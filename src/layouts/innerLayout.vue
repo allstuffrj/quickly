@@ -1,17 +1,20 @@
 <template>
-    <div id="dashboard">
+    <div class="chats-tab-open h-100">
+        <div class="main-layout h-100">
         <sidebar></sidebar>
-        <h1>Hello, I'm dashboard layout</h1>
-
-        <router-view />
+            <router-view />
+            <Backdrop></Backdrop>
+    </div>
     </div>
 </template>
 
 <script>
     import Sidebar from "../components/Partials/Sidebar.vue";
+    import Backdrop from "../components/Partials/BackDrop.vue";
     export default {
         components : {
-            Sidebar
+            Sidebar,
+            Backdrop
         },
         mounted() {
             // this is dashboard layout
