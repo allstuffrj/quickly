@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Intro from '../components/intro/index.vue'
-
+import Chat from '../components/Pages/Chat.vue'
 
 export const routes: Array<RouteRecordRaw> = [
     {
@@ -10,19 +10,24 @@ export const routes: Array<RouteRecordRaw> = [
         meta: { layout: 'intro-layout' }
     },
     {
-        path: '/',
+        path: '/chats',
         name: 'Chats',
-        component: Intro,
-        meta: { layout: 'intro-layout' }
+        component: Chat,
+        meta: { layout: 'inner-layout' }
     },
     {
-        path: '/',
+        path: '/sign-in',
         name: 'SignIn',
         component: Intro,
         meta: { layout: 'intro-layout' }
+    },{
+        path: '/sign-up',
+        name: 'SignUp',
+        component: Intro,
+        meta: { layout: 'intro-layout' }
     },
     {
-        path: '/',
+        path: '/reset-password',
         name: 'reset-password',
         component: Intro,
         meta: { layout: 'intro-layout' }

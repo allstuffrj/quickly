@@ -20,7 +20,7 @@
 
                         <router-link
                                 to="/Chats"
-                                @click.native="setThemeColor(ThemeColor.Light)">
+                                @click.native="setThemeColor(ThemeColor.Light)" target="_blank">
                             View demo
                         </router-link>
 
@@ -49,7 +49,7 @@
 
                     <router-link
                             to="/Chats"
-                            @click.native="setThemeColor(ThemeColor.Light)" class="text-reset">
+                            @click.native="setThemeColor(ThemeColor.Light)" class="text-reset" target="_blank">
                         <div class="card">
                             <img
                                     class="img-fluid rounded-top"
@@ -68,7 +68,7 @@
 
                     <router-link
                             to="/Chats"
-                            @click.native="setThemeColor(ThemeColor.Dark)" class="text-reset">
+                            @click.native="setThemeColor(ThemeColor.Dark)" class="text-reset" target="_blank">
                         <div class="card">
                             <img
                                     class="img-fluid rounded-top"
@@ -86,7 +86,7 @@
 
                     <router-link
                             to="/Chats"
-                            @click.native="setThemeColor(ThemeColor.Light, true)" class="text-reset">
+                            @click.native="setThemeColor(ThemeColor.Light, true)" class="text-reset" target="_blank">
                         <div class="card">
                             <img
                                     class="img-fluid rounded-top"
@@ -104,7 +104,7 @@
                 <div class="col-sm-6 col-md-4 my-3">
                     <router-link
                             to="/Chats"
-                            @click.native="setThemeColor(ThemeColor.Dark, true)" class="text-reset">
+                            @click.native="setThemeColor(ThemeColor.Dark, true)" class="text-reset" target="_blank">
                         <div class="card">
                             <img
                                     class="img-fluid rounded-top"
@@ -121,7 +121,8 @@
                 <div class="col-sm-6 col-md-4 my-3">
                     <router-link
                             to="/SignIn"
-                            @click.native="setThemeColor(ThemeColor.Light)" class="border rounded d-block theme-shadow-sm overflow-hidden text-reset">
+                            @click.native="setThemeColor(ThemeColor.Light)"
+                            class="border rounded d-block theme-shadow-sm overflow-hidden text-reset" target="_blank">
                         <img
                                 :src=LigntSignIn
                                 alt="light signin"
@@ -134,7 +135,8 @@
                 <div class="col-sm-6 col-md-4 my-3">
                     <router-link
                             to="/SignUp"
-                            @click.native="setThemeColor(ThemeColor.Light)" class="border rounded d-block theme-shadow-sm overflow-hidden text-reset">
+                            @click.native="setThemeColor(ThemeColor.Light)"
+                            class="border rounded d-block theme-shadow-sm overflow-hidden text-reset" target="_blank">
                         <img
                                 :src=LightSignUp
                                 alt="light signup"
@@ -147,7 +149,8 @@
                 <div class="col-sm-6 col-md-4 my-3">
                     <router-link
                             to="/reset-password"
-                            @click.native="setThemeColor(ThemeColor.Light)" class="border rounded d-block theme-shadow-sm overflow-hidden text-reset">
+                            @click.native="setThemeColor(ThemeColor.Light)"
+                            class="border rounded d-block theme-shadow-sm overflow-hidden text-reset" target="_blank">
                         <img
                                 :src=LightResetPassword
                                 alt="light reset password"
@@ -163,7 +166,8 @@
                 <div class="col-sm-6 col-md-4 my-3">
                     <router-link
                             to="/SignIn"
-                            @click.native="setThemeColor(ThemeColor.Dark)" class="border rounded d-block theme-shadow-sm overflow-hidden text-reset">
+                            @click.native="setThemeColor(ThemeColor.Dark)"
+                            class="border rounded d-block theme-shadow-sm overflow-hidden text-reset" target="_blank">
                         <img
                                 :src=DarkSignIn
                                 alt="dark signin"
@@ -176,7 +180,8 @@
                 <div class="col-sm-6 col-md-4 my-3">
                     <router-link
                             to="/SignUp"
-                            @click.native="setThemeColor(ThemeColor.Dark)" class="border rounded d-block theme-shadow-sm overflow-hidden text-reset">
+                            @click.native="setThemeColor(ThemeColor.Dark)"
+                            class="border rounded d-block theme-shadow-sm overflow-hidden text-reset" target="_blank">
                         <img
                                 :src=DarkSignUp
                                 alt="dark signup"
@@ -189,7 +194,8 @@
                 <div class="col-sm-6 col-md-4 my-3">
                     <router-link
                             to="/reset-password"
-                            @click.native="setThemeColor(ThemeColor.Dark)" class="border rounded d-block theme-shadow-sm overflow-hidden text-reset">
+                            @click.native="setThemeColor(ThemeColor.Dark)"
+                            class="border rounded d-block theme-shadow-sm overflow-hidden text-reset" target="_blank">
                         <img
                                 :src=DarkResetPassword
                                 alt="dark reset password"
@@ -269,6 +275,7 @@
             <div class="row">
                 <div class="col-12">
 
+
                 </div>
             </div>
         </div>
@@ -329,13 +336,13 @@
                     <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center align-items-sm-start mt-4">
                         <router-link
                                 to="/Documentation"
-                                class="btn btn-secondary mb-2 mx-2">
+                                class="btn btn-secondary mb-2 mx-2" target="_blank">
                             Documentation
                         </router-link>
                         <router-link
                                 to="/Chats"
                                 @click.native="setThemeColor(ThemeColor.Light)"
-                                class="btn btn-primary mb-2 mx-2">
+                                class="btn btn-primary mb-2 mx-2" target="_blank">
                             View demo
                         </router-link>
 
@@ -375,6 +382,8 @@
     import PencilSvg from "../../assets/media/icons/pencil.svg";
     import ResponsiveSvg from "../../assets/media/icons/responsive.svg";
     import LogoSvg from "../../assets/media/logo.svg";
+
+
     export default defineComponent({
         name: 'Intro',
         props: {
