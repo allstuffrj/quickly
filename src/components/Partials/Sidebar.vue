@@ -1,4 +1,5 @@
 <template>
+  <AccountSvg />
     <!--<div class="navigation navbar navbar-light bg-primary">
       <Link class="d-none d-xl-block bg-light rounded p-1" to="/">
         <AppIconSvg />
@@ -65,10 +66,17 @@
     </div> -->
 </template>
 
-<script>
-    export default {
-        mounted() {
-            // this is dashboard layout
-        }
-    }
+<script lang="ts">
+import  AccountSvg from '../../assets/media/icons/accounts.svg';
+import { ref, defineComponent } from 'vue'
+export default defineComponent({
+  name: 'SideBar',
+  props: {
+    
+  },
+  setup: () => {
+      
+    return {AccountSvg}
+  }
+})
 </script>
