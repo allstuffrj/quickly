@@ -1,7 +1,7 @@
 <template>
     <div class="chats-tab-open h-100">
         <div class="main-layout h-100">
-        <sidebar></sidebar>
+        <NavSidebar></NavSidebar>
             <router-view />
             <Backdrop></Backdrop>
     </div>
@@ -9,11 +9,11 @@
 </template>
 
 <script>
-    import Sidebar from "../components/Partials/Sidebar.vue";
+    import NavSidebar from "../components/Partials/NavSidebar.vue";
     import Backdrop from "../components/Partials/BackDrop.vue";
     export default {
         components : {
-            Sidebar,
+            NavSidebar,
             Backdrop
         },
         mounted() {
