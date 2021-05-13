@@ -18,7 +18,7 @@
             </svg>
 
             <!-- Alternate :: External File link -->
-            <!-- <img  class="injectable hw-20" src="./../assets/media/heroicons/outline/dots-vertical.svg" alt=""> -->
+            
         </a>
         <!-- Dropdown Button End -->
 
@@ -88,7 +88,7 @@
         setup: (props,context) => {
                 const selectedOption = ref(null);
                 const emptyLabel = ref("Select");
-            console.log(props.defaultvalue)
+                
                 if(props.defaultvalue != '')
                 {
 

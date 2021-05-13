@@ -10,12 +10,12 @@
                                 <h5 class="font-weight-semibold mb-0">Chats</h5>
                                 <ChatAction />
                             </div>
-                            <ChatFilter
+                            <!--<ChatFilter
                                     selectedOption={this.state.filterOption}
                                     filterOptionChanged={this.handleFilterOptionChanged}
                                     search={this.state.search}
                                     handleSearch={this.handleSearchChat}
-                            />
+                            />-->
                             <Dropdown title="Details" :displayType=dpDisplayType :size=dpsize :xplacement=xplacement
                                       :emptyLabel=emptyLabel
                                       :options=options
@@ -57,7 +57,8 @@
 
         },
         components : {
-            Dropdown
+            Dropdown,
+            ChatAction
         },
         setup: () => {
             const options = [

@@ -9,7 +9,11 @@
             </a>
         </li>
         <li class="nav-item list-inline-item mr-0">
-            <Dropdown>
+        <Dropdown title="Details" displayType="kebab" size="mt-2"               xplacement="bottom-end"
+                                      emptyLabel="Details"
+                                      :options=chatOptions
+                                      @change="charOpHandler" defaultvalue=null></Dropdown>
+            <!-- <Dropdown>
                 <Dropdown.Toggle
                         class="text-muted hw-20 mt-2"
                         as={VerticalOptionDots}
@@ -36,7 +40,7 @@
                         Invite Others
                     </a>
                 </Dropdown.Menu>
-            </Dropdown>
+            </Dropdown> -->
         </li>
     </ul>
 
@@ -46,20 +50,42 @@
 
     import { ref, defineComponent } from 'vue'
     import NotificationsSvg from '../../assets/media/icons/notifications.svg';
+    import Dropdown from '../Base/Dropdown.vue'
+
     export default defineComponent({
         name: 'ChatAction',
         props: {
-
+            
         },
         components : {
-
+                NotificationsSvg,
+                Dropdown
         },
         setup: () => {
                 const showNotification = ref(false);
                 function toggleNotification() : void {
                     showNotification.value = !showNotification.value;
                 }
-            return {showNotification,toggleNotification}
+                const chatOptions= [
+                    {
+                        value : 'new-chat',
+                        label : 'New Chat'
+                    },
+                    {
+                        value : 'create-group',
+                        label : 'Create Group'
+                    },
+                    {
+                        value : 'invite-other',
+                        label : 'Invite Others'
+                    }
+                ];
+
+                function charOpHandler(option)
+                {
+
+                }
+            return {showNotification,toggleNotification,charOpHandler,chatOptions}
         }
     })
 </script>
