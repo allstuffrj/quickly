@@ -16,6 +16,10 @@
                                     search={this.state.search}
                                     handleSearch={this.handleSearchChat}
                             />
+                            <Dropdown title="Details" :displayType=dpDisplayType :size=dpsize :xplacement=xplacement
+                                      :emptyLabel=emptyLabel
+                                      :options=options
+                                      @change="dpChangeHandler" :defaultvalue=defaultvalue></Dropdown>
                         </div>
                         <!--<ul
                                 class="contacts-list"
@@ -44,18 +48,49 @@
 <script lang="ts">
 
     import ChatAction from "../Partials/ChatAction.vue";
+    import Dropdown from "../Base/Dropdown.vue";
     import { ref, defineComponent } from 'vue'
+    import FriendsSvg from "../../assets/media/icons/friends.svg";
     export default defineComponent({
         name: 'ChatList',
         props: {
 
         },
         components : {
-
+            Dropdown
         },
         setup: () => {
-
-            return {}
+            const options = [
+                {
+                    value: 'all-chats',
+                    label : 'All Chats'
+                },
+                {
+                    value: 'friends',
+                    label : 'Friends'
+                }, {
+                    value: 'groups',
+                    label : 'Groups'
+                },{
+                    value: 'unread',
+                    label : 'Unread'
+                },{
+                    value: 'archived',
+                    label : 'Archived'
+                },
+            ];
+            const emptyLabel = "All Chats";
+            const dpsize = "mt-2";
+            const xplacement= "bottom-start";
+            const defaultvalue='all-chats';
+            const dpDisplayType = 'button';
+            return {options,emptyLabel,dpsize,defaultvalue,dpDisplayType}
+        },
+        methods : {
+            dpChangeHandler: function (selected : object) :void
+            {
+                console.log(selected)
+            }
         }
     })
 </script>

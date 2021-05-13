@@ -53,7 +53,7 @@
 
         </li>
       </ul>
-    <Dropdown :size="mt-3" :options=options @change="function(o){console.log(o)}"></Dropdown>
+
     </div>
 </template>
 
@@ -64,21 +64,18 @@ import  ChatsSvg from '../../assets/media/icons/chats.svg';
 import  CallsSvg from '../../assets/media/icons/calls.svg';
 import  FriendsSvg from '../../assets/media/icons/friends.svg';
 import { ref, defineComponent } from 'vue'
-import Dropdown from "../Base/Dropdown.vue";
+
 export default defineComponent({
   name: 'NavSidebar',
   props: {
 
   },
     components : {
-        AccountsSvg,AppIconSvg,ChatsSvg,CallsSvg,FriendsSvg,Dropdown
+        AccountsSvg,AppIconSvg,ChatsSvg,CallsSvg,FriendsSvg
     },
   setup: () => {
-        const options = [
-            {value: 'Manage Content'},
-            {value: 'Quick Search'}
-        ];
-    return {options}
+
+    return {}
   }
 })
 </script>

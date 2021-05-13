@@ -1,26 +1,50 @@
 <template>
-    <div class="dropdown " :class=size>
+    <div class="dropdown" :class="[{'show': checkIsOpen}, size] ">
         <!-- Dropdown Button Start -->
-        <button class="btn btn-outline-default dropdown-toggle" type="button" data-chat-filter-list="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            All Chats
+
+        <button v-if="displayType == 'button'" class="btn btn-outline-default dropdown-toggle" @click="handleToggle"
+                type="button"
+                data-chat-filter-list=""
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded=checkIsOpen>
+            {{emptyLabel}}
         </button>
+
+        <a v-if="displayType == 'kebab'" @click="handleToggle"  class="nav-link text-muted px-1" href="#"
+           role="button" :title=title
+           data-toggle="dropdown" aria-haspopup="true" aria-expanded=checkIsOpen>
+            <!-- Default :: Inline SVG -->
+            <svg class="hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
+            </svg>
+
+            <!-- Alternate :: External File link -->
+            <!-- <img  class="injectable hw-20" src="./../assets/media/heroicons/outline/dots-vertical.svg" alt=""> -->
+        </a>
         <!-- Dropdown Button End -->
 
         <!-- Dropdown Menu Start -->
-        <div class="dropdown-menu">
-            <a class="dropdown-item" data-chat-filter="" data-select="all-chats" href="#">All Chats</a>
-            <a class="dropdown-item" data-chat-filter="" data-select="friends" href="#">Friends</a>
-            <a class="dropdown-item" data-chat-filter="" data-select="groups" href="#">Groups</a>
-            <a class="dropdown-item" data-chat-filter="" data-select="unread" href="#">Unread</a>
-            <a class="dropdown-item" data-chat-filter="" data-select="archived" href="#">Archived</a>
+
+        <div class="dropdown-menu" :x-placement=xplacement :class="{'show': checkIsOpen}">
+
+            <a class="dropdown-item" :class="[{'active' : selectedOption == option.value}]" v-for="(option,i) in
+            options" data-chat-filter=""
+               @click="handleSelection(i)"
+               :data-select=option.value
+               href="#"> {{option.label}}</a>
+
         </div>
         <!-- Dropdown Menu End -->
+
+
     </div>
 </template>
 
 <script lang="ts">
     import { ref, defineComponent,computed} from 'vue'
-
+    const enum DisplayTypes  {
+       button =  'button',
+        kebab = 'kebab'
+    };
     export default defineComponent({
         name: 'Dropdown',
         props: {
@@ -39,15 +63,59 @@
             size : {
                 type: String,
                 default : 'mr-2'
+            },
+            xplacement : {
+                type: String,
+                default : 'bottom-start'
+            },
+            defaultvalue : {
+                type: String,
+                default : null
+            },
+            displayType : {
+                type : String,
+                default : DisplayTypes.button
+            },
+            title : {
+                type : String,
+                default : null
             }
+
         },
         components : {
 
         },
-        setup: (context, props) => {
+        setup: (props,context) => {
                 const selectedOption = ref(null);
-                console.log(props);
-                return {props}
+                const emptyLabel = ref("Select");
+            console.log(props.defaultvalue)
+                if(props.defaultvalue != '')
+                {
+
+                    selectedOption.value = props.defaultvalue;
+                }
+                if(props.emptyLabel != '')
+                {
+                    emptyLabel.value = props.emptyLabel;
+                }
+                const isOpen = ref(false);
+                  function handleToggle() {
+                        isOpen.value = !isOpen.value;
+                }
+
+                const checkIsOpen = computed(() => {
+                    return isOpen.value;
+                });
+
+                  function handleSelection(selectedVal : number) :void
+                  {
+                      let selectOp = this.options[selectedVal];
+                      selectedOption.value = selectOp.value;
+                      emptyLabel.value = selectOp.label;
+                      isOpen.value = false;
+                      this.$emit('change',selectOp);
+                  }
+                return {handleToggle,checkIsOpen,handleSelection,selectedOption,emptyLabel}
         }
     })
 </script>
