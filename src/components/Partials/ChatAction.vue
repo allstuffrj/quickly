@@ -9,10 +9,10 @@
             </a>
         </li>
         <li class="nav-item list-inline-item mr-0">
-        <Dropdown title="Details" displayType="kebab" size="mt-2"               xplacement="bottom-end"
+        <Dropdown title="Details" displayType="kebab" size=null xplacement="bottom-end"
                                       emptyLabel="Details"
                                       :options=chatOptions
-                                      @change="charOpHandler" defaultvalue=null></Dropdown>
+                                      @change="charOpHandler" defaultvalue=null dpclass="dropdown-menu-right" dpstyle="position: absolute; transform: translate3d(-128px, 40px, 0px); top: 0px; left: 0px; will-change: transform;"></Dropdown>
             <!-- <Dropdown>
                 <Dropdown.Toggle
                         class="text-muted hw-20 mt-2"

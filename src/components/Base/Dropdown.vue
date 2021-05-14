@@ -1,15 +1,15 @@
 <template>
-    <div class="dropdown" :class="[{'show': checkIsOpen}, size] ">
+    <div  class="dropdown" :class="[{'show': checkIsOpen}, size] ">
         <!-- Dropdown Button Start -->
 
-        <button v-if="displayType == 'button'" class="btn btn-outline-default dropdown-toggle" @click="handleToggle"
+        <button v-if="displayType == 'button'" v-click-outside="onClickOutside"  class="btn btn-outline-default dropdown-toggle" @click="handleToggle"
                 type="button"
                 data-chat-filter-list=""
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded=checkIsOpen>
             {{emptyLabel}}
         </button>
 
-        <a v-if="displayType == 'kebab'" @click="handleToggle"  class="nav-link text-muted px-1" href="#"
+        <a v-if="displayType == 'kebab'" v-click-outside="onClickOutside" @click="handleToggle"  class="nav-link text-muted px-1" href="#"
            role="button" :title=title
            data-toggle="dropdown" aria-haspopup="true" aria-expanded=checkIsOpen>
             <!-- Default :: Inline SVG -->
@@ -24,7 +24,7 @@
 
         <!-- Dropdown Menu Start -->
 
-        <div class="dropdown-menu" :x-placement=xplacement :class="{'show': checkIsOpen}">
+        <div  class="dropdown-menu " :x-placement=xplacement :class="{'show': checkIsOpen, dpclass}" :style="dpstyle">
 
             <a class="dropdown-item" :class="[{'active' : selectedOption == option.value}]" v-for="(option,i) in
             options" data-chat-filter=""
@@ -41,6 +41,7 @@
 
 <script lang="ts">
     import { ref, defineComponent,computed} from 'vue'
+    import vClickOutside from 'click-outside-vue3'
     const enum DisplayTypes  {
        button =  'button',
         kebab = 'kebab'
@@ -62,7 +63,7 @@
             },
             size : {
                 type: String,
-                default : 'mr-2'
+                default : null
             },
             xplacement : {
                 type: String,
@@ -79,9 +80,20 @@
             title : {
                 type : String,
                 default : null
+            },
+            dpclass : {
+                type: String,
+                default : null
+            },
+            dpstyle : {
+                type: String,
+                default:null
             }
 
         },
+        directives: {
+      clickOutside: vClickOutside.directive
+        },  
         components : {
 
         },
@@ -101,6 +113,10 @@
                 const isOpen = ref(false);
                   function handleToggle() {
                         isOpen.value = !isOpen.value;
+                        if(isOpen.value == true)
+                        {
+                           // window.addEventListener('click', onClickOutside);
+                        }
                 }
 
                 const checkIsOpen = computed(() => {
@@ -115,7 +131,17 @@
                       isOpen.value = false;
                       this.$emit('change',selectOp);
                   }
-                return {handleToggle,checkIsOpen,handleSelection,selectedOption,emptyLabel}
+
+                  function onClickOutside (event) {
+                   
+                        if(isOpen.value == true)
+                                isOpen.value = false;
+                   }
+                   
+                return {handleToggle,checkIsOpen,handleSelection,selectedOption,emptyLabel,onClickOutside}
+        },
+        methods: {
+            
         }
     })
 </script>
