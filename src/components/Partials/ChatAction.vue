@@ -13,37 +13,10 @@
                                       emptyLabel="Details"
                                       :options=chatOptions
                                       @change="charOpHandler" defaultvalue=null dpclass="dropdown-menu-right" dpstyle="position: absolute; transform: translate3d(-128px, 40px, 0px); top: 0px; left: 0px; will-change: transform;"></Dropdown>
-            <!-- <Dropdown>
-                <Dropdown.Toggle
-                        class="text-muted hw-20 mt-2"
-                        as={VerticalOptionDots}
-                ></Dropdown.Toggle>
-                <Dropdown.Menu class="dropdown-menu dropdown-menu-right">
-                    <a
-                            class="dropdown-item"
-                            onClick={this.toggleNewChat}
-                            to="#" >
-                        New Chat
-                    </a>
-                    <a
-                            class="dropdown-item"
-                            onClick={this.toggleCreateGroup}
-                            to="#"
-                    >
-                        Create Group
-                    </a>
-                    <a
-                            class="dropdown-item"
-                            onClick={this.toggleInviteOthers}
-                            to="#"
-                    >
-                        Invite Others
-                    </a>
-                </Dropdown.Menu>
-            </Dropdown> -->
+
         </li>
     </ul>
-
+    <Modal :showModal=showNotification :modalClass=modalClass></Modal>
 </template>
 
 <script lang="ts">
@@ -51,20 +24,26 @@
     import { ref, defineComponent } from 'vue'
     import NotificationsSvg from '../../assets/media/icons/notifications.svg';
     import Dropdown from '../Base/Dropdown.vue'
-
+    import Modal from "../Base/Modal.vue";
     export default defineComponent({
         name: 'ChatAction',
         props: {
-            
+
         },
         components : {
                 NotificationsSvg,
-                Dropdown
+                Dropdown,
+                Modal
         },
         setup: () => {
                 const showNotification = ref(false);
+
                 function toggleNotification() : void {
                     showNotification.value = !showNotification.value;
+                    console.log(showNotification.value);
+                    if(document.getElementsByClassName("rj-modal-con")){
+// I have the 'hidden' class //.classList.contains("hidden")
+                    }
                 }
                 const chatOptions= [
                     {
