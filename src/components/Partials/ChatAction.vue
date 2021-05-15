@@ -16,7 +16,21 @@
 
         </li>
     </ul>
-    <Modal :showModal=showNotification ></Modal>
+    <Modal :showModal=showNotification @modalClose="modalClosed">
+
+            <template v-slot:modalHeader>
+            <h5 class="modal-title" id="notificationModalLabel">Notifications</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="toggleNotification">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </template>
+        <template v-slot:modalBody>
+            This is Body
+        </template>
+        <template v-slot:modalFooter>
+            <button type="button" class="btn btn-link text-muted">Clear all</button>
+        </template>
+    </Modal>
 </template>
 
 <script lang="ts">
@@ -41,9 +55,9 @@
                 function toggleNotification() : void {
                     showNotification.value = !showNotification.value;
                     console.log(showNotification.value);
-                    if(document.getElementsByClassName("rj-modal-con")){
+                    /*if(document.getElementsByClassName("rj-modal-con")){
 // I have the 'hidden' class //.classList.contains("hidden")
-                    }
+                    }*/
                 }
                 const chatOptions= [
                     {
@@ -64,7 +78,12 @@
                 {
 
                 }
-            return {showNotification,toggleNotification,charOpHandler,chatOptions}
+
+                function modalClosed(value)
+                {
+                    showNotification.value = !showNotification.value;
+                }
+            return {showNotification,toggleNotification,charOpHandler,chatOptions,modalClosed}
         }
     })
 </script>
