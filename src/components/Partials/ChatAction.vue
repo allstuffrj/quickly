@@ -16,7 +16,7 @@
 
         </li>
     </ul>
-    <Modal :showModal=showNotification :modalClass=modalClass></Modal>
+    <Modal :showModal=showNotification ></Modal>
 </template>
 
 <script lang="ts">

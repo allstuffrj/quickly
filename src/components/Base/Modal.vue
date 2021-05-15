@@ -1,5 +1,5 @@
 <template>
-    <div class="modal modal-lg-fullscreen rj-modal-con fade" :class="[{'d-block show' : showModal}]"
+    <div class="modal modal-lg-fullscreen rj-modal-con fade" :class="[{'d-block show' : showModalToggle}]"
          id="notificationModal"
          tabindex="-1"
          role="dialog"
@@ -8,7 +8,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="notificationModalLabel">Notifications</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="closeModal">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -160,7 +160,7 @@
 </template>
 
 <script lang="ts">
-    import { ref, defineComponent,computed} from 'vue'
+    import { ref, defineComponent,computed,watch} from 'vue'
 
     export default defineComponent({
         name: 'Modal',
@@ -174,7 +174,18 @@
 
         },
         setup: (props,context) => {
-                console.log(props.showModal)
+                const showModalToggle = ref(Boolean)
+                     //   showModalToggle.value = props.showModal;
+                    watch(props.showModal, (first) => {
+                       console.log(first) 
+                        showModalToggle.value = first;
+                    });
+                function closeModal()
+                {
+                    console.log(showModalToggle)
+                    showModalToggle.value = false;
+                }
+                return {closeModal,showModalToggle}
         },
         methods: {
 

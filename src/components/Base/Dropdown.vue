@@ -24,7 +24,7 @@
 
         <!-- Dropdown Menu Start -->
 
-        <div  class="dropdown-menu " :x-placement=xplacement :class="{'show': checkIsOpen, dpclass}" :style="dpstyle">
+        <div  class="dropdown-menu" :x-placement=xplacement :class="{'show': checkIsOpen, dpclass}" :style="dpstyle">
 
             <a class="dropdown-item" :class="[{'active' : selectedOption == option.value}]" v-for="(option,i) in
             options" data-chat-filter=""
