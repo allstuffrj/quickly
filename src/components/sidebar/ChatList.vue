@@ -32,7 +32,7 @@
     import ChatAction from "../Partials/ChatAction.vue";
     import Dropdown from "../Base/Dropdown.vue";
     import SerachForm from "../Base/SerachForm.vue";
-    import { ref, defineComponent,computed } from 'vue'
+    import { ref, defineComponent,computed,watch } from 'vue'
     import FriendsSvg from "../../assets/media/icons/friends.svg";
     export default defineComponent({
         name: 'ChatList',
@@ -46,8 +46,8 @@
         },
         setup: () => {
             const searchInput = ref(null)
-            const searchInputChange = computed(() => {
-                console.log("computed change")
+            watch(searchInput,(neval) => {
+                console.log(newval)
             })
             const options = [
                 {
