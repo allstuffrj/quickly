@@ -10,34 +10,16 @@
                                 <h5 class="font-weight-semibold mb-0">Chats</h5>
                                 <ChatAction />
                             </div>
-                            <!--<ChatFilter
-                                    selectedOption={this.state.filterOption}
-                                    filterOptionChanged={this.handleFilterOptionChanged}
-                                    search={this.state.search}
-                                    handleSearch={this.handleSearchChat}
-                            />-->
+                           <div class="sidebar-sub-header">
                             <Dropdown title="Details" :displayType=dpDisplayType :size=dpsize :xplacement=xplacement
                                       :emptyLabel=emptyLabel
                                       :options=options
                                       @change="dpChangeHandler" :defaultvalue=defaultvalue></Dropdown>
+                            <SerachForm :modelValue="searchInput"
+                                        @update:modelValue="searchInput = $event"></SerachForm>
+                           </div>
                         </div>
-                        <!--<ul
-                                class="contacts-list"
-                                id="chatContactTab"
-                                data-chat-list=""
-                        >
-                            {this.state.FilterChatList.map((chat, index) => {
-                            return (
-                            <ChatMessage
-                                    key={"chat" + index}
-                                    {...chat}
-                                    handleChatClick={() => {
-                            this.handleChatClick(chat.ChatUserId);
-                            }}
-                            />
-                            );
-                            })}
-                        </ul>-->
+
                     </div>
                 </div>
             </div>
@@ -49,7 +31,8 @@
 
     import ChatAction from "../Partials/ChatAction.vue";
     import Dropdown from "../Base/Dropdown.vue";
-    import { ref, defineComponent } from 'vue'
+    import SerachForm from "../Base/SerachForm.vue";
+    import { ref, defineComponent,computed } from 'vue'
     import FriendsSvg from "../../assets/media/icons/friends.svg";
     export default defineComponent({
         name: 'ChatList',
@@ -58,9 +41,14 @@
         },
         components : {
             Dropdown,
-            ChatAction
+            ChatAction,
+            SerachForm
         },
         setup: () => {
+            const searchInput = ref(null)
+            const searchInputChange = computed(() => {
+                console.log("computed change")
+            })
             const options = [
                 {
                     value: 'all-chats',
@@ -81,7 +69,7 @@
                 },
             ];
             const emptyLabel = "All Chats";
-            const dpsize = "mt-2";
+            const dpsize = "mr-2";
             const xplacement= "bottom-start";
             const defaultvalue='all-chats';
             const dpDisplayType = 'button';
