@@ -15,8 +15,8 @@
                                       :emptyLabel=emptyLabel
                                       :options=options
                                       @change="dpChangeHandler" :defaultvalue=defaultvalue></Dropdown>
-                            <SerachForm :modelValue="searchInput"
-                                        @update:modelValue="searchInput = $event"></SerachForm>
+                                       
+                            <SerachForm v-model="searchInput"></SerachForm>
                            </div>
                         </div>
 
@@ -46,8 +46,8 @@
         },
         setup: () => {
             const searchInput = ref(null)
-            watch(searchInput,(neval) => {
-                console.log(newval)
+            watch(searchInput,(neval,oldVal) => {
+                console.log(neval,oldVal)
             })
             const options = [
                 {
@@ -73,7 +73,7 @@
             const xplacement= "bottom-start";
             const defaultvalue='all-chats';
             const dpDisplayType = 'button';
-            return {options,emptyLabel,dpsize,defaultvalue,dpDisplayType}
+            return {options,emptyLabel,dpsize,defaultvalue,dpDisplayType,searchInput,xplacement}
         },
         methods : {
             dpChangeHandler: function (selected : object) :void

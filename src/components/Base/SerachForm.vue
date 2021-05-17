@@ -1,13 +1,11 @@
 <template>
-    <form class="form-inline">
+    <form class="form-inline" onsubmit="return false">
         <div class="input-group">
             <input
                     type="text"
                     class="form-control search border-right-0 transparent-bg pr-0"
-                    placeholder="Search users..."
-                    :value='modelValue'
-                    @input='$emit("update:modelValue", $event.target.value)'
-            >
+                    placeholder="Search users..." :value="modelValue" 
+    @input="$emit('update:modelValue', $event.target.value)">
             <div class="input-group-append">
                 <div
                         class="input-group-text transparent-bg border-left-0"
@@ -30,7 +28,6 @@
                 type: String,
                 default: null
             }
-
         },
 
         components : {
@@ -38,13 +35,6 @@
         },
         emits: ['update:modelValue'],
         setup: (props,context) => {
-
-            const serachInput = ref(null);
-
-            const inputChange = (value)=>{
-
-            }
-
             return {}
         },
         methods: {
