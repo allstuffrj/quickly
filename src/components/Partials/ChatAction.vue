@@ -39,6 +39,7 @@
     import NotificationsSvg from '../../assets/media/icons/notifications.svg';
     import Dropdown from '../Base/Dropdown.vue'
     import Modal from "../Base/Modal.vue";
+    import Notifications from '../../Services/Notifications'
     export default defineComponent({
         name: 'ChatAction',
         props: {
@@ -51,7 +52,7 @@
         },
         setup: () => {
                 const showNotification = ref(false);
-
+                const notificationList = ref({})
                 function toggleNotification() : void {
                     showNotification.value = !showNotification.value;
                     console.log(showNotification.value);
@@ -59,6 +60,7 @@
 // I have the 'hidden' class //.classList.contains("hidden")
                     }*/
                 }
+                
                 const chatOptions= [
                     {
                         value : 'new-chat',
@@ -84,6 +86,15 @@
                     showNotification.value = !showNotification.value;
                 }
             return {showNotification,toggleNotification,charOpHandler,chatOptions,modalClosed}
+        },
+        methods : {
+            getNotificationsList(){
+                    Notifications.getAll().then((response: object) => {
+                            this.notificationList = response;
+                    }).catch((e: Error) => {
+                        console.log(e);
+                    });
+            }
         }
     })
 </script>
