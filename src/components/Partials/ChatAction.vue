@@ -25,21 +25,38 @@
             </button>
             </template>
         <template v-slot:modalBody>
-            This is Body
+            <div class="row">
+
+                <div class="col-12">
+                    <!-- List Group Start -->
+                    <ul class="list-group list-group-flush  py-2">
+
+
+                        <NotificationRow v-if="notificationList.length > 0" v-for="notification in notificationList"
+                                          :notification=notification></NotificationRow>
+                         <div class="text-center" v-else>
+                             <span>No Notifications</span>
+                         </div>
+                    </ul>
+
+                </div>
+            </div>
         </template>
         <template v-slot:modalFooter>
             <button type="button" class="btn btn-link text-muted">Clear all</button>
         </template>
     </Modal>
+
 </template>
 
 <script lang="ts">
 
-    import { ref, defineComponent } from 'vue'
+    import { ref, defineComponent,onMounted } from 'vue'
     import NotificationsSvg from '../../assets/media/icons/notifications.svg';
     import Dropdown from '../Base/Dropdown.vue'
     import Modal from "../Base/Modal.vue";
     import Notifications from '../../Services/Notifications'
+    import NotificationRow from "../Base/NotificationRow.vue";
     export default defineComponent({
         name: 'ChatAction',
         props: {
@@ -48,7 +65,8 @@
         components : {
                 NotificationsSvg,
                 Dropdown,
-                Modal
+                Modal,
+                NotificationRow
         },
         setup: () => {
                 const showNotification = ref(false);
@@ -60,7 +78,7 @@
 // I have the 'hidden' class //.classList.contains("hidden")
                     }*/
                 }
-                
+
                 const chatOptions= [
                     {
                         value : 'new-chat',
@@ -85,16 +103,24 @@
                 {
                     showNotification.value = !showNotification.value;
                 }
-            return {showNotification,toggleNotification,charOpHandler,chatOptions,modalClosed}
+           function getNotificationsList(){
+
+                Notifications.getAll().then((response: object) => {
+                    notificationList.value = response.data;
+                }).catch((e: Error) => {
+                    console.log(e);
+                });
+            }
+
+            onMounted(() => {
+
+                getNotificationsList();
+            })
+
+            return {showNotification,toggleNotification,charOpHandler,chatOptions,modalClosed,notificationList}
         },
         methods : {
-            getNotificationsList(){
-                    Notifications.getAll().then((response: object) => {
-                            this.notificationList = response;
-                    }).catch((e: Error) => {
-                        console.log(e);
-                    });
-            }
+
         }
     })
 </script>

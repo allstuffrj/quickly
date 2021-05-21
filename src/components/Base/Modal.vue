@@ -1,10 +1,12 @@
 <template>
     <transition name="modal-fade">
-        <div class="fade modal-backdrop " :class="showModalToggle ? 'show' : 'hide'"></div>
+        <div class="fade modal-backdrop "  :class="showModalToggle ? 'show' : 'hide'"></div>
     </transition>
 
     <transition name="modal-fade">
-    <div class="modal modal-lg-fullscreen rj-modal-con fade" :class="[{'d-block show' : showModalToggle}]" tabindex="-1"
+    <div class="modal modal-lg-fullscreen  rj-modal-con fade" :class="[{'d-block show' :
+    showModalToggle}]"
+         tabindex="-1"
          role="dialog"
           aria-hidden="true" >
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-dialog-zoom">
@@ -54,6 +56,7 @@
 
             function closeModal()
                 {
+                    console.log("In close modal")
                     showModalToggle.value = false;
                     context.emit('modalClose',true);
                 }
