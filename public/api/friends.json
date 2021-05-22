@@ -1,0 +1,27 @@
+[
+  {
+    "user_name" : "Catherine richardson",
+    "uuid" : "20240fba-19d1-49e0-8292-3f784b69289f",
+    "status" : "online",
+    "avatar" : "uploads/avatar/1.png"
+  },
+  {
+    "user_name" : "Katelyn Valdez",
+    "uuid" : "02acbf18-d466-46c0-99ef-1fdf662d5e54",
+    "status" : "offline",
+    "avatar" : "uploads/avatar/2.png"
+  },
+  {
+    "user_name" : "Eva Walker",
+    "uuid" : "3eef2589-6c68-4fc7-a6f7-ef3b3dcf576f",
+    "status" : "busy",
+    "avatar" : "uploads/avatar/3.png"
+  },
+  {
+    "user_name" : "Bonnie Torres",
+    "uuid" : "d8ae1425-f2b4-471c-8f14-1d214166d8df",
+    "status": "away",
+    "avatar" : "uploads/avatar/4.png"
+  }
+
+]

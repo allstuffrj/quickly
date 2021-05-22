@@ -3,7 +3,7 @@
         <li class="nav-item list-inline-item mr-1">
             <a class="nav-link text-muted px-1" title="Notifications" role="button" data-toggle="modal"
                     data-target="#notificationModal"
-                    @click="toggleNotification"
+                    @click="toggleModal('notification')"
                     href="javascript:void(0)">
                 <NotificationsSvg />
             </a>
@@ -16,11 +16,12 @@
 
         </li>
     </ul>
-    <Modal :showModal=showNotification @modalClose="modalClosed">
+    <Modal :showModal=showNotification >
 
             <template v-slot:modalHeader>
             <h5 class="modal-title" id="notificationModalLabel">Notifications</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="toggleNotification">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    @click="toggleModal('notification')">
                 <span aria-hidden="true">&times;</span>
             </button>
             </template>
@@ -46,7 +47,57 @@
             <button type="button" class="btn btn-link text-muted">Clear all</button>
         </template>
     </Modal>
+    <Modal :showModal=showNewChat >
 
+        <template v-slot:modalHeader>
+            <h5 class="modal-title" id="newChatModalLabel">New Chat</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="toggleModal('new-chat')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </template>
+        <template v-slot:modalBody>
+            <div class="row">
+                <div class="col-12">
+                    <form class="form-inline w-100 p-2 border-bottom">
+                        <div class="input-group w-100 bg-light">
+                            <input
+                                    type="text"
+                                    class="form-control form-control-md search border-right-0 transparent-bg pr-0"
+                                    placeholder="Search..."
+                            >
+                            <div class="input-group-append">
+                                <div
+                                        class="input-group-text transparent-bg border-left-0"
+                                        role="button"
+                                >
+                                    <SearchSvg />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-12">
+                    <ul class="list-group list-group-flush">
+
+
+
+                        <FriendRow v-if="friendsList.length > 0" v-for="friend in friendsList"
+                                         :friend=friend></FriendRow>
+                        <div class="text-center" v-else>
+                            <span>No Friends</span>
+                        </div>
+
+                    </ul>
+                </div>
+            </div>
+
+
+        </template>
+        <template v-slot:modalFooter>
+
+        </template>
+    </Modal>
 </template>
 
 <script lang="ts">
@@ -57,6 +108,9 @@
     import Modal from "../Base/Modal.vue";
     import Notifications from '../../Services/Notifications'
     import NotificationRow from "../Base/NotificationRow.vue";
+    import SearchSvg from  '../../assets/media/icons/search.svg';
+    import Friends from "../../Services/Friends";
+    import FriendRow from "../Base/FriendRow.vue";
     export default defineComponent({
         name: 'ChatAction',
         props: {
@@ -66,17 +120,25 @@
                 NotificationsSvg,
                 Dropdown,
                 Modal,
-                NotificationRow
+                NotificationRow,
+                SearchSvg,
+                FriendRow
         },
         setup: () => {
                 const showNotification = ref(false);
+                const showNewChat = ref(false);
                 const notificationList = ref({})
-                function toggleNotification() : void {
-                    showNotification.value = !showNotification.value;
-                    console.log(showNotification.value);
-                    /*if(document.getElementsByClassName("rj-modal-con")){
-// I have the 'hidden' class //.classList.contains("hidden")
-                    }*/
+                const friendsList = ref({})
+                function toggleModal(modal: String) : void {
+                    if(modal == 'notification')
+                    {
+                        showNotification.value = !showNotification.value;
+                    }else if(modal == 'new-chat')
+                    {
+                        showNewChat.value = !showNewChat.value;
+                    }
+
+
                 }
 
                 const chatOptions= [
@@ -94,19 +156,26 @@
                     }
                 ];
 
-                function charOpHandler(option)
+                function charOpHandler(option : Object) :void
                 {
-
+                    toggleModal(option.value);
                 }
 
-                function modalClosed(value)
-                {
-                    showNotification.value = !showNotification.value;
-                }
            function getNotificationsList(){
 
                 Notifications.getAll().then((response: object) => {
+
                     notificationList.value = response.data;
+                }).catch((e: Error) => {
+                    console.log(e);
+                });
+            }
+
+           function getFriendList(){
+
+                Friends.getAll().then((response: object) => {
+
+                    friendsList.value = response.data;
                 }).catch((e: Error) => {
                     console.log(e);
                 });
@@ -115,9 +184,21 @@
             onMounted(() => {
 
                 getNotificationsList();
+                getFriendList();
+
             })
 
-            return {showNotification,toggleNotification,charOpHandler,chatOptions,modalClosed,notificationList}
+            return {
+                    showNotification,
+
+                    charOpHandler,
+                    chatOptions,
+                    toggleModal,
+                    notificationList,
+                    showNewChat,
+                    friendsList
+
+                }
         },
         methods : {
 

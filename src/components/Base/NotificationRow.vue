@@ -20,7 +20,7 @@
                     <span v-if="notification.type== 'request_rejected'"> rejected your friend request</span>
                 </h6>
 
-                <p class="text-muted mb-0">5 mins ago</p>
+                <p class="text-muted mb-0">{{notification.datetime}}</p>
             </div>
         </div>
         <div class="d-flex justify-content-center mt-2" v-if="notification.type== 'request_arrived'">

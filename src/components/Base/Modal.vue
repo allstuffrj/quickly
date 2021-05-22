@@ -54,13 +54,8 @@
 
             });
 
-            function closeModal()
-                {
-                    console.log("In close modal")
-                    showModalToggle.value = false;
-                    context.emit('modalClose',true);
-                }
-                return {closeModal,showModalToggle}
+
+                return {showModalToggle}
         },
         methods: {
 
