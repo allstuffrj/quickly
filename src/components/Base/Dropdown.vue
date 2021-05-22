@@ -88,6 +88,10 @@
             dpstyle : {
                 type: String,
                 default:null
+            },
+            setActive : {
+                type:Boolean,
+                default:true
             }
 
         },
@@ -103,7 +107,6 @@
                 
                 if(props.defaultvalue != '')
                 {
-
                     selectedOption.value = props.defaultvalue;
                 }
                 if(props.emptyLabel != '')
@@ -126,7 +129,11 @@
                   function handleSelection(selectedVal : number) :void
                   {
                       let selectOp = this.options[selectedVal];
-                      selectedOption.value = selectOp.value;
+                        if(props.setActive)
+                        {
+                            selectedOption.value = selectOp.value;
+                        }
+
                       emptyLabel.value = selectOp.label;
                       isOpen.value = false;
                       this.$emit('change',selectOp);

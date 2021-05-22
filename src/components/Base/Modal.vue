@@ -62,3 +62,6 @@
         }
     })
 </script>
+<style scoped>
+    .modal-body{min-height:300px !important}
+</style>

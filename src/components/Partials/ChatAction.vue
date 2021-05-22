@@ -12,10 +12,11 @@
         <Dropdown title="Details" displayType="kebab" size=null xplacement="bottom-end"
                                       emptyLabel="Details"
                                       :options=chatOptions
-                                      @change="charOpHandler" defaultvalue=null dpclass="dropdown-menu-right" dpstyle="position: absolute; transform: translate3d(-128px, 40px, 0px); top: 0px; left: 0px; will-change: transform;"></Dropdown>
+                                      @change="charOpHandler" defaultvalue=null :setActive=false dpclass="dropdown-menu-right" dpstyle="position: absolute; transform: translate3d(-128px, 40px, 0px); top: 0px; left: 0px; will-change: transform;"></Dropdown>
 
         </li>
     </ul>
+
     <Modal :showModal=showNotification >
 
             <template v-slot:modalHeader>
@@ -47,6 +48,7 @@
             <button type="button" class="btn btn-link text-muted">Clear all</button>
         </template>
     </Modal>
+
     <Modal :showModal=showNewChat >
 
         <template v-slot:modalHeader>
@@ -64,6 +66,7 @@
                                     type="text"
                                     class="form-control form-control-md search border-right-0 transparent-bg pr-0"
                                     placeholder="Search..."
+                                    v-model=friendSearch
                             >
                             <div class="input-group-append">
                                 <div
@@ -82,7 +85,7 @@
 
 
 
-                        <FriendRow v-if="friendsList.length > 0" v-for="friend in friendsList"
+                        <FriendRow v-if="filteredFriendList().length > 0" v-for="friend in filteredFriendList()"
                                          :friend=friend></FriendRow>
                         <div class="text-center" v-else>
                             <span>No Friends</span>
@@ -98,6 +101,24 @@
 
         </template>
     </Modal>
+
+    <Modal :showModal=showCreateGroup>
+    <template v-slot:modalHeader>
+            <h5 class="modal-title" id="newCreateGroupModalLabel">Create Group</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="toggleModal('create-group')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </template>
+        <template v-slot:modalBody>
+            
+             <CreateGroup></CreateGroup>
+       
+        </template>
+        <template v-slot:modalFooter>
+
+        </template>
+    </Modal>
+
 </template>
 
 <script lang="ts">
@@ -111,6 +132,7 @@
     import SearchSvg from  '../../assets/media/icons/search.svg';
     import Friends from "../../Services/Friends";
     import FriendRow from "../Base/FriendRow.vue";
+    import CreateGroup from './CreateGroup.vue'
     export default defineComponent({
         name: 'ChatAction',
         props: {
@@ -122,13 +144,16 @@
                 Modal,
                 NotificationRow,
                 SearchSvg,
-                FriendRow
+                FriendRow,
+                CreateGroup
         },
         setup: () => {
                 const showNotification = ref(false);
                 const showNewChat = ref(false);
-                const notificationList = ref({})
-                const friendsList = ref({})
+                const showCreateGroup = ref(false);
+                const notificationList = ref([])
+                const friendSearch = ref(null)
+                const friendsList = ref({});
                 function toggleModal(modal: String) : void {
                     if(modal == 'notification')
                     {
@@ -136,6 +161,10 @@
                     }else if(modal == 'new-chat')
                     {
                         showNewChat.value = !showNewChat.value;
+                        friendSearch.value =null;
+                    }else if(modal == 'create-group')
+                    {
+                        showCreateGroup.value = !showCreateGroup.value;
                     }
 
 
@@ -176,6 +205,7 @@
                 Friends.getAll().then((response: object) => {
 
                     friendsList.value = response.data;
+                    
                 }).catch((e: Error) => {
                     console.log(e);
                 });
@@ -186,7 +216,18 @@
                 getNotificationsList();
                 getFriendList();
 
-            })
+            });
+
+            function filteredFriendList() {
+
+                let friendListAr = friendsList.value;
+                if(friendSearch.value === '' || friendSearch.value == null) 
+                                        return friendListAr;
+                
+                return friendListAr.filter(entry => {
+                    return entry.user_name.toLowerCase().includes(friendSearch.value.toLowerCase())
+                })   
+            }
 
             return {
                     showNotification,
@@ -196,8 +237,10 @@
                     toggleModal,
                     notificationList,
                     showNewChat,
+                    filteredFriendList,
+                    friendSearch,
+                    showCreateGroup,
                     friendsList
-
                 }
         },
         methods : {
