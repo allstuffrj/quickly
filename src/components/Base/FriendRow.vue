@@ -4,7 +4,7 @@
 
         <div class="media">
             <div class="avatar  mr-2" :class="['avatar-'+friend.status]">
-                <img :src=friend.avatar alt="avatar1">
+                <img :src=friend.avatar :alt=friend.user_name>
             </div>
 
             <div class="media-body">

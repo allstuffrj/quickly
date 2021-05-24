@@ -14,7 +14,7 @@
                 <div class="modal-header">
                     <slot name="modalHeader"></slot>
                 </div>
-                <div class="modal-body p-0 hide-scrollbar">
+                <div class="modal-body hide-scrollbar" :class="[modalClass]">
                     <slot name="modalBody"></slot>
                 </div>
                 <div class="modal-footer justify-content-center">
@@ -40,6 +40,10 @@
             modalTitle :{
                 type : String,
                 default: 'Modal Title'
+            },
+            modalClass : {
+                type : String,
+                default : 'p-0'
             }
         },
         emits : ['modalClose'],

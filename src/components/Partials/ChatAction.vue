@@ -17,7 +17,7 @@
         </li>
     </ul>
 
-    <Modal :showModal=showNotification >
+    <Modal :showModal=showNotification modalClass='p-0'>
 
             <template v-slot:modalHeader>
             <h5 class="modal-title" id="notificationModalLabel">Notifications</h5>
@@ -49,7 +49,7 @@
         </template>
     </Modal>
 
-    <Modal :showModal=showNewChat >
+    <Modal :showModal=showNewChat modalClass='p-0' >
 
         <template v-slot:modalHeader>
             <h5 class="modal-title" id="newChatModalLabel">New Chat</h5>
@@ -102,7 +102,7 @@
         </template>
     </Modal>
 
-    <Modal :showModal=showCreateGroup>
+    <Modal :showModal=showCreateGroup modalClass="py-0">
     <template v-slot:modalHeader>
             <h5 class="modal-title" id="newCreateGroupModalLabel">Create Group</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="toggleModal('create-group')">
@@ -110,12 +110,29 @@
             </button>
         </template>
         <template v-slot:modalBody>
-            
-             <CreateGroup></CreateGroup>
-       
+
+             <CreateGroup :cuStep=createGrupCuStep></CreateGroup>
+
         </template>
         <template v-slot:modalFooter>
-
+            <button
+                    variant="link"
+                    class="btn btn-link text-muted js-btn-step mr-auto">
+                Cancel
+            </button>
+            <button type="button" class="btn btn-secondary  js-btn-step" data-orientation="previous"
+                    :data-step="createGrupCuStep -1"
+                    @click="createGrupCuStep -= 1"
+                    :disabled="createGrupCuStep == 1">Previous</button>
+            <button type="button" class="btn btn-primary js-btn-step" data-orientation="next"
+                    :data-step=" createGrupCuStep + 1 " :class="[{'hide' : createGrupCuStep==3}]"
+                    :disabled="createGrupCuStep == 3"
+                    @click="createGrupCuStep += 1">Next
+            </button>
+            <button type="button" class="btn btn-primary js-btn-step" :class="[{'hide':createGrupCuStep != 3}]"
+                    data-orientation="next"
+                    data-step="complete">
+                Finish</button>
         </template>
     </Modal>
 
@@ -149,6 +166,7 @@
         },
         setup: () => {
                 const showNotification = ref(false);
+                const createGrupCuStep = ref(1);
                 const showNewChat = ref(false);
                 const showCreateGroup = ref(false);
                 const notificationList = ref([])
@@ -166,7 +184,7 @@
                     {
                         showCreateGroup.value = !showCreateGroup.value;
                     }
-
+                    createGrupCuStep.value = 1;
 
                 }
 
@@ -205,7 +223,7 @@
                 Friends.getAll().then((response: object) => {
 
                     friendsList.value = response.data;
-                    
+
                 }).catch((e: Error) => {
                     console.log(e);
                 });
@@ -221,12 +239,12 @@
             function filteredFriendList() {
 
                 let friendListAr = friendsList.value;
-                if(friendSearch.value === '' || friendSearch.value == null) 
+                if(friendSearch.value === '' || friendSearch.value == null)
                                         return friendListAr;
-                
+
                 return friendListAr.filter(entry => {
                     return entry.user_name.toLowerCase().includes(friendSearch.value.toLowerCase())
-                })   
+                })
             }
 
             return {
@@ -240,7 +258,8 @@
                     filteredFriendList,
                     friendSearch,
                     showCreateGroup,
-                    friendsList
+                    friendsList,
+                    createGrupCuStep
                 }
         },
         methods : {
