@@ -6,7 +6,7 @@
                 <input
                   type="text"
                   class="form-control form-control-md"
-                  id="groupName" v-model="creategroupobj.name.value"
+                  id="groupName" v-model="creategroupobj.grpname"
                   placeholder="Type group name here" />
               </div>
             </div>
@@ -18,6 +18,7 @@
                     type="file"
                     class="custom-file-input"
                     id="profilePictureInput"
+                    @change="onFilePicked"
                     accept="image/*" >
                   <label class="custom-file-label">Choose file</label>
                 </div>
@@ -37,10 +38,11 @@
                       <input
                         class="form-check-input"
                         type="radio"
-                        name="exampleRadios"
-                        v-model="creategroupobj.type.value" value="public">
+                        name="grouptype"
+
+                        v-model="creategroupobj.type" id="grouptypepublic" value="public">
                       <label
-                        class="form-check-label" >
+                        class="form-check-label" for="grouptypepublic" >
                         Public group
                       </label>
                     </div>
@@ -52,10 +54,10 @@
                       <input
                         class="form-check-input"
                         type="radio"
-                        name="exampleRadios"
-                         v-model="creategroupobj.type.value" value="private">
+                        name="grouptype"
+                         v-model="creategroupobj.type" id="grouptypeprivate" value="private">
                       <label
-                        class="form-check-label" >
+                        class="form-check-label" for="grouptypeprivate" >
                         Private group
                       </label>
                     </div>
@@ -69,16 +71,11 @@
             <!-- Search Start -->
             <form class="form-inline w-100 px-2 pb-2 border-bottom">
                 <div class="input-group w-100 bg-light">
-                    <input type="text" class="form-control form-control-md search border-right-0 transparent-bg pr-0" placeholder="Search">
+                    <input type="text" v-model=friendSearch
+                           class="form-control form-control-md search border-right-0 transparent-bg pr-0" placeholder="Search">
                     <div class="input-group-append">
                         <div class="input-group-text transparent-bg border-left-0" role="button">
-                            <!-- Default :: Inline SVG -->
-                            <svg class="hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                            </svg>
-
-                            <!-- Alternate :: External File link -->
-                            <!-- <img class="injectable hw-20" src="./../assets/media/heroicons/outline/search.svg" alt=""> -->
+                            <SearchSvg />
                         </div>
                     </div>
                 </div>
@@ -91,7 +88,8 @@
             <ul class="list-group list-group-flush">
 
                 <!-- List Group Item Start -->
-                <li class="list-group-item" v-if="CfilteredFriendList().length > 0" v-for="friend in CfilteredFriendList()">
+                <li class="list-group-item" v-if="CfilteredFriendList().length > 0" v-for="friend, ind in
+                CfilteredFriendList()">
                     <div class="media">
                         <div class="avatar mr-2" :class="['avatar-'+friend.status]">
                             <img :src=friend.avatar :alt=friend.user_name>
@@ -148,16 +146,17 @@
     import SearchSvg from  '../../assets/media/icons/search.svg';
     import Friends from "../../Services/Friends";
     import FriendRow from "../Base/FriendRow.vue";
-    const enum groupTypes  {
-        private =  'private',
-        public = 'public'
-    };
+
     export default defineComponent({
         name: 'CreateGroup',
         props: {
             cuStep : {
                 type: Number,
                 default: 1
+            },
+            creategroupobj : {
+                type : Object,
+                default : {}
             }
         },
 
@@ -170,20 +169,7 @@
 
                 const friendSearch = ref(null)
                 var friendsList = ref({});
-                const creategroupobj = ref({
-                    name: {
-                        type:String,
-                        default:null
-                    },
-                    type: {
-                        type:groupTypes,
-                        default:null
-                    },
-                    friends:{
-                        type:Array,
-                        default:[]
-                    }
-                });
+
 
             function CfilteredFriendList() : Array {
 
@@ -207,8 +193,12 @@
                 });
             }
             getFriendList();
-
-            return {CfilteredFriendList,friendSearch,creategroupobj}
+            function onFilePicked(event) : void
+            {
+                console.log("in child")
+                this.$emit('onFilePicked',event);
+            }
+            return {CfilteredFriendList,friendSearch,onFilePicked}
         },
         methods: {
 

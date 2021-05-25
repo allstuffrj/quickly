@@ -104,20 +104,21 @@
 
     <Modal :showModal=showCreateGroup modalClass="py-0">
     <template v-slot:modalHeader>
-            <h5 class="modal-title" id="newCreateGroupModalLabel">Create Group</h5>
+            <h5 class="modal-title" id="newCreateGroupModalLabel">{{ createGrpMdlTitle }}</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="toggleModal('create-group')">
                 <span aria-hidden="true">&times;</span>
             </button>
         </template>
         <template v-slot:modalBody>
 
-             <CreateGroup :cuStep=createGrupCuStep></CreateGroup>
+             <CreateGroup :cuStep=createGrupCuStep :creategroupobj="creategroupobj"
+                          @onFilePicked="onFilePicked"></CreateGroup>
 
         </template>
         <template v-slot:modalFooter>
             <button
                     variant="link"
-                    class="btn btn-link text-muted js-btn-step mr-auto">
+                    class="btn btn-link text-muted js-btn-step mr-auto" @click="toggleModal('create-group')">
                 Cancel
             </button>
             <button type="button" class="btn btn-secondary  js-btn-step" data-orientation="previous"
@@ -131,7 +132,7 @@
             </button>
             <button type="button" class="btn btn-primary js-btn-step" :class="[{'hide':createGrupCuStep != 3}]"
                     data-orientation="next"
-                    data-step="complete">
+                    data-step="complete" @click="createGrup">
                 Finish</button>
         </template>
     </Modal>
@@ -139,8 +140,11 @@
 </template>
 
 <script lang="ts">
-
-    import { ref, defineComponent,onMounted } from 'vue'
+    const enum groupTypes  {
+        private =  'private',
+        public = 'public'
+    };
+    import { ref, defineComponent,onMounted,watch,reactive } from 'vue'
     import NotificationsSvg from '../../assets/media/icons/notifications.svg';
     import Dropdown from '../Base/Dropdown.vue'
     import Modal from "../Base/Modal.vue";
@@ -172,6 +176,43 @@
                 const notificationList = ref([])
                 const friendSearch = ref(null)
                 const friendsList = ref({});
+                const createGrpMdlTitle = ref('Create a New Group');
+                const creategroupobj = reactive({
+                    grpname :'',
+                    friends : [],
+                    type:'',
+                    image:''
+                });
+
+            /*{
+                name: {
+                    type:String,
+                default:null
+                },
+                type: {
+                    type:groupTypes,
+                default:null
+                },
+                friends:{
+                    type:Array,
+                default:[]
+                }
+            }*/
+
+            watch(createGrupCuStep, (first) => {
+
+                if(first == 3)
+                {
+                    createGrpMdlTitle.value = 'Finished';
+                }else if(first == 2)
+                {
+                    createGrpMdlTitle.value = 'Add Group Members';
+                }else
+                {
+                    createGrpMdlTitle.value = 'Create a New Group';
+                }
+
+            });
                 function toggleModal(modal: String) : void {
                     if(modal == 'notification')
                     {
@@ -247,6 +288,24 @@
                 })
             }
 
+            function createGrup() :void{
+                console.log(creategroupobj)
+                console.log(creategroupobj.grpname,creategroupobj.friends,creategroupobj.type)
+
+                console.log("Group create ajax call will be here")
+            }
+
+            function onFilePicked (event) {
+                console.log("Here in onFilePicked");
+                const files = event.target.files
+                let filename = files[0].name
+                const fileReader = new FileReader()
+                fileReader.addEventListener('load', () => {
+                    this.imageUrl = fileReader.result
+                })
+                fileReader.readAsDataURL(files[0])
+                console.log(files[0])
+            }
             return {
                     showNotification,
 
@@ -259,7 +318,11 @@
                     friendSearch,
                     showCreateGroup,
                     friendsList,
-                    createGrupCuStep
+                    createGrupCuStep,
+                    createGrpMdlTitle,
+                    createGrup,
+                    creategroupobj,
+                    onFilePicked
                 }
         },
         methods : {
