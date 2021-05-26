@@ -164,7 +164,7 @@
                 SearchSvg,
                 FriendRow,
         },
-
+        emits : ['onFilePicked'],
         setup: (props,context) => {
 
                 const friendSearch = ref(null)

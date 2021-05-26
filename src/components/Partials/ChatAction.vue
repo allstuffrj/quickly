@@ -112,7 +112,7 @@
         <template v-slot:modalBody>
 
              <CreateGroup :cuStep=createGrupCuStep :creategroupobj="creategroupobj"
-                          @onFilePicked="onFilePicked"></CreateGroup>
+                          @onFilePicked=groupPictureUpload></CreateGroup>
 
         </template>
         <template v-slot:modalFooter>
@@ -134,6 +134,58 @@
                     data-orientation="next"
                     data-step="complete" @click="createGrup">
                 Finish</button>
+        </template>
+    </Modal>
+
+    <Modal :showModal=showInvite modalClass="py-0">
+        <template v-slot:modalHeader>
+            <h5>Invite Others</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    @click="toggleModal('invite-others')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </template>
+        <template v-slot:modalBody>
+
+            <form>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Email address</label>
+                            <input
+                                    type="email"
+                                    class="form-control form-control-md"
+                                    id="inviteEmailAddress"
+                                    placeholder="Type email address here"
+                                    v-model="inviteother.email"
+                            >
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Invitation message</label>
+                            <textarea
+                                    class="form-control form-control-md no-resize hide-scrollbar"
+                                    id="inviteMessage"
+                                    placeholder="Write your message here"
+                                    rows="3"
+                                    v-model="inviteother.message"
+                            ></textarea>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </template>
+        <template v-slot:modalFooter>
+            <button
+                    variant="link"
+                    class="btn btn-link text-muted js-btn-step mr-auto" @click="toggleModal('invite-others')">
+                Cancel
+            </button>
+
+            <button type="button" class="btn btn-primary js-btn-step"  @click="sendInvitation">
+                Send Invitation</button>
         </template>
     </Modal>
 
@@ -173,6 +225,7 @@
                 const createGrupCuStep = ref(1);
                 const showNewChat = ref(false);
                 const showCreateGroup = ref(false);
+                const showInvite = ref(false);
                 const notificationList = ref([])
                 const friendSearch = ref(null)
                 const friendsList = ref({});
@@ -184,20 +237,10 @@
                     image:''
                 });
 
-            /*{
-                name: {
-                    type:String,
-                default:null
-                },
-                type: {
-                    type:groupTypes,
-                default:null
-                },
-                friends:{
-                    type:Array,
-                default:[]
-                }
-            }*/
+                const inviteother = reactive({
+                    email:'',
+                    message:''
+                })
 
             watch(createGrupCuStep, (first) => {
 
@@ -224,6 +267,9 @@
                     }else if(modal == 'create-group')
                     {
                         showCreateGroup.value = !showCreateGroup.value;
+                    }else if(modal == 'invite-others')
+                    {
+                        showInvite.value = !showInvite.value;
                     }
                     createGrupCuStep.value = 1;
 
@@ -239,7 +285,7 @@
                         label : 'Create Group'
                     },
                     {
-                        value : 'invite-other',
+                        value : 'invite-others',
                         label : 'Invite Others'
                     }
                 ];
@@ -290,21 +336,28 @@
 
             function createGrup() :void{
                 console.log(creategroupobj)
-                console.log(creategroupobj.grpname,creategroupobj.friends,creategroupobj.type)
+                console.log(creategroupobj.grpname,creategroupobj.friends,creategroupobj.type,creategroupobj.image)
 
                 console.log("Group create ajax call will be here")
+                toggleModal('create-group')
             }
 
-            function onFilePicked (event) {
+            function sendInvitation() : void{
+                console.log("sendInvitation")
+                console.log(inviteother.email,inviteother.message)
+                toggleModal('invite-others')
+            }
+
+            function groupPictureUpload (event) {
                 console.log("Here in onFilePicked");
                 const files = event.target.files
                 let filename = files[0].name
                 const fileReader = new FileReader()
                 fileReader.addEventListener('load', () => {
-                    this.imageUrl = fileReader.result
+                    creategroupobj.image = fileReader.result
                 })
                 fileReader.readAsDataURL(files[0])
-                console.log(files[0])
+
             }
             return {
                     showNotification,
@@ -317,12 +370,15 @@
                     filteredFriendList,
                     friendSearch,
                     showCreateGroup,
+                    showInvite,
                     friendsList,
                     createGrupCuStep,
                     createGrpMdlTitle,
                     createGrup,
                     creategroupobj,
-                    onFilePicked
+                    groupPictureUpload,
+                    sendInvitation,
+                    inviteother
                 }
         },
         methods : {
