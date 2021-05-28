@@ -1,5 +1,5 @@
 <template>
-    <ChatList></ChatList>
+    <ChatList @openConversation=openConversation></ChatList>
 </template>
 
 <script lang="ts">
@@ -14,7 +14,10 @@
             ChatList
         },
         setup: () => {
-
+            function openConversation(conversation) {
+                console.log("Gere")
+            }
+            {openConversation}
         }
     })
 </script>

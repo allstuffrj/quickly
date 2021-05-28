@@ -2,8 +2,8 @@
     <ul class="contacts-list" id="chatContactTab">
 
         <li class="contacts-item friends" v-for="conversation in conversationList">
-            <a class="contacts-link" href="javascript:void(0)">
-                <div class="avatar avatar-offline bg-info text-light">
+            <a class="contacts-link" href="javascript:void(0)" @click="openConversation(conversation)">
+                <div class="avatar  bg-info text-light" :class="['avatar-'+conversation.status]">
                     <img :src=conversation.avatar :alt=conversation.name>
                 </div>
                 <div class="contacts-content">
@@ -12,8 +12,17 @@
                         <div class="chat-time">{{timeAgo(conversation.last_conversation_time)}}</div>
                     </div>
                     <div class="contacts-texts">
+
+                        <MissedCall v-if="conversation.last_message_type =='missed-call'"></MissedCall>
+                        <Document v-if="conversation.last_message_type =='document'"></Document>
+                        <photoGraph v-if="conversation.last_message_type =='photo'"></photoGraph>
                         <p class="text-truncate">{{conversation.last_message}}</p>
-                        <div class="badge badge-rounded badge-primary ml-1">2</div>
+                        <div class="badge badge-rounded badge-primary ml-1"
+                             v-if="conversation.unread_count >0">{{conversation.unread_count}}
+                        </div>
+                        <div class="d-inline-flex align-items-center ml-1" v-if="conversation.is_mute == 1">
+                            <Muted></Muted>
+                        </div>
                     </div>
                 </div>
             </a>
@@ -25,7 +34,10 @@
 
     import { ref, defineComponent } from 'vue'
     import  timeAgo from '../../Config/timeAgo'
-
+    import photoGraph from '../../assets/media/heroicons/solid/photograph.svg'
+    import Document from '../../assets/media/heroicons/solid/document-report.svg'
+    import MissedCall from '../../assets/media/heroicons/solid/phone-incoming.svg'
+    import Muted from '../../assets/media/heroicons/solid/volume-off.svg'
     export default defineComponent({
         name: 'ConversationList',
         props: {
@@ -35,11 +47,18 @@
             }
         },
         components : {
-
+            photoGraph,
+            MissedCall,
+            Muted,
+            Document
         },
+        emits:['openConversation'],
         setup: () => {
-
-            return {timeAgo}
+                function openConversation(conversation)
+                {
+                    this.$emit('openConversation',conversation)
+                }
+            return {timeAgo,openConversation}
         }
     })
 </script>

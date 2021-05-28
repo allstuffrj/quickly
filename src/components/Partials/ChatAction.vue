@@ -349,7 +349,7 @@
             }
 
             function groupPictureUpload (event) {
-                console.log("Here in onFilePicked");
+
                 const files = event.target.files
                 let filename = files[0].name
                 const fileReader = new FileReader()

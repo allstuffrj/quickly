@@ -1,5 +1,5 @@
 <template>
-  <h1>{{ msg }}</h1>
+  <h1></h1>
 
   <p>
     Recommended IDE setup:
@@ -39,10 +39,7 @@ import { ref, defineComponent } from 'vue'
 export default defineComponent({
   name: 'HelloWorld',
   props: {
-    msg: {
-      type: String,
-      required: true
-    }
+
   },
   setup: () => {
       console.log("in hello world")

@@ -387,11 +387,9 @@
     export default defineComponent({
         name: 'Intro',
         props: {
-            msg: {
-                type: String,
-                required: true
-            }
+
         },
+        emits:['update-theme-mode'],
         setup: (props, { emit }) => {
 
             const count = ref(0)
