@@ -73,7 +73,7 @@
                 },
             ];
             const emptyLabel = "All Chats";
-            const dpsize = "mr-2";
+            const dpsize = "border-0 f-16 p-0 min-w-150 cut-texts";
             const xplacement = "bottom-start";
             const defaultvalue = 'all-chats';
             const dpDisplayType = 'button';

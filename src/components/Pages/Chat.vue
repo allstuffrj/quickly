@@ -1,17 +1,20 @@
 <template>
-    <ChatList @openConversation=openConversation></ChatList>
+    <ChatList></ChatList>
+    <ChatHistory></ChatHistory>
 </template>
 
 <script lang="ts">
     import { ref, defineComponent } from 'vue'
     import ChatList from "../sidebar/ChatList.vue";
+    import ChatHistory from "../Partials/ChatHistory.vue";
     export default defineComponent({
         name: 'Chat',
         props: {
 
         },
         components : {
-            ChatList
+            ChatList,
+            ChatHistory
         },
         setup: () => {
             function openConversation(conversation) {
