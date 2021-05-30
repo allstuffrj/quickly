@@ -51,7 +51,7 @@
         setup: () => {
             const searchInput = ref(null);
             watch(searchInput, (neval, oldVal) => {
-                console.log(neval, oldVal)
+                dpChangeHandler(currentSelected.value)
             });
             const options = [
                 {
@@ -79,7 +79,7 @@
             const dpDisplayType = 'button';
             const conversationList = ref({});
             const filteredConversationList = ref({});
-
+            const currentSelected = ref(options[0]);
             function getConversationList() {
 
                 Friends.getConversations().then((response: object) => {
@@ -93,9 +93,19 @@
 
 
             function  dpChangeHandler  (selected: object): void {
+
+                currentSelected.value = selected;
                 if(selected.value=='all-chats')
                 {
-                    filteredConversationList.value = conversationList.value;
+                    let ListAr = conversationList.value;
+                    if(searchInput.value != '' && searchInput.value != null)
+                    {
+
+                        ListAr = ListAr.filter(entry => {
+                            return entry.name.toLowerCase().includes(searchInput.value.toLowerCase())
+                        })
+                    }
+                    filteredConversationList.value = ListAr;
                     return;
                 }
 
@@ -122,6 +132,13 @@
                         }
 
                 });
+
+                if(searchInput.value != '' && searchInput.value != null)
+                {
+                    tempList =  tempList.filter(entry => {
+                        return entry.name.toLowerCase().includes(searchInput.value.toLowerCase())
+                    })
+                }
                 filteredConversationList.value = tempList;
             }
             onMounted(() => {
