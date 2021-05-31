@@ -21,8 +21,7 @@
                         </div>
 
 
-                        <ConversationList :conversationList=filteredConversationList
-                                          @openConversation=openConversation></ConversationList>
+                        <ConversationList :conversationList=filteredConversationList></ConversationList>
 
                     </div>
                 </div>
@@ -143,16 +142,14 @@
                 filteredConversationList.value = tempList;
             }
 
-            function openConversation(selectedConv : Object): void{
-                console.log(selectedConv)
-            }
+
             onMounted(() => {
 
                 getConversationList();
 
             });
             return {options, emptyLabel, dpsize, defaultvalue, dpDisplayType, searchInput,
-                xplacement,filteredConversationList,dpChangeHandler,openConversation}
+                xplacement,filteredConversationList,dpChangeHandler}
         }
 
     })

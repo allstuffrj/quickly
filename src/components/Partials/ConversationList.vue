@@ -56,7 +56,7 @@
         setup: () => {
                 function openConversation(conversation)
                 {
-                    this.$emit('openConversation',conversation)
+
                 }
             return {timeAgo,openConversation}
         }
