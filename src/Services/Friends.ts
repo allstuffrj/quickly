@@ -9,6 +9,10 @@ class FriendsService {
         return http.get('/conversationlist.json');
     }
 
+    getConversationDetail(conversation : Object): Promise<any>{
+      return http.get('/conversation_detail.json');
+    }
+
   }
 
   export default new FriendsService();

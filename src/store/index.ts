@@ -9,7 +9,7 @@ import {
     DispatchOptions,
     createLogger
 } from "vuex";
-
+import Friends from "../Services//Friends";
 //declare state
 export type State = { currentConversation: Object };
 
@@ -58,6 +58,8 @@ export interface Actions {
 
 export const actions: ActionTree<State, State> & Actions = {
     [ActionTypes.LOAD_CONVERSATION]({ commit }, payload: Object) {
+        // Ajax call will be here.
+        
         commit(MutationTypes.LOAD_CONVERSATION, payload);
     }
 };
