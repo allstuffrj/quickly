@@ -7,6 +7,7 @@
     import { ref, defineComponent } from 'vue'
     import ChatList from "../sidebar/ChatList.vue";
     import ChatHistory from "../Partials/ChatHistory.vue";
+
     export default defineComponent({
         name: 'Chat',
         props: {

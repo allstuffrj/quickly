@@ -11,7 +11,8 @@
     "click-outside-vue3": "^4.0.1",
     "vite-svg-loader": "^1.5.1",
     "vue": "^3.0.5",
-    "vue-router": "^4.0.6"
+    "vue-router": "^4.0.6",
+    "vuex": "^4.0.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.2.2",

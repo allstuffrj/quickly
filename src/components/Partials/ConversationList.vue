@@ -38,6 +38,8 @@
     import Document from '../../assets/media/heroicons/solid/document-report.svg'
     import MissedCall from '../../assets/media/heroicons/solid/phone-incoming.svg'
     import Muted from '../../assets/media/heroicons/solid/volume-off.svg'
+
+    import { useStore, MutationTypes, ActionTypes } from "../../store";
     export default defineComponent({
         name: 'ConversationList',
         props: {
@@ -54,9 +56,13 @@
         },
         emits:['openConversation'],
         setup: () => {
-                function openConversation(conversation)
-                {
 
+            const store = useStore();
+            const currentConversation = ref(store.state.currentConversation);
+
+            function openConversation(conversation : object) :void
+                {
+                    store.dispatch(ActionTypes.LOAD_CONVERSATION, conversation);
                 }
             return {timeAgo,openConversation}
         }
