@@ -19,11 +19,11 @@ const state: State = { currentConversation: {} };
 // mutations and action enums
 
 export enum MutationTypes {
-    LOAD_CONVERSATION = "SET_CONVERSATION"
+    LOAD_CONVERSATION = "SET_CONVERSATION",
 }
 
 export enum ActionTypes {
-    LOAD_CONVERSATION = "SET_CONVERSATION"
+    LOAD_CONVERSATION = "SET_CONVERSATION",
 }
 
 //Mutation Types
@@ -34,7 +34,13 @@ export type Mutations<S = State> = {
 //define mutations
 const mutations: MutationTree<State> & Mutations = {
     [MutationTypes.LOAD_CONVERSATION](state: State, payload: Object) {
-        state.currentConversation = payload;
+        Friends.getConversationDetail(payload).then((response: object) => {
+
+            state.currentConversation = response.data;
+        }).catch((e: Error) => {
+            console.log(e);
+            state.currentConversation = {};
+        });
     }
 };
 
@@ -59,8 +65,14 @@ export interface Actions {
 export const actions: ActionTree<State, State> & Actions = {
     [ActionTypes.LOAD_CONVERSATION]({ commit }, payload: Object) {
         // Ajax call will be here.
-        
-        commit(MutationTypes.LOAD_CONVERSATION, payload);
+        Friends.getConversationDetail(payload).then((response: object) => {
+
+            commit(MutationTypes.LOAD_CONVERSATION, response.data);
+        }).catch((e: Error) => {
+            console.log(e);
+            commit(MutationTypes.LOAD_CONVERSATION, {});
+        });
+
     }
 };
 

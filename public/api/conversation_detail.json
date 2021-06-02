@@ -1,0 +1,171 @@
+{
+  "uuid": "ea519128-972d-4081-8378-5b72dff6b8c8",
+  "name": "Catherine Richardson",
+  "avatar": "uploads/avatar/3.png",
+  "status": "online",
+  "conversations" : [
+    {
+      "date" : "2021-06-01",
+      "list" : [
+        {
+          "message_uuid" : "ea519128-972d-4081-8378-5b72dff6b8c8",
+          "message_type" : "text",
+          "name": "Catherine Richardson",
+          "avatar": "uploads/avatar/8.png",
+          "message" : "I have to give a presentation on global warming on Friday, and I am so nervous.",
+          "datetime" : "2021-05-17 12:15:00",
+          "user_uuid" : "ea519128-972d-4081-8378-5b72dff6b8c8",
+          "is_received": 1,
+          "is_sent" : 0
+        },
+        {
+          "message_uuid" : "ea519128-972d-4081-8378-5b72dff6b8c8",
+          "message_type" : "text",
+          "name": "Catherine Richardson",
+          "avatar": "uploads/avatar/8.png",
+          "message" : "First of all, you need to understand the subject matter thoroughly. You need to know what is global warming, what causes global warming, and what people should do to abate the effects of global warming.",
+          "datetime" : "2021-05-17 12:15:00",
+          "user_uuid" : "ea519128-972d-4081-8378-5b72dff6b8c8",
+          "is_received": 0,
+          "is_sent" : 1
+        },
+        {
+          "message_uuid" : "ea519128-972d-4081-8378-5b72dff6b8c8",
+          "message_type" : "text",
+          "name": "Catherine Richardson",
+          "avatar": "uploads/avatar/8.png",
+          "message" : "I have done a lot of research on the subject, and I know I can answer any questions I will receive from the audience.",
+          "datetime" : "2021-05-17 12:15:00",
+          "user_uuid" : "ea519128-972d-4081-8378-5b72dff6b8c8",
+          "is_received": 1,
+          "is_sent" : 0
+        },
+        {
+          "message_uuid" : "ea519128-972d-4081-8378-5b72dff6b8c8",
+          "message_type" : "text",
+          "name": "Catherine Richardson",
+          "avatar": "uploads/avatar/8.png",
+          "message" : "I should talk about more precisely the sequence of my presentation?",
+          "datetime" : "2021-05-17 12:15:00",
+          "user_uuid" : "ea519128-972d-4081-8378-5b72dff6b8c8",
+          "is_received": 1,
+          "is_sent" : 0
+        },
+        {
+          "message_uuid" : "ea519128-972d-4081-8378-5b72dff6b8c8",
+          "message_type" : "text",
+          "name": "Catherine Richardson",
+          "avatar": "uploads/avatar/8.png",
+          "message" : "Yes, what you should present first, second and third…",
+          "datetime" : "2021-05-17 12:15:00",
+          "user_uuid" : "ea519128-972d-4081-8378-5b72dff6b8c8",
+          "is_received": 0,
+          "is_sent" : 1
+        }
+      ]
+    },
+    {
+      "date" : "2021-06-02",
+      "list" : [
+        {
+          "message_uuid" : "ea519128-972d-4081-8378-5b72dff6b8c8",
+          "message_type" : "document",
+          "name": "Catherine Richardson",
+          "avatar": "uploads/avatar/8.png",
+          "message" : "global-warming-data-2020.csv",
+          "message_link" : "documents/global-warming-data-2020.csv",
+          "datetime" : "2021-05-17 12:15:00",
+          "user_uuid" : "ea519128-972d-4081-8378-5b72dff6b8c8",
+          "is_received": 1,
+          "is_sent" : 0
+        },
+        {
+          "message_uuid" : "ea519128-972d-4081-8378-5b72dff6b8c8",
+          "message_type" : "text",
+          "name": "Catherine Richardson",
+          "avatar": "uploads/avatar/8.png",
+          "message" : "If that is the case, then I already have an outline. To make it easy for my audience to follow the presentation, I intend to post the outline on the board at all time during my speech.",
+          "datetime" : "2021-05-17 12:15:00",
+          "user_uuid" : "ea519128-972d-4081-8378-5b72dff6b8c8",
+          "is_received": 1,
+          "is_sent" : 0
+        },
+        {
+          "message_uuid" : "ea519128-972d-4081-8378-5b72dff6b8c8",
+          "message_type" : "text",
+          "name": "Catherine Richardson",
+          "avatar": "uploads/avatar/8.png",
+          "message" : "Good idea! By the way, do you have any facts to back you up? For example, change of climate, yearly disasters…",
+          "datetime" : "2021-05-17 12:15:00",
+          "user_uuid" : "ea519128-972d-4081-8378-5b72dff6b8c8",
+          "is_received": 0,
+          "is_sent" : 1
+        },
+        {
+          "message_uuid" : "ea519128-972d-4081-8378-5b72dff6b8c8",
+          "message_type" : "image",
+          "name": "Catherine Richardson",
+          "avatar": "uploads/avatar/8.png",
+          "message" : "I have shared some photos, Please have a look.",
+          "message_link" : [
+            "shared-photos/01.jpg",
+            "shared-photos/02.jpg",
+            "shared-photos/03.jpg"
+
+          ],
+          "datetime" : "2021-05-17 12:15:00",
+          "user_uuid" : "ea519128-972d-4081-8378-5b72dff6b8c8",
+          "is_received": 1,
+          "is_sent" : 0
+        },
+        {
+          "message_uuid" : "ea519128-972d-4081-8378-5b72dff6b8c8",
+          "message_type" : "text",
+          "name": "Catherine Richardson",
+          "avatar": "uploads/avatar/8.png",
+          "message" : "No, I have not thought about that. I better get some statistics from the Internet. I should not have any problems since the Internet has all kinds of data.",
+          "message_link" : "",
+          "datetime" : "2021-05-17 12:15:00",
+          "user_uuid" : "ea519128-972d-4081-8378-5b72dff6b8c8",
+          "is_received": 1,
+          "is_sent" : 0
+        },
+        {
+          "message_uuid" : "ea519128-972d-4081-8378-5b72dff6b8c8",
+          "message_type" : "text",
+          "name": "Catherine Richardson",
+          "avatar": "uploads/avatar/8.png",
+          "message" : "Pictures will keep your audience from being bored. In order for you to succeed, you need to keep them interested and involved.",
+          "datetime" : "2021-05-17 12:15:00",
+          "user_uuid" : "ea519128-972d-4081-8378-5b72dff6b8c8",
+          "is_received": 0,
+          "is_sent" : 1
+        },
+        {
+          "message_uuid" : "ea519128-972d-4081-8378-5b72dff6b8c8",
+          "message_type" : "text",
+          "name": "Catherine Richardson",
+          "avatar": "uploads/avatar/8.png",
+          "message" : "You are absolutely right. I will take time to practice and to learn to relax and express myself really well. Wish me luck, Catherine!",
+          "message_link" : "",
+          "datetime" : "2021-05-17 12:15:00",
+          "user_uuid" : "ea519128-972d-4081-8378-5b72dff6b8c8",
+          "is_received": 1,
+          "is_sent" : 0
+        },
+        {
+          "message_uuid" : "ea519128-972d-4081-8378-5b72dff6b8c8",
+          "message_type" : "text",
+          "name": "Catherine Richardson",
+          "avatar": "uploads/avatar/8.png",
+          "message" : "I know you. You can do it. Good luck, Jennifer!",
+          "datetime" : "2021-05-17 12:15:00",
+          "user_uuid" : "ea519128-972d-4081-8378-5b72dff6b8c8",
+          "is_received": 0,
+          "is_sent" : 1
+        }
+      ]
+    }
+  ]
+
+}

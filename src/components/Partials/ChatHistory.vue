@@ -1,6 +1,6 @@
 <template>
     <EmptyChat v-if="isEmpty"></EmptyChat>
-    <Conversation v-if="!isEmpty"></Conversation>
+    <Conversation v-if="!isEmpty" :conversation=currentConversation></Conversation>
 </template>
 
 <script lang="ts">
