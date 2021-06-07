@@ -8,7 +8,7 @@
 
                 <div class="message-divider sticky-top pb-2" :data-label=timeAgo(converse.date,false)>&nbsp;</div>
 
-                <!-- Received Message Start -->
+                
                 <div class="message" :class="[{'self' : conversemsg.is_sent}]" v-for="(conversemsg,i) in converse.list">
                     <div class="message-wrapper">
                         <div class="message-content">
@@ -40,11 +40,12 @@
 
                             <h6  v-if="conversemsg.message_type == 'image' && conversemsg.message != '' ">{{conversemsg.message}}</h6>
                             <div class="form-row" v-if="conversemsg.message_link">
-                                <div class="col" v-for="img in conversemsg.message_link">
-                                    <a class="popup-media" :href=img>
+                                <div class="col"  @click=showImg(index) v-for="(img,index) in conversemsg.message_link">
+                                    <a class="popup-media" href="javascript:void(0)">
                                         <img class="img-fluid rounded" :src=img alt="">
                                     </a>
                                 </div>
+                                <vue-easy-lightbox :visible="imgPopupVisible" :imgs=conversemsg.message_link :index="imgIndex" @hide="handleImgHide" ></vue-easy-lightbox>
 
                             </div>
 
@@ -112,6 +113,7 @@
     import TrashIcon from '../../../assets/media/heroicons/outline/trash.svg';
     import DocumentIcon from '../../../assets/media/heroicons/outline/document.svg';
     import DropdownWithSlot from "../../Base/DropdownWithSlot.vue";
+    import VueEasyLightbox from 'vue-easy-lightbox'
     export default defineComponent({
         name: 'ChatContent',
         props: {
@@ -119,16 +121,24 @@
         },
         components : {
             DotsHorizontalIcon,
-            DuplicateIcon,ReplyIcon,StarIcon,TrashIcon,DropdownWithSlot,DocumentIcon
+            DuplicateIcon,ReplyIcon,StarIcon,TrashIcon,DropdownWithSlot,DocumentIcon,VueEasyLightbox
 
         },
         setup: () => {
             const store = useStore();
             const count = ref(store.state);
-
+            const imgIndex = ref(0);
+            const imgPopupVisible = ref(false);
+                function showImg(index) {
+                    imgIndex.value = index
+                    imgPopupVisible.value = true
+                }
+                function handleImgHide() {
+                    imgPopupVisible.value = false
+                }
             const currentConversation = computed(() => store.getters.currentConversation);
             return {
-                currentConversation,timeAgo
+                currentConversation,timeAgo,showImg,handleImgHide,imgIndex,imgPopupVisible
             }
         },
         methods : {
