@@ -6,13 +6,9 @@
                 <input type="text" class="form-control form-control-md border-right-0 transparent-bg pr-0" placeholder="Search">
                 <div class="input-group-append">
                                     <span class="input-group-text transparent-bg border-left-0">
-                                        <!-- Default :: Inline SVG -->
-                                        <svg class="hw-20 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                                        </svg>
 
-                                        <!-- Alternate :: External File link -->
-                                        <!-- <img class="injectable hw-20" src="./../assets/media/heroicons/outline/search.svg" alt="Search icon"> -->
+                                        <SearchSvg  class="injectable hw-20" />
+
                                     </span>
                 </div>
             </div>
@@ -25,6 +21,8 @@
 <script lang="ts">
 
     import { ref, defineComponent,computed } from 'vue'
+    import SearchSvg from  '../../../assets/media/icons/search.svg';
+    import { useStore } from "../../../store";
 
     export default defineComponent({
         name: 'ChatSearch',
@@ -32,12 +30,16 @@
 
         },
         components : {
-
+            SearchSvg
         },
         setup: () => {
 
-            return {
+            const store = useStore();
+            const count = ref(store.state);
 
+            const currentConversation = computed(() => store.getters.currentConversation);
+            return {
+                currentConversation
             }
         },
         methods : {

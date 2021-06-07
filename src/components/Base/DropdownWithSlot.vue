@@ -1,13 +1,6 @@
 <template>
     <div  class="dropdown" :class="[{'show': checkIsOpen}, size] ">
-        <!-- Dropdown Button Start -->
 
-        <button v-if="displayType == 'button'" v-click-outside="onClickOutside"  class="btn btn-outline-default dropdown-toggle" @click="handleToggle"
-                type="button"
-                data-chat-filter-list=""
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded=checkIsOpen>
-            {{emptyLabel}}
-        </button>
 
         <a v-if="displayType == 'kebab'" v-click-outside="onClickOutside" @click="handleToggle"  class="nav-link text-muted px-1" href="#"
            role="button" :title=title
@@ -17,7 +10,12 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
             </svg>
 
+        </a>
 
+        <a v-if="displayType == 'kebabhorz'" v-click-outside="onClickOutside" @click="handleToggle" class="text-muted" href="#" data-toggle="dropdown" aria-haspopup="true"
+           :title=title  aria-expanded=checkIsOpen>
+
+            <DotsHorizontalIcon class="injectable hw-18" alt="message options"></DotsHorizontalIcon>
 
         </a>
         <!-- Dropdown Button End -->
@@ -26,11 +24,7 @@
 
         <div  class="dropdown-menu" :x-placement=xplacement :class="[{'show': checkIsOpen},dpclass]" :style="dpstyle">
 
-            <a class="dropdown-item" :class="[{'active' : selectedOption == option.value}]" v-for="(option,i) in
-            options" data-chat-filter=""
-               @click="handleSelection(i)"
-               :data-select=option.value
-               href="#"> {{option.label}}</a>
+           <slot name="menus"></slot>
 
         </div>
         <!-- Dropdown Menu End -->
@@ -42,12 +36,13 @@
 <script lang="ts">
     import { ref, defineComponent,computed} from 'vue'
     import vClickOutside from 'click-outside-vue3'
+    import DotsHorizontalIcon from '../../assets/media/heroicons/outline/dots-horizontal.svg';
     const enum DisplayTypes  {
        button =  'button',
         kebab = 'kebab'
     };
     export default defineComponent({
-        name: 'Dropdown',
+        name: 'DropdownWithSlot',
         props: {
             open: {
                 type: Boolean,
@@ -56,10 +51,6 @@
             emptyLabel: {
                 type: String,
                 default: 'Select'
-            },
-            options: {
-                type: Array,
-                required: true
             },
             size : {
                 type: String,
@@ -99,9 +90,10 @@
       clickOutside: vClickOutside.directive
         },
         components : {
-
+            DotsHorizontalIcon
         },
         setup: (props,context) => {
+
                 const selectedOption = ref(null);
                 const emptyLabel = ref("Select");
 
@@ -115,6 +107,7 @@
                 }
                 const isOpen = ref(false);
                   function handleToggle() {
+                      console.log("Here")
                         isOpen.value = !isOpen.value;
                         if(isOpen.value == true)
                         {

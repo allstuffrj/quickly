@@ -361,6 +361,7 @@
 <script lang="ts">
 
     import { ref, defineComponent,computed } from 'vue'
+    import { useStore } from "../../../store";
 
     export default defineComponent({
         name: 'ChatInfo',
@@ -372,8 +373,12 @@
         },
         setup: () => {
 
-            return {
+            const store = useStore();
+            const count = ref(store.state);
 
+            const currentConversation = computed(() => store.getters.currentConversation);
+            return {
+                currentConversation
             }
         },
         methods : {

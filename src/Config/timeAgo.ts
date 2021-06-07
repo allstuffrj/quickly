@@ -4,7 +4,7 @@ const MONTH_NAMES = [
 ];
 
 
-function getFormattedDate(date, prefomattedDate = false, hideYear = false) {
+function getFormattedDate(date, prefomattedDate = false, hideYear = false,displayTime = true) {
     const day = date.getDate();
     const month = MONTH_NAMES[date.getMonth()];
     const year = date.getFullYear();
@@ -19,21 +19,30 @@ function getFormattedDate(date, prefomattedDate = false, hideYear = false) {
     if (prefomattedDate) {
         // Today at 10:20
         // Yesterday at 10:20
-        return `${ prefomattedDate } at ${ hours }:${ minutes }`;
+        if(displayTime)
+            return `${ prefomattedDate } at ${ hours }:${ minutes }`;
+        else
+            return `${ prefomattedDate }`;
     }
 
     if (hideYear) {
         // 10. January at 10:20
-        return `${ day }. ${ month } at ${ hours }:${ minutes }`;
+        if(displayTime)
+            return `${ day }. ${ month } at ${ hours }:${ minutes }`;
+        else
+            return `${ day }. ${ month }`;
     }
 
     // 10. January 2017. at 10:20
-    return `${ day }. ${ month } ${ year }. at ${ hours }:${ minutes }`;
+    if(displayTime)
+        return `${ day }. ${ month } ${ year }. at ${ hours }:${ minutes }`;
+    else
+        return `${ day }. ${ month } ${ year }`;
 }
 
 
 // --- Main function
-const timeAgo = function (dateParam) {
+const timeAgo = function (dateParam,displayTime = true) {
     if (!dateParam) {
         return null;
     }
@@ -58,14 +67,14 @@ const timeAgo = function (dateParam) {
     } else if (minutes < 60) {
         return `${ minutes } minutes ago`;
     } else if (isToday) {
-        return getFormattedDate(date, 'Today'); // Today at 10:20
+        return getFormattedDate(date, 'Today',false,displayTime); // Today at 10:20
     } else if (isYesterday) {
-        return getFormattedDate(date, 'Yesterday',true); // Yesterday at 10:20
+        return getFormattedDate(date, 'Yesterday',false,displayTime); // Yesterday at 10:20
     } else if (isThisYear) {
-        return getFormattedDate(date, false, true); // 10. January at 10:20
+        return getFormattedDate(date, false, true,displayTime); // 10. January at 10:20
     }
 
-    return getFormattedDate(date); // 10. January 2017. at 10:20
+    return getFormattedDate(date,false,false,displayTime); // 10. January 2017. at 10:20
 }
 
 export default timeAgo;

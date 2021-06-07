@@ -8,13 +8,13 @@
 
         <!-- Chat participant's Name -->
         <div class="media chat-name align-items-center text-truncate">
-            <div class="avatar avatar-online d-none d-sm-inline-block mr-3">
-                <img src="./../assets/media/avatar/2.png" alt="">
+            <div class="avatar  d-none d-sm-inline-block mr-3" :class="'avatar-'+currentConversation.status">
+                <img :src=currentConversation.avatar alt="">
             </div>
 
             <div class="media-body align-self-center ">
-                <h6 class="text-truncate mb-0">Catherine Richardson</h6>
-                <small class="text-muted">Online</small>
+                <h6 class="text-truncate mb-0">{{ currentConversation.name }}</h6>
+                <small class="text-muted text-capitalize">{{ currentConversation.status }}</small>
             </div>
         </div>
 
@@ -32,15 +32,19 @@
                 </a>
             </li>
             <li class="nav-item list-inline-item d-none d-sm-block mr-0">
-                <div class="dropdown">
-                    <a class="nav-link text-muted px-1" href="#" role="button" title="Details" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <DotsVertical  class="injectable hw-20"></DotsVertical>
-                    </a>
+                <DropdownWithSlot title="Details" displayType="kebab" size=null xplacement="bottom-end"
+                                  emptyLabel="Details"
 
-                    <div class="dropdown-menu dropdown-menu-right">
+                                  defaultvalue=null :setActive=false dpclass="dropdown-menu-right" dpstyle="position: absolute; transform: translate3d(-172px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+
+
+
+                    <template v-slot:menus>
+
+
                         <a class="dropdown-item align-items-center d-flex" href="#" data-chat-info-toggle="">
-                            <InformationCircle  class="injectable hw-20 mr-2"></InformationCircle>
 
+                            <InformationCircle class="injectable hw-20 mr-2"></InformationCircle>
                             <span>View Info</span>
                         </a>
 
@@ -69,18 +73,19 @@
                             <Ban class="injectable hw-20 mr-2"></Ban>
                             <span>Block</span>
                         </a>
-                    </div>
-                </div>
+                    </template>
+                </DropdownWithSlot>
+
             </li>
             <li class="nav-item list-inline-item d-sm-none mr-0">
-                <div class="dropdown">
-                    <a class="nav-link text-muted px-1" href="#" role="button" title="Details" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <DropdownWithSlot title="Details" displayType="kebab" size=null xplacement="bottom-end"
+                          emptyLabel="Details"
 
-                        <DotsVertical class="injectable hw-20"></DotsVertical>
+                           defaultvalue=null :setActive=false dpclass="dropdown-menu-right" dpstyle="position: absolute; transform: translate3d(-172px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
 
-                    </a>
 
-                    <div class="dropdown-menu dropdown-menu-right">
+
+                        <template  v-slot:menus>
                         <a class="dropdown-item align-items-center d-flex" href="#">
 
                             <Phone class="injectable hw-20 mr-2"></Phone>
@@ -88,7 +93,7 @@
                         </a>
                         <a class="dropdown-item align-items-center d-flex" href="#" data-toggle="collapse" data-target="#searchCollapse" aria-expanded="false">
 
-                            <Search class="injectable hw-20 mr-2"></Search>
+                            <SearchIcon class="injectable hw-20 mr-2"></SearchIcon>
                             <span>Search</span>
                         </a>
 
@@ -123,8 +128,9 @@
                             <Ban class="injectable hw-20 mr-2"></Ban>
                             <span>Block</span>
                         </a>
-                    </div>
-                </div>
+                        </template>
+                </DropdownWithSlot>
+
             </li>
         </ul>
     </div>
@@ -144,6 +150,9 @@
     import Archive from '../../../assets/media/heroicons/outline/archive.svg';
     import Trash from '../../../assets/media/heroicons/outline/trash.svg';
     import Ban from '../../../assets/media/heroicons/outline/ban.svg';
+    import DropdownWithSlot from "../../Base/DropdownWithSlot.vue";
+    import { useStore } from "../../../store";
+
     export default defineComponent({
         name: 'ChatHeader',
         props: {
@@ -159,12 +168,18 @@
             PhotoGraph,
             Archive,
             Trash,
-            Ban
+            Ban,
+            DropdownWithSlot
         },
         setup: () => {
 
-            return {
+            const store = useStore();
+            const count = ref(store.state);
 
+            const currentConversation = computed(() => store.getters.currentConversation);
+
+            return {
+                currentConversation
             }
         },
         methods : {

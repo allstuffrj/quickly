@@ -1,6 +1,6 @@
 <template>
     <EmptyChat v-if="isEmpty"></EmptyChat>
-    <Conversation v-if="!isEmpty" :conversation=currentConversation></Conversation>
+    <Conversation v-if="!isEmpty"></Conversation>
 </template>
 
 <script lang="ts">
@@ -28,7 +28,6 @@
                 return Object.keys( currentConversation.value ).length == 0
             })
             return {
-                currentConversation,
                 isEmpty
                 }
         },

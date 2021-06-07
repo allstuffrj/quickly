@@ -74,6 +74,8 @@
           "avatar": "uploads/avatar/8.png",
           "message" : "global-warming-data-2020.csv",
           "message_link" : "documents/global-warming-data-2020.csv",
+          "file_size" : "27 KB",
+          "file_type" : "CSV",
           "datetime" : "2021-05-17 12:15:00",
           "user_uuid" : "ea519128-972d-4081-8378-5b72dff6b8c8",
           "is_received": 1,
@@ -108,9 +110,9 @@
           "avatar": "uploads/avatar/8.png",
           "message" : "I have shared some photos, Please have a look.",
           "message_link" : [
-            "shared-photos/01.jpg",
-            "shared-photos/02.jpg",
-            "shared-photos/03.jpg"
+            "uploads/shared-photos/01.jpg",
+            "uploads/shared-photos/02.jpg",
+            "uploads/shared-photos/03.jpg"
 
           ],
           "datetime" : "2021-05-17 12:15:00",
