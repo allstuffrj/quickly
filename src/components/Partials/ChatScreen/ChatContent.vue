@@ -1,14 +1,14 @@
 <template>
     <!-- Chat Content Start-->
     <div class="chat-content p-2" id="messageBody">
-        <div class="container">
+        <div class="container" id="msg-container">
 
             <!-- Message Day Start -->
-            <div class="message-day" v-for="(converse,i) in   currentConversation.conversations" >
+            <div class="message-day" v-for="(converse,y) in   currentConversation.conversations" >
 
                 <div class="message-divider sticky-top pb-2" :data-label=timeAgo(converse.date,false)>&nbsp;</div>
 
-                
+
                 <div class="message" :class="[{'self' : conversemsg.is_sent}]" v-for="(conversemsg,i) in converse.list">
                     <div class="message-wrapper">
                         <div class="message-content">
@@ -53,8 +53,8 @@
                     </div>
                     <div class="message-options">
                         <div class="avatar avatar-sm"><img alt="" :src=conversemsg.avatar></div>
-                        <span class="message-date">{{ timeAgo(conversemsg.datetime) }}</span>
-                        <DropdownWithSlot title="Details" displayType="kebabhorz" size=null xplacement="bottom-end"
+                        <span class="message-date" >{{ timeAgo(conversemsg.datetime) }}</span>
+                        <DropdownWithSlot  title="Details" displayType="kebabhorz" size=null xplacement="bottom-end"
                                           emptyLabel="Details"  defaultvalue=null :setActive=false dpclass="dropdown-menu-right" dpstyle="position: absolute; transform: translate3d(0px, -121px, 0px); top: 0px; left: 0px; will-change: transform;">
 
 
@@ -86,7 +86,7 @@
                             </template>
                         </DropdownWithSlot>
                         </div>
-
+                        <span :ref="setMsgRef"></span>
                 </div>
                 <!-- Received Message End -->
 
@@ -103,7 +103,7 @@
 
 <script lang="ts">
 
-    import { ref, defineComponent,computed } from 'vue'
+    import { ref, defineComponent,computed,onMounted } from 'vue'
     import { useStore } from "../../../store";
     import  timeAgo from '../../../Config/timeAgo'
     import DotsHorizontalIcon from '../../../assets/media/heroicons/outline/dots-horizontal.svg';
@@ -136,9 +136,26 @@
                 function handleImgHide() {
                     imgPopupVisible.value = false
                 }
+                let msgRefs = []
+                const setMsgRef = el => {
+                    if (el) {
+                        msgRefs.push(el)
+                    }
+                }
+                function scrollIntoView() {
+                    var lastPosition = msgRefs.length-1;
+
+                    const container = msgRefs[lastPosition];
+                   if (container) {
+                        container.scrollIntoView({ behavior: "smooth", block: "end" });
+                    }
+                }
+                onMounted(() => {
+                    scrollIntoView();
+                });
             const currentConversation = computed(() => store.getters.currentConversation);
             return {
-                currentConversation,timeAgo,showImg,handleImgHide,imgIndex,imgPopupVisible
+                currentConversation,timeAgo,showImg,handleImgHide,imgIndex,imgPopupVisible,setMsgRef
             }
         },
         methods : {
