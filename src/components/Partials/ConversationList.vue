@@ -1,7 +1,9 @@
 <template>
     <ul class="contacts-list" id="chatContactTab">
 
-        <li class="contacts-item friends" v-for="conversation in conversationList">
+        <li class="contacts-item friends" :class="[{'active' : convId == conversation.uuid}]"
+            v-for="conversation in
+        conversationList">
             <a class="contacts-link" href="javascript:void(0)" @click="openConversation(conversation)">
                 <div class="avatar  bg-info text-light" :class="['avatar-'+conversation.status]">
                     <img :src=conversation.avatar :alt=conversation.name>
@@ -58,13 +60,16 @@
         setup: () => {
 
             const store = useStore();
+            const convId = ref(null);
             const currentConversation = ref(store.state.currentConversation);
 
             function openConversation(conversation : object) :void
                 {
+                    convId.value = conversation.uuid;
+
                     store.dispatch(ActionTypes.LOAD_CONVERSATION, conversation);
                 }
-            return {timeAgo,openConversation}
+            return {timeAgo,openConversation,convId}
         }
     })
 </script>

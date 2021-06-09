@@ -1,9 +1,11 @@
 <template>
     <!-- Search Start -->
-    <div class="collapse border-bottom px-3" id="searchCollapse">
+    <div class="collapse border-bottom px-3" id="searchCollapse" :class="[{'show':showSearch}]">
         <div class="container-xl py-2 px-0 px-md-3">
             <div class="input-group bg-light ">
-                <input type="text" class="form-control form-control-md border-right-0 transparent-bg pr-0" placeholder="Search">
+                <input type="text" v-on:input="searchText"
+                       class="form-control form-control-md border-right-0 transparent-bg pr-0"
+                       placeholder="Search">
                 <div class="input-group-append">
                                     <span class="input-group-text transparent-bg border-left-0">
 
@@ -22,7 +24,7 @@
 
     import { ref, defineComponent,computed } from 'vue'
     import SearchSvg from  '../../../assets/media/icons/search.svg';
-    import { useStore } from "../../../store";
+    import { useStore,MutationTypes } from "../../../store";
 
     export default defineComponent({
         name: 'ChatSearch',
@@ -38,8 +40,15 @@
             const count = ref(store.state);
 
             const currentConversation = computed(() => store.getters.currentConversation);
+            const showSearch = computed(() => store.getters.currentShowChatSearch);
+            function searchText(event)
+            {
+                store.commit(MutationTypes.SHOW_CHATSEARCH, event.target.value);
+            }
             return {
-                currentConversation
+                currentConversation,
+                showSearch,
+                searchText
             }
         },
         methods : {

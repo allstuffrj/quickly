@@ -9,7 +9,8 @@
                 <div class="message-divider sticky-top pb-2" :data-label=timeAgo(converse.date,false)>&nbsp;</div>
 
 
-                <div class="message" :class="[{'self' : conversemsg.is_sent}]" v-for="(conversemsg,i) in converse.list">
+                <div class="message" :class="[{'self' : conversemsg.is_sent}]" v-for="(conversemsg,i) in
+                converse.list">
                     <div class="message-wrapper">
                         <div class="message-content">
                             <span v-if="conversemsg.message_type.includes('text')">{{conversemsg.message}}</span>
@@ -127,6 +128,7 @@
         setup: () => {
             const store = useStore();
             const count = ref(store.state);
+            const filteredConversationList = ref({})
             const imgIndex = ref(0);
             const imgPopupVisible = ref(false);
                 function showImg(index) {
@@ -147,15 +149,39 @@
 
                     const container = msgRefs[lastPosition];
                    if (container) {
-                        container.scrollIntoView({ behavior: "smooth", block: "end" });
+                        container.scrollIntoView({ behavior: "smooth" });
                     }
                 }
                 onMounted(() => {
                     scrollIntoView();
                 });
             const currentConversation = computed(() => store.getters.currentConversation);
+
+
+
+            const filterText = computed(() => {
+                var srchTxt = store.getters.currentSearchText;
+                if(srchTxt=='')
+                {
+                    filteredConversationList.value = currentConversation.conversations;
+                    return;
+                }
+
+                var tempList = [];
+                tempList = currentConversation.conversations;
+                if(srchTxt != '' && srchTxt != null)
+                {
+                    tempList =  tempList.filter(entry => {
+                        return   entry.list.filter(msgli => {
+                            return entry.message.toLowerCase().includes(srchTxt.toLowerCase())
+                        })
+                    })
+                }
+
+                filteredConversationList.value = tempList;
+            });
             return {
-                currentConversation,timeAgo,showImg,handleImgHide,imgIndex,imgPopupVisible,setMsgRef
+                currentConversation,timeAgo,showImg,handleImgHide,imgIndex,imgPopupVisible,setMsgRef,filterText
             }
         },
         methods : {

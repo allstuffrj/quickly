@@ -11,15 +11,17 @@ import {
 } from "vuex";
 import Friends from "../Services//Friends";
 //declare state
-export type State = { currentConversation: Object };
+export type State = { currentConversation: Object, showChatSearch : Boolean,searchText : String };
 
 //set state
-const state: State = { currentConversation: {} };
+const state: State = { currentConversation: {}, showChatSearch : false , searchText: '' };
 
 // mutations and action enums
 
 export enum MutationTypes {
     LOAD_CONVERSATION = "SET_CONVERSATION",
+    SHOW_CHATSEARCH = "SET_SHOWCHATSEARCH",
+    LOAD_SEARCHTEXT = "SET_SEARCHTEXT",
 }
 
 export enum ActionTypes {
@@ -29,6 +31,8 @@ export enum ActionTypes {
 //Mutation Types
 export type Mutations<S = State> = {
     [MutationTypes.LOAD_CONVERSATION](state: S, payload: Object): void;
+    [MutationTypes.SHOW_CHATSEARCH](state: S, payload: Boolean): void;
+    [MutationTypes.LOAD_SEARCHTEXT](state: S, payload: String): void;
 };
 
 //define mutations
@@ -41,6 +45,12 @@ const mutations: MutationTree<State> & Mutations = {
             console.log(e);
             state.currentConversation = {};
         });
+    },
+    [MutationTypes.SHOW_CHATSEARCH](state: State, payload: Boolean) {
+        state.showChatSearch = payload;
+    },
+    [MutationTypes.LOAD_SEARCHTEXT](state: State, payload: String) {
+        state.searchText = payload;
     }
 };
 
@@ -79,14 +89,21 @@ export const actions: ActionTree<State, State> & Actions = {
 // Getters types
 export type Getters = {
     currentConversation(state: State): Object;
+    currentShowChatSearch(state: State) : Boolean;
+    currentSearchText(state: State) : String;
 };
 
 //getters
 
 export const getters: GetterTree<State, State> & Getters = {
     currentConversation: state => {
-        console.log("state", state.currentConversation);
         return state.currentConversation;
+    },
+    currentShowChatSearch: state => {
+        return state.showChatSearch;
+    },
+    currentSearchText: state => {
+        return state.searchText;
     }
 };
 

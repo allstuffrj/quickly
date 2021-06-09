@@ -21,7 +21,9 @@
         <!-- Chat Options -->
         <ul class="nav flex-nowrap">
             <li class="nav-item list-inline-item d-none d-sm-block mr-1">
-                <a class="nav-link text-muted px-1" data-toggle="collapse" data-target="#searchCollapse" href="#" aria-expanded="false">
+                <a class="nav-link text-muted px-1" data-toggle="collapse" @click="toggleSearch"
+                   data-target="#searchCollapse" href="#"
+                   aria-expanded="false">
                     <SearchIcon class="injectable hw-20"></SearchIcon>
                 </a>
             </li>
@@ -91,7 +93,8 @@
                             <Phone class="injectable hw-20 mr-2"></Phone>
                             <span>Call</span>
                         </a>
-                        <a class="dropdown-item align-items-center d-flex" href="#" data-toggle="collapse" data-target="#searchCollapse" aria-expanded="false">
+                        <a class="dropdown-item align-items-center d-flex" href="#" data-toggle="collapse" @click="toggleSearch"
+                           data-target="#searchCollapse" aria-expanded="false">
 
                             <SearchIcon class="injectable hw-20 mr-2"></SearchIcon>
                             <span>Search</span>
@@ -151,7 +154,7 @@
     import Trash from '../../../assets/media/heroicons/outline/trash.svg';
     import Ban from '../../../assets/media/heroicons/outline/ban.svg';
     import DropdownWithSlot from "../../Base/DropdownWithSlot.vue";
-    import { useStore } from "../../../store";
+    import { useStore,MutationTypes } from "../../../store";
 
     export default defineComponent({
         name: 'ChatHeader',
@@ -175,11 +178,15 @@
 
             const store = useStore();
             const count = ref(store.state);
+            function  toggleSearch(){
 
+                store.commit(MutationTypes.SHOW_CHATSEARCH, !store.getters.currentShowChatSearch);
+            };
             const currentConversation = computed(() => store.getters.currentConversation);
 
             return {
-                currentConversation
+                currentConversation,
+                toggleSearch
             }
         },
         methods : {
