@@ -29,7 +29,7 @@
             </li>
 
             <li class="nav-item list-inline-item d-none d-sm-block mr-1">
-                <a class="nav-link text-muted px-1" href="#" title="Add People">
+                <a class="nav-link text-muted px-1" href="javascript:void(0)" @click="callFriend" title="Call People">
                       <Phone class="injectable hw-20"></Phone>
                 </a>
             </li>
@@ -44,7 +44,8 @@
                     <template v-slot:menus>
 
 
-                        <a class="dropdown-item align-items-center d-flex" href="#" data-chat-info-toggle="">
+                        <a class="dropdown-item align-items-center d-flex" href="javascript:void(0)"
+                           data-chat-info-toggle="" @click="toggleChatInfo">
 
                             <InformationCircle class="injectable hw-20 mr-2"></InformationCircle>
                             <span>View Info</span>
@@ -182,11 +183,22 @@
 
                 store.commit(MutationTypes.SHOW_CHATSEARCH, !store.getters.currentShowChatSearch);
             };
+            function  toggleChatInfo(){
+
+                store.commit(MutationTypes.SHOW_CHATINFO, !store.getters.currentShowChatInfo);
+            };
             const currentConversation = computed(() => store.getters.currentConversation);
 
+            function callFriend()
+            {
+                //Call friend functionality will goes here
+                console.log("Call friend functionality will goes here")
+            }
             return {
                 currentConversation,
-                toggleSearch
+                toggleSearch,
+                callFriend,
+                toggleChatInfo
             }
         },
         methods : {

@@ -1,6 +1,6 @@
 <template>
     <!-- Chat Info Start -->
-    <div class="chat-info">
+    <div class="chat-info" :class="[{'chat-info-visible':showChatInfo}]">
         <div class="d-flex h-100 flex-column">
 
             <!-- Chat Info Header Start -->
@@ -15,14 +15,10 @@
 
                         <!-- Close Sidebar Start -->
                         <li class="nav-item list-inline-item">
-                            <a class="nav-link text-muted px-0" href="#" data-chat-info-close="">
-                                <!-- Default :: Inline SVG -->
-                                <svg class="hw-22" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                                </svg>
+                            <a class="nav-link text-muted px-0" href="javascript:void(0)" @click="closeChatInfo"
+                               data-chat-info-close="">
+                                <closeIcon class="injectable hw-22"></closeIcon>
 
-                                <!-- Alternate :: External File link -->
-                                <!-- <img class="injectable hw-22" src="./../assets/media/heroicons/outline/x.svg" alt=""> -->
 
                             </a>
                         </li>
@@ -40,51 +36,30 @@
 
                     <!-- User Profile Picture -->
                     <div class="avatar avatar-xl mx-5 mb-3">
-                        <img class="avatar-img" src="./../assets/media/avatar/2.png" alt="">
+                        <img class="avatar-img" :src=currentConversation.avatar alt="">
                     </div>
 
                     <!-- User Info -->
-                    <h5 class="mb-1">Catherine Richardson</h5>
+                    <h5 class="mb-1">{{currentConversation.name}}</h5>
                     <p class="text-muted d-flex align-items-center justify-content-center">
-                        <!-- Default :: Inline SVG -->
-                        <svg class="hw-18 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                        </svg>
 
-                        <!-- Alternate :: External File link -->
-                        <!-- <img class="injectable mr-1 hw-18" src="./../assets/media/heroicons/outline/location-marker.svg" alt=""> -->
-                        <span>San Fransisco, CA</span>
+                        <LocationMarkerIcon class="injectable mr-1 hw-18"></LocationMarkerIcon>
+                        <span>{{currentConversation.location}}</span>
                     </p>
 
                     <!-- User Quick Options -->
                     <div class="d-flex align-items-center justify-content-center">
                         <div class="btn btn-outline-default btn-icon rounded-circle mx-1">
-                            <!-- Default :: Inline SVG -->
-                            <svg class="hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
-                            </svg>
+                                <UserAddIcon class="injectable hw-20"></UserAddIcon>
 
-                            <!-- Alternate :: External File link -->
-                            <!-- <img class="injectable hw-20" src="./../assets/media/heroicons/outline/user-add.svg" alt=""> -->
                         </div>
                         <div class="btn btn-primary btn-icon rounded-circle text-light mx-1">
-                            <!-- Default :: Inline SVG -->
-                            <svg class="hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                            </svg>
+                            <HeartIcon class="injectable hw-20"></HeartIcon>
 
-                            <!-- Alternate :: External File link -->
-                            <!-- <img class="injectable hw-20" src="./../assets/media/heroicons/outline/heart.svg" alt=""> -->
                         </div>
                         <div class="btn btn-danger btn-icon rounded-circle text-light mx-1">
-                            <!-- Default :: Inline SVG -->
-                            <svg class="hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
-                            </svg>
+                            <BanIcon class="injectable hw-20"></BanIcon>
 
-                            <!-- Alternate :: External File link -->
-                            <!-- <img class="injectable hw-20" src="./../assets/media/heroicons/outline/ban.svg" alt=""> -->
                         </div>
                     </div>
                 </div>
@@ -92,19 +67,19 @@
 
                 <!-- User Information Start -->
                 <div class="chat-info-group">
-                    <a class="chat-info-group-header" data-toggle="collapse" href="#profile-info" role="button" aria-expanded="true" aria-controls="profile-info">
+                    <a class="chat-info-group-header" :class="[{'collapsed':!showDocumentInfo}]"
+                       @click="toggleUserInfoBox"
+                       data-toggle="collapse"
+                       href="javascript:void(0)"
+                       role="button"
+                       aria-expanded="true" aria-controls="profile-info">
                         <h6 class="mb-0">User Information</h6>
 
-                        <!-- Default :: Inline SVG -->
-                        <svg class="hw-20 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
+                        <InformationCircleIcon  class="injectable text-muted hw-20"></InformationCircleIcon>
 
-                        <!-- Alternate :: External File link -->
-                        <!-- <img class="injectable text-muted hw-20" src="./../assets/media/heroicons/outline/information-circle.svg" alt=""> -->
                     </a>
 
-                    <div class="chat-info-group-body collapse show" id="profile-info">
+                    <div class="chat-info-group-body collapse show" :class="[{'collapse show':showDocumentInfo.value}]" id="profile-info">
                         <div class="chat-info-group-content list-item-has-padding">
                             <!-- List Group Start -->
                             <ul class="list-group list-group-flush ">
@@ -112,21 +87,21 @@
                                 <!-- List Group Item Start -->
                                 <li class="list-group-item border-0">
                                     <p class="small text-muted mb-0">Phone</p>
-                                    <p class="mb-0">+01-222-364522</p>
+                                    <p class="mb-0">{{currentConversation.phone}}</p>
                                 </li>
                                 <!-- List Group Item End -->
 
                                 <!-- List Group Item Start -->
                                 <li class="list-group-item border-0">
                                     <p class="small text-muted mb-0">Email</p>
-                                    <p class="mb-0">catherine.richardson@gmail.com</p>
+                                    <p class="mb-0">{{currentConversation.email}}</p>
                                 </li>
                                 <!-- List Group Item End -->
 
                                 <!-- List Group Item Start -->
                                 <li class="list-group-item border-0">
                                     <p class="small text-muted mb-0">Address</p>
-                                    <p class="mb-0">1134 Ridder Park Road, San Fransisco, CA 94851</p>
+                                    <p class="mb-0">{{currentConversation.address}}</p>
                                 </li>
                                 <!-- List Group Item End -->
                             </ul>
@@ -140,35 +115,21 @@
                 <div class="chat-info-group">
                     <a class="chat-info-group-header" data-toggle="collapse" href="#shared-media" role="button" aria-expanded="true" aria-controls="shared-media">
                         <h6 class="mb-0">Last Media</h6>
+                        <PhotographIcon class="injectable text-muted hw-20"></PhotographIcon>
 
-                        <!-- Default :: Inline SVG -->
-                        <svg class="hw-20 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                        </svg>
-
-                        <!-- Alternate :: External File link -->
-                        <!-- <img class="injectable text-muted hw-20" src="./../assets/media/heroicons/outline/photograph.svg" alt=""> -->
                     </a>
 
                     <div class="chat-info-group-body collapse show" id="shared-media">
                         <div class="chat-info-group-content">
                             <!-- Shared Media -->
                             <div class="form-row">
-                                <div class="col-4 col-md-2 col-xl-4">
-                                    <a href="#">
-                                        <img src="./../assets/media/shared-photos/01.jpg" class="img-fluid rounded border" alt="">
+                                <div class="col-4 col-md-2 col-xl-4" v-if="currentConversation.last_media"
+                                     v-for="media in currentConversation.last_media">
+                                    <a href="javascript:void(0)">
+                                        <img :src=media class="img-fluid rounded border" alt="">
                                     </a>
                                 </div>
-                                <div class="col-4 col-md-2 col-xl-4">
-                                    <a href="#">
-                                        <img src="./../assets/media/shared-photos/02.jpg" class="img-fluid rounded border" alt="">
-                                    </a>
-                                </div>
-                                <div class="col-4 col-md-2 col-xl-4">
-                                    <a href="#">
-                                        <img src="./../assets/media/shared-photos/03.jpg" class="img-fluid rounded border" alt="">
-                                    </a>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -179,14 +140,8 @@
                 <div class="chat-info-group">
                     <a class="chat-info-group-header" data-toggle="collapse" href="#shared-files" role="button" aria-expanded="true" aria-controls="shared-files">
                         <h6 class="mb-0">Documents</h6>
+                        <DocumentIcon class="injectable text-muted hw-20"></DocumentIcon>
 
-                        <!-- Default :: Inline SVG -->
-                        <svg class="hw-20 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
-                        </svg>
-
-                        <!-- Alternate :: External File link -->
-                        <!-- <img class="injectable text-muted hw-20" src="./../assets/media/heroicons/outline/document.svg" alt=""> -->
                     </a>
 
                     <div class="chat-info-group-body collapse show" id="shared-files">
@@ -195,154 +150,53 @@
                             <ul class="list-group list-group-flush">
 
                                 <!-- List Group Item Start -->
-                                <li class="list-group-item">
+                                <li class="list-group-item" v-if="currentConversation.last_documents"
+                                    v-for="doc in currentConversation.last_documents">
                                     <div class="document">
                                         <div class="btn btn-primary btn-icon rounded-circle text-light mr-2">
-                                            <!-- Default :: Inline SVG -->
-                                            <svg class="hw-24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
-                                            </svg>
+                                            <DocumentIcon class="injectable hw-24"></DocumentIcon>
 
-                                            <!-- Alternate :: External File link -->
-                                            <!-- <img class="injectable hw-24" src="./../assets/media/heroicons/outline/document.svg" alt=""> -->
                                         </div>
 
                                         <div class="document-body">
                                             <h6 class="text-truncate">
-                                                <a href="#" class="text-reset" title="effects-of-global-warming.docs">Effects-of-global-warming.docs</a>
+                                                <a href="{{doc.url}}" target="_blank" class="text-reset"
+                                                   title="{{doc.name}}">{{doc.name}}</a>
                                             </h6>
 
                                             <ul class="list-inline small mb-0">
                                                 <li class="list-inline-item">
-                                                    <span class="text-muted">79.2 KB</span>
+                                                    <span class="text-muted">{{doc.size}}</span>
                                                 </li>
                                                 <li class="list-inline-item">
-                                                    <span class="text-muted text-uppercase">docs</span>
+                                                    <span class="text-muted text-uppercase">{{doc.type}}</span>
                                                 </li>
                                             </ul>
                                         </div>
 
                                         <div class="document-options ml-1">
-                                            <div class="dropdown">
-                                                <button class="btn btn-secondary btn-icon btn-minimal btn-sm text-muted" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <!-- Default :: Inline SVG -->
-                                                    <svg class="hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
-                                                    </svg>
+                                            <DropdownWithSlot  title="Details" displayType="kebab" size=null
+                                                               xplacement="bottom-start"
+                                                               emptyLabel="Details"  defaultvalue=null :setActive=false dpclass="dropdown-menu-right" dpstyle="position: absolute; transform: translate3d(-111px, 48px, 0px); top: 0px; left: 0px; will-change: transform;">
 
-                                                    <!-- Alternate :: External File link -->
-                                                    <!-- <img class="injectable hw-20" src="./../assets/media/heroicons/outline/dots-vertical.svg" alt=""> -->
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="#">Download</a>
-                                                    <a class="dropdown-item" href="#">Share</a>
-                                                    <a class="dropdown-item" href="#">Delete</a>
-                                                </div>
-                                            </div>
+
+
+                                                <template v-slot:menus>
+
+                                                    <a class="dropdown-item" href="javascript:void(0)"
+                                                       @click="downloadDoc(doc)">Download</a>
+                                                    <a class="dropdown-item" @click="shareDoc(doc)"
+                                                       href="javascript:void(0)">Share</a>
+                                                    <a class="dropdown-item" @click="deleteDoc(doc)"
+                                                       href="javascript:void(0)">Delete</a>
+                                                </template>
+                                            </DropdownWithSlot>
+
                                         </div>
                                     </div>
                                 </li>
                                 <!-- List Group Item End -->
 
-                                <!-- List Group Item Start -->
-                                <li class="list-group-item">
-                                    <div class="document">
-                                        <div class="btn btn-primary btn-icon rounded-circle text-light mr-2">
-                                            <!-- Default :: Inline SVG -->
-                                            <svg class="hw-24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
-                                            </svg>
-
-                                            <!-- Alternate :: External File link -->
-                                            <!-- <img class="injectable hw-24" src="./../assets/media/icons/excel-file.svg" alt=""> -->
-                                        </div>
-
-                                        <div class="document-body">
-                                            <h6 class="text-truncate">
-                                                <a href="#" class="text-reset" title="global-warming-data-2020.xlxs">Global-warming-data-2020.xlxs</a>
-                                            </h6>
-
-                                            <ul class="list-inline small mb-0">
-                                                <li class="list-inline-item">
-                                                    <span class="text-muted">79.2 KB</span>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <span class="text-muted text-uppercase">xlxs</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-
-                                        <div class="document-options ml-1">
-                                            <div class="dropdown">
-                                                <button class="btn btn-secondary btn-icon btn-minimal btn-sm text-muted" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <!-- Default :: Inline SVG -->
-                                                    <svg class="hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
-                                                    </svg>
-
-                                                    <!-- Alternate :: External File link -->
-                                                    <!-- <img class="injectable hw-20" src="./../assets/media/heroicons/outline/dots-vertical.svg" alt=""> -->
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="#">View</a>
-                                                    <a class="dropdown-item" href="#">Share</a>
-                                                    <a class="dropdown-item" href="#">Delete</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <!-- List Group Item End -->
-
-                                <!-- List Group Item Start -->
-                                <li class="list-group-item">
-                                    <div class="document">
-                                        <div class="btn btn-primary btn-icon rounded-circle text-light mr-2">
-                                            <!-- Default :: Inline SVG -->
-                                            <svg class="hw-24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
-                                            </svg>
-
-                                            <!-- Alternate :: External File link -->
-                                            <!-- <img class="injectable hw-24" src="./../assets/media/icons/powerpoint-file.svg" alt=""> -->
-                                        </div>
-
-                                        <div class="document-body">
-                                            <h6 class="text-truncate">
-                                                <a href="#" class="text-reset" title="great-presentation-on global-warming-2020.ppt">Great-presentation-on global-warming-2020.ppt</a>
-                                            </h6>
-
-                                            <ul class="list-inline small mb-0">
-                                                <li class="list-inline-item">
-                                                    <span class="text-muted">79.2 KB</span>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <span class="text-muted text-uppercase">ppt</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-
-                                        <div class="document-options ml-1">
-                                            <div class="dropdown">
-                                                <button class="btn btn-secondary btn-icon btn-minimal btn-sm text-muted" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <!-- Default :: Inline SVG -->
-                                                    <svg class="hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
-                                                    </svg>
-
-                                                    <!-- Alternate :: External File link -->
-                                                    <!-- <img class="injectable hw-20" src="./../assets/media/heroicons/outline/dots-vertical.svg" alt=""> -->
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="#">Download</a>
-                                                    <a class="dropdown-item" href="#">Share</a>
-                                                    <a class="dropdown-item" href="#">Delete</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <!-- List Group Item End -->
                             </ul>
                             <!-- List Group End -->
                         </div>
@@ -361,24 +215,85 @@
 <script lang="ts">
 
     import { ref, defineComponent,computed } from 'vue'
-    import { useStore } from "../../../store";
+    import {MutationTypes, useStore} from "../../../store";
 
+    import closeIcon from '../../../assets/media/heroicons/outline/x.svg';
+    import LocationMarkerIcon from '../../../assets/media/heroicons/outline/location-marker.svg';
+    import UserAddIcon from '../../../assets/media/heroicons/outline/user-add.svg';
+    import HeartIcon from '../../../assets/media/heroicons/outline/heart.svg';
+    import BanIcon from '../../../assets/media/heroicons/outline/ban.svg';
+    import InformationCircleIcon from '../../../assets/media/heroicons/outline/information-circle.svg';
+    import PhotographIcon from '../../../assets/media/heroicons/outline/photograph.svg';
+    import DocumentIcon from '../../../assets/media/heroicons/outline/document.svg';
+    import DropdownWithSlot from "../../Base/DropdownWithSlot.vue";
     export default defineComponent({
         name: 'ChatInfo',
         props: {
 
         },
         components : {
-
+            closeIcon,
+            LocationMarkerIcon,
+            UserAddIcon,
+            HeartIcon,
+            BanIcon,
+            InformationCircleIcon,
+            PhotographIcon,
+            DocumentIcon,
+            DropdownWithSlot
         },
         setup: () => {
 
             const store = useStore();
             const count = ref(store.state);
-
+            const showChatInfo = computed(() => store.getters.currentShowChatInfo);
             const currentConversation = computed(() => store.getters.currentConversation);
+            const showUserInfo = ref(true);
+            const showMediaInfo = ref(true);
+            const showDocumentInfo = ref(true);
+
+            function toggleUserInfoBox()
+            {
+                showUserInfo.value = !showUserInfo.value;
+            }
+            function toggleMediaInfoBox()
+            {
+                showMediaInfo.value = !showMediaInfo.value;
+            }
+            function toggleDocumentInfoBox()
+            {
+                showDocumentInfo.value = !showDocumentInfo.value;
+            }
+            function closeChatInfo()
+            {
+                store.commit(MutationTypes.SHOW_CHATINFO, !store.getters.currentShowChatInfo);
+            }
+            function downloadDoc(doc)
+            {
+                console.log("Download doc code goes here")
+            }
+
+            function shareDoc(doc)
+            {
+                console.log("Share doc code goes here")
+            }
+            function deleteDoc(doc)
+            {
+                console.log("Delete doc code goes here")
+            }
             return {
-                currentConversation
+                currentConversation,
+                showChatInfo,
+                closeChatInfo,
+                downloadDoc,
+                shareDoc,
+                deleteDoc,
+                toggleUserInfoBox,
+                toggleMediaInfoBox,
+                toggleDocumentInfoBox,
+                showUserInfo,
+                showMediaInfo,
+                showDocumentInfo
             }
         },
         methods : {

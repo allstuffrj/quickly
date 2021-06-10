@@ -3,6 +3,10 @@
   "name": "Catherine Richardson",
   "avatar": "uploads/avatar/3.png",
   "status": "online",
+  "location" : "San Fransisco, CA",
+  "phone" : "+01-222-364522",
+  "email" : "catherine.richardson@gmail.com",
+  "address" : "1134 Ridder Park Road, San Fransisco, CA 94851",
   "conversations" : [
     {
       "date" : "2021-06-01",
@@ -167,6 +171,20 @@
           "is_sent" : 1
         }
       ]
+    }
+  ],
+  "last_media" : [
+    "uploads/shared-photos/01.jpg",
+    "uploads/shared-photos/02.jpg",
+    "uploads/shared-photos/03.jpg"
+
+  ],
+  "last_documents" : [
+    {
+      "name": "Effects-of-global-warming.csv",
+      "size" : "79.2 KB",
+      "type" : "docs",
+      "url" : "documents/global-warming-data-2020.csv"
     }
   ]
 

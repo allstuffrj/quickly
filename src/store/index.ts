@@ -11,16 +11,17 @@ import {
 } from "vuex";
 import Friends from "../Services//Friends";
 //declare state
-export type State = { currentConversation: Object, showChatSearch : Boolean,searchText : String };
+export type State = { currentConversation: Object, showChatSearch : Boolean,showChatInfo : Boolean,searchText : String };
 
 //set state
-const state: State = { currentConversation: {}, showChatSearch : false , searchText: '' };
+const state: State = { currentConversation: {}, showChatSearch : false , searchText: '',showChatInfo:false };
 
 // mutations and action enums
 
 export enum MutationTypes {
     LOAD_CONVERSATION = "SET_CONVERSATION",
     SHOW_CHATSEARCH = "SET_SHOWCHATSEARCH",
+    SHOW_CHATINFO = "SET_SHOWCHATINFO",
     LOAD_SEARCHTEXT = "SET_SEARCHTEXT",
 }
 
@@ -33,6 +34,7 @@ export enum ActionTypes {
 export type Mutations<S = State> = {
     [MutationTypes.LOAD_CONVERSATION](state: S, payload: Object): void;
     [MutationTypes.SHOW_CHATSEARCH](state: S, payload: Boolean): void;
+    [MutationTypes.SHOW_CHATINFO](state: S, payload: Boolean): void;
     [MutationTypes.LOAD_SEARCHTEXT](state: S, payload: String): void;
 };
 
@@ -49,6 +51,9 @@ const mutations: MutationTree<State> & Mutations = {
     },
     [MutationTypes.SHOW_CHATSEARCH](state: State, payload: Boolean) {
         state.showChatSearch = payload;
+    },
+    [MutationTypes.SHOW_CHATINFO](state: State, payload: Boolean) {
+        state.showChatInfo = payload;
     },
     [MutationTypes.LOAD_SEARCHTEXT](state: State, payload: String) {
         state.searchText = payload;
@@ -100,6 +105,7 @@ export const actions: ActionTree<State, State> & Actions = {
 export type Getters = {
     currentConversation(state: State): Object;
     currentShowChatSearch(state: State) : Boolean;
+    currentShowChatInfo(state: State) : Boolean;
     currentSearchText(state: State) : String;
 };
 
@@ -111,6 +117,9 @@ export const getters: GetterTree<State, State> & Getters = {
     },
     currentShowChatSearch: state => {
         return state.showChatSearch;
+    },
+    currentShowChatInfo: state => {
+        return state.showChatInfo;
     },
     currentSearchText: state => {
         return state.searchText;
