@@ -4,7 +4,7 @@
         <div class="container" id="msg-container">
 
             <!-- Message Day Start -->
-            <div class="message-day" v-for="(converse,y) in   currentConversation.conversations" >
+            <div class="message-day" v-for="(converse,y) in   filteredConversationList" >
 
                 <div class="message-divider sticky-top pb-2" :data-label=timeAgo(converse.date,false)>&nbsp;</div>
 
@@ -128,9 +128,10 @@
         setup: () => {
             const store = useStore();
             const count = ref(store.state);
-            const filteredConversationList = ref({})
+
             const imgIndex = ref(0);
             const imgPopupVisible = ref(false);
+
                 function showImg(index) {
                     imgIndex.value = index
                     imgPopupVisible.value = true
@@ -155,33 +156,31 @@
                 onMounted(() => {
                     scrollIntoView();
                 });
-            const currentConversation = computed(() => store.getters.currentConversation);
 
 
 
-            const filterText = computed(() => {
+
+
+            const filteredConversationList = computed(() => {
                 var srchTxt = store.getters.currentSearchText;
-                if(srchTxt=='')
-                {
-                    filteredConversationList.value = currentConversation.conversations;
-                    return;
-                }
-
-                var tempList = [];
-                tempList = currentConversation.conversations;
+                console.log(srchTxt)
+                let converList = store.getters.currentConversation;
+                 let tempList = [];
+                tempList = converList.conversations;
                 if(srchTxt != '' && srchTxt != null)
                 {
                     tempList =  tempList.filter(entry => {
-                        return   entry.list.filter(msgli => {
-                            return entry.message.toLowerCase().includes(srchTxt.toLowerCase())
+                        var newList =   entry.list.filter(msgli => {
+                            return msgli.message.toLowerCase().includes(srchTxt.toLowerCase())
                         })
+                        return entry.list = newList;
                     })
                 }
 
-                filteredConversationList.value = tempList;
+                return  tempList;
             });
             return {
-                currentConversation,timeAgo,showImg,handleImgHide,imgIndex,imgPopupVisible,setMsgRef,filterText
+                timeAgo,showImg,handleImgHide,imgIndex,imgPopupVisible,setMsgRef,filteredConversationList
             }
         },
         methods : {

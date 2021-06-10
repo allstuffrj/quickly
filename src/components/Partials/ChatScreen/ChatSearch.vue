@@ -24,7 +24,7 @@
 
     import { ref, defineComponent,computed } from 'vue'
     import SearchSvg from  '../../../assets/media/icons/search.svg';
-    import { useStore,MutationTypes } from "../../../store";
+    import {useStore, MutationTypes, ActionTypes} from "../../../store";
 
     export default defineComponent({
         name: 'ChatSearch',
@@ -43,7 +43,7 @@
             const showSearch = computed(() => store.getters.currentShowChatSearch);
             function searchText(event)
             {
-                store.commit(MutationTypes.SHOW_CHATSEARCH, event.target.value);
+                store.dispatch(ActionTypes.LOAD_SEARCHTEXT, event.target.value);
             }
             return {
                 currentConversation,

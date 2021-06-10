@@ -26,6 +26,7 @@ export enum MutationTypes {
 
 export enum ActionTypes {
     LOAD_CONVERSATION = "SET_CONVERSATION",
+    LOAD_SEARCHTEXT = "SET_SEARCHTEXT",
 }
 
 //Mutation Types
@@ -70,6 +71,10 @@ export interface Actions {
         { commit }: AugmentedActionContext,
         payload: Object
     ): void;
+    [ActionTypes.LOAD_SEARCHTEXT](
+        { commit }: AugmentedActionContext,
+        payload: Object
+    ): void;
 }
 
 export const actions: ActionTree<State, State> & Actions = {
@@ -82,6 +87,11 @@ export const actions: ActionTree<State, State> & Actions = {
             console.log(e);
             commit(MutationTypes.LOAD_CONVERSATION, {});
         });
+
+    },
+    [ActionTypes.LOAD_SEARCHTEXT]({ commit }, payload: String) {
+        // Ajax call will be here.
+        commit(MutationTypes.LOAD_SEARCHTEXT, payload);
 
     }
 };
