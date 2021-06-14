@@ -51,27 +51,32 @@
                             <span>View Info</span>
                         </a>
 
-                        <a class="dropdown-item align-items-center d-flex" href="#">
+                        <a class="dropdown-item align-items-center d-flex" @click="muteConversation"
+                           href="javascript:void(0)">
 
                             <VolumeOff class="injectable hw-20 mr-2"></VolumeOff>
                             <span>Mute Notifications</span>
                         </a>
-                        <a class="dropdown-item align-items-center d-flex" href="#">
+                        <a class="dropdown-item align-items-center d-flex" @click="wallpaperSet"
+                           href="javascript:void(0)">
 
                             <PhotoGraph class="injectable hw-20 mr-2"></PhotoGraph>
                             <span>Wallpaper</span>
                         </a>
-                        <a class="dropdown-item align-items-center d-flex" href="#">
+                        <a class="dropdown-item align-items-center d-flex" @click="archiveConversation"
+                           href="javascript:void(0)">
 
                             <Archive class="injectable hw-20 mr-2"></Archive>
                             <span>Archive</span>
                         </a>
-                        <a class="dropdown-item align-items-center d-flex" href="#">
+                        <a class="dropdown-item align-items-center d-flex" @click="deleteConversation"
+                           href="javascript:void(0)">
 
                             <Trash class="injectable hw-20 mr-2"></Trash>
                             <span>Delete</span>
                         </a>
-                        <a class="dropdown-item align-items-center d-flex text-danger" href="#">
+                        <a class="dropdown-item align-items-center d-flex text-danger" href="javascript:void(0)"
+                           @click="blockConversation">
 
                             <Ban class="injectable hw-20 mr-2"></Ban>
                             <span>Block</span>
@@ -89,45 +94,47 @@
 
 
                         <template  v-slot:menus>
-                        <a class="dropdown-item align-items-center d-flex" href="#">
+                        <a class="dropdown-item align-items-center d-flex" href="javascript:void(0)">
 
                             <Phone class="injectable hw-20 mr-2"></Phone>
                             <span>Call</span>
                         </a>
-                        <a class="dropdown-item align-items-center d-flex" href="#" data-toggle="collapse" @click="toggleSearch"
+                        <a class="dropdown-item align-items-center d-flex" href="javascript:void(0)" data-toggle="collapse" @click="toggleSearch"
                            data-target="#searchCollapse" aria-expanded="false">
 
                             <SearchIcon class="injectable hw-20 mr-2"></SearchIcon>
                             <span>Search</span>
                         </a>
 
-                        <a class="dropdown-item align-items-center d-flex" href="#" data-chat-info-toggle="">
+                        <a class="dropdown-item align-items-center d-flex" href="javascript:void(0)"
+                           data-chat-info-toggle=""
+                           @click="toggleChatInfo">
 
                             <InformationCircle class="injectable hw-20 mr-2"></InformationCircle>
                             <span>View Info</span>
                         </a>
 
-                        <a class="dropdown-item align-items-center d-flex" href="#">
+                        <a class="dropdown-item align-items-center d-flex" href="javascript:void(0)" @click="muteConversation">
 
                             <VolumeOff class="injectable hw-20 mr-2"></VolumeOff>
                             <span>Mute Notifications</span>
                         </a>
-                        <a class="dropdown-item align-items-center d-flex" href="#">
+                        <a class="dropdown-item align-items-center d-flex" href="javascript:void(0)"  @click="wallpaperSet">
 
                             <PhotoGraph class="injectable hw-20 mr-2"></PhotoGraph>
                             <span>Wallpaper</span>
                         </a>
-                        <a class="dropdown-item align-items-center d-flex" href="#">
+                        <a class="dropdown-item align-items-center d-flex" href="javascript:void(0)" @click="archiveConversation" >
 
                             <Archive class="injectable hw-20 mr-2"></Archive>
                             <span>Archive</span>
                         </a>
-                        <a class="dropdown-item align-items-center d-flex" href="#">
+                        <a class="dropdown-item align-items-center d-flex" href="javascript:void(0)" @click="deleteConversation">
 
                             <Trash class="injectable hw-20 mr-2"></Trash>
                             <span>Delete</span>
                         </a>
-                        <a class="dropdown-item align-items-center d-flex text-danger" href="#">
+                        <a class="dropdown-item align-items-center d-flex text-danger" href="javascript:void(0)"  @click="blockConversation">
 
                             <Ban class="injectable hw-20 mr-2"></Ban>
                             <span>Block</span>
@@ -194,11 +201,46 @@
                 //Call friend functionality will goes here
                 console.log("Call friend functionality will goes here")
             }
+
+            function muteConversation()
+            {
+                //Mute conversation script will goes here
+                console.log("Mute conversation script will goes here")
+            }
+
+            function wallpaperSet()
+            {
+                //Wallpaper script will goes here
+                console.log("Wallpaper script will goes here")
+            }
+
+            function archiveConversation()
+            {
+                //Wallpaper script will goes here
+                console.log("Archive conversation script will goes here")
+            }
+
+            function deleteConversation()
+            {
+                //Wallpaper script will goes here
+                console.log("Delete conversation script will goes here")
+            }
+
+            function blockConversation()
+            {
+                //Wallpaper script will goes here
+                console.log("Block conversation script will goes here")
+            }
             return {
                 currentConversation,
                 toggleSearch,
                 callFriend,
-                toggleChatInfo
+                toggleChatInfo,
+                muteConversation,
+                wallpaperSet,
+                archiveConversation,
+                deleteConversation,
+                blockConversation
             }
         },
         methods : {

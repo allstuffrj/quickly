@@ -67,19 +67,19 @@
 
                 <!-- User Information Start -->
                 <div class="chat-info-group">
-                    <a class="chat-info-group-header" :class="[{'collapsed':!showDocumentInfo}]"
+                    <a class="chat-info-group-header" :class="[{'collapsed':!showUserInfo}]"
                        @click="toggleUserInfoBox"
                        data-toggle="collapse"
                        href="javascript:void(0)"
                        role="button"
-                       aria-expanded="true" aria-controls="profile-info">
+                       :aria-expanded="showUserInfo" aria-controls="profile-info">
                         <h6 class="mb-0">User Information</h6>
 
                         <InformationCircleIcon  class="injectable text-muted hw-20"></InformationCircleIcon>
 
                     </a>
 
-                    <div class="chat-info-group-body collapse show" :class="[{'collapse show':showDocumentInfo.value}]" id="profile-info">
+                    <div class="chat-info-group-body collapse" :class="[{'show':showUserInfo}]" id="profile-info">
                         <div class="chat-info-group-content list-item-has-padding">
                             <!-- List Group Start -->
                             <ul class="list-group list-group-flush ">
@@ -113,13 +113,15 @@
 
                 <!-- Shared Media Start -->
                 <div class="chat-info-group">
-                    <a class="chat-info-group-header" data-toggle="collapse" href="#shared-media" role="button" aria-expanded="true" aria-controls="shared-media">
+                    <a class="chat-info-group-header" :class="[{'collapsed':!showMediaInfo}]"
+                       @click="toggleMediaInfoBox" data-toggle="collapse" href="javascript:void(0)" role="button"
+                       :aria-expanded="showMediaInfo" aria-controls="shared-media">
                         <h6 class="mb-0">Last Media</h6>
                         <PhotographIcon class="injectable text-muted hw-20"></PhotographIcon>
 
                     </a>
 
-                    <div class="chat-info-group-body collapse show" id="shared-media">
+                    <div class="chat-info-group-body collapse " :class="[{'show':showMediaInfo}]" id="shared-media">
                         <div class="chat-info-group-content">
                             <!-- Shared Media -->
                             <div class="form-row">
@@ -138,13 +140,15 @@
 
                 <!-- Shared Files Start -->
                 <div class="chat-info-group">
-                    <a class="chat-info-group-header" data-toggle="collapse" href="#shared-files" role="button" aria-expanded="true" aria-controls="shared-files">
+                    <a class="chat-info-group-header" :class="[{'collapsed':!showDocumentInfo}]"  data-toggle="collapse"
+                       href="javascript:void(0)" @click="toggleDocumentInfoBox" role="button"
+                       :aria-expanded="showDocumentInfo" aria-controls="shared-files">
                         <h6 class="mb-0">Documents</h6>
                         <DocumentIcon class="injectable text-muted hw-20"></DocumentIcon>
 
                     </a>
 
-                    <div class="chat-info-group-body collapse show" id="shared-files">
+                    <div class="chat-info-group-body collapse" :class="[{'show':showDocumentInfo}]" id="shared-files">
                         <div class="chat-info-group-content list-item-has-padding">
                             <!-- List Group Start -->
                             <ul class="list-group list-group-flush">
@@ -254,7 +258,9 @@
 
             function toggleUserInfoBox()
             {
+
                 showUserInfo.value = !showUserInfo.value;
+
             }
             function toggleMediaInfoBox()
             {

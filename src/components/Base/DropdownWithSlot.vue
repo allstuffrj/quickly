@@ -107,7 +107,7 @@
                 }
                 const isOpen = ref(false);
                   function handleToggle() {
-                      console.log("Here")
+
                         isOpen.value = !isOpen.value;
                         if(isOpen.value == true)
                         {
