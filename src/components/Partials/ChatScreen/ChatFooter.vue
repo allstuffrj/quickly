@@ -40,10 +40,9 @@
             </DropdownWithSlot>
 
         </div>
-
-        <textarea v-model="messageInput" class="form-control emojionearea-form-control" id="messageInput" rows="1"
+        <textarea  class="form-control emojionearea-form-control" id="messageInput" rows="1"
                    placeholder="Type your message here..."></textarea>
-        <button type="button"  class="btn btn-primary btn-icon send-icon rounded-circle text-light mb-1"
+        <button type="button" @click="sendMessage"  class="btn btn-primary btn-icon send-icon rounded-circle text-light mb-1"
                 role="button">
 
             <ArrowRightIcon class="injectable"></ArrowRightIcon>
@@ -55,7 +54,7 @@
 
 <script lang="ts">
 
-    import { ref, defineComponent,computed,onMounted } from 'vue'
+    import { ref, defineComponent,computed,onMounted,reactive } from 'vue'
     import { useStore } from "../../../store";
     import PhotoGraph from '../../../assets/media/heroicons/outline/photograph.svg';
     import VolumeUp from '../../../assets/media/heroicons/outline/volume-up.svg';
@@ -82,18 +81,34 @@
             DropdownWithSlot
         },
         setup: () => {
-            const messageInput = ref(null);
+            const messageInput = ref('');
+            let emojObject = '';
             onMounted(() => {
-                $('#messageInput').emojioneArea()
+                emojObject = $('#messageInput').emojioneArea({
+                    autocomplete: false,
+                    events: {
+                        keyup: function (editor, event) {
+                            messageInput.value = editor.html();
+                        }
+                    }
+                })
             })
             const store = useStore();
             const count = ref(store.state);
 
             const currentConversation = computed(() => store.getters.currentConversation);
 
+            function sendMessage()
+            {
+                if(messageInput.value != '')
+                {
+                    // ajax call or socket call will write here for send message
+                }
+            }
             return {
                 currentConversation,
-                messageInput
+                messageInput,
+                sendMessage
             }
         },
         methods : {
