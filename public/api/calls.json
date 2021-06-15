@@ -1,0 +1,58 @@
+[
+  {
+    "user_name" : "Catherine richardson",
+    "uuid" : "20240fba-19d1-49e0-8292-3f784b69289f",
+    "status" : "online",
+    "avatar" : "uploads/avatar/1.png",
+    "time" : "2021-06-16 22:00:03",
+    "type" : "incoming"
+  },
+  {
+    "user_name" : "Eva Walker",
+    "uuid" : "20240fba-19d1-49e0-8292-3f784b69289f",
+    "status" : "online",
+    "avatar" : "uploads/avatar/1.png",
+    "time" : "2021-06-16 22:00:03",
+    "type" : "outgoing"
+  },
+  {
+    "user_name" : "Christopher Garcia",
+    "uuid" : "20240fba-19d1-49e0-8292-3f784b69289f",
+    "status" : "online",
+    "avatar" : "uploads/avatar/1.png",
+    "time" : "2021-06-16 22:00:03",
+    "type" : "missed-calls"
+  },
+  {
+    "user_name" : "Christina Turner",
+    "uuid" : "20240fba-19d1-49e0-8292-3f784b69289f",
+    "status" : "online",
+    "avatar" : "uploads/avatar/1.png",
+    "time" : "2021-06-16 22:00:03",
+    "type" : "outgoing"
+  },
+  {
+    "user_name" : "Tammy Martinez",
+    "uuid" : "20240fba-19d1-49e0-8292-3f784b69289f",
+    "status" : "online",
+    "avatar" : "uploads/avatar/1.png",
+    "time" : "2021-06-16 22:00:03",
+    "type" : "incoming"
+  },
+  {
+    "user_name" : "Bonnie Torres",
+    "uuid" : "20240fba-19d1-49e0-8292-3f784b69289f",
+    "status" : "online",
+    "avatar" : "uploads/avatar/1.png",
+    "time" : "2021-06-16 22:00:03",
+    "type" : "incoming"
+  },
+  {
+    "user_name" : "Jacqueline James",
+    "uuid" : "20240fba-19d1-49e0-8292-3f784b69289f",
+    "status" : "online",
+    "avatar" : "uploads/avatar/1.png",
+    "time" : "2021-06-16 22:00:03",
+    "type" : "outgoing"
+  }
+]
