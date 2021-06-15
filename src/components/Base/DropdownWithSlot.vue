@@ -11,6 +11,14 @@
             </svg>
 
         </a>
+        <button v-if="displayType == 'circle'" v-click-outside="onClickOutside"
+                class="btn btn-secondary btn-icon btn-minimal btn-sm" @click="handleToggle"
+                type="button"
+                data-chat-filter-list=""
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded=checkIsOpen>
+            <PlusCircle class="injectable hw-20"></PlusCircle>
+        </button>
+
 
         <a v-if="displayType == 'kebabhorz'" v-click-outside="onClickOutside" @click="handleToggle" class="text-muted" href="#" data-toggle="dropdown" aria-haspopup="true"
            :title=title  aria-expanded=checkIsOpen>
@@ -37,6 +45,7 @@
     import { ref, defineComponent,computed} from 'vue'
     import vClickOutside from 'click-outside-vue3'
     import DotsHorizontalIcon from '../../assets/media/heroicons/outline/dots-horizontal.svg';
+    import PlusCircle from '../../assets/media/heroicons/outline/plus-circle.svg';
     const enum DisplayTypes  {
        button =  'button',
         kebab = 'kebab'
@@ -90,7 +99,8 @@
       clickOutside: vClickOutside.directive
         },
         components : {
-            DotsHorizontalIcon
+            DotsHorizontalIcon,
+            PlusCircle
         },
         setup: (props,context) => {
 
