@@ -18,10 +18,8 @@
             ChatHistory
         },
         setup: () => {
-            function openConversation(conversation) {
-                console.log("Gere")
-            }
-            {openConversation}
+
+            {}
         }
     })
 </script>

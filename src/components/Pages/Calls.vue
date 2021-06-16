@@ -1,12 +1,12 @@
 <template>
     <CallsList></CallsList>
-    <ChatHistory></ChatHistory>
+    <CallHistory></CallHistory>
 </template>
 
 <script lang="ts">
     import { ref, defineComponent } from 'vue'
     import CallsList from "../sidebar/CallsList.vue";
-    import ChatHistory from "../Partials/ChatHistory.vue";
+    import CallHistory from "../Partials/CallHistory.vue";
 
     export default defineComponent({
         name: 'Calls',
@@ -15,13 +15,11 @@
         },
         components : {
             CallsList,
-            ChatHistory
+            CallHistory
         },
         setup: () => {
-            function openConversation(conversation) {
-                console.log("Gere")
-            }
-            {openConversation}
+
+
         }
     })
 </script>

@@ -6,8 +6,8 @@ class CallsService {
         return http.get('/calls.json');
     }
 
-    getConversationDetail(conversation : Object): Promise<any>{
-      return http.get('/conversation_detail.json');
+    getCallHistory(conversation : Object): Promise<any>{
+      return http.get('/call_history.json');
     }
 
   }

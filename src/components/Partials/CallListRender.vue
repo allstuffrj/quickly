@@ -56,22 +56,22 @@
             PhoneOutgoing,
             Phone
         },
-        emits:['openConversation'],
+        emits:[],
         setup: () => {
 
             const store = useStore();
             const callId = ref(null);
-            const currentConversation = ref(store.state.currentConversation);
+            const currentCall = ref(store.state.currentCall);
 
-            function openConversation(conversation : object) :void
+            function openCall(conversation : object) :void
                 {
-                    callId.value = conversation.uuid;
+                   callId.value = conversation.uuid;
                     store.dispatch(ActionTypes.LOAD_SEARCHTEXT, '');
                     store.commit(MutationTypes.SHOW_CHATSEARCH, false);
-                    store.dispatch(ActionTypes.LOAD_CONVERSATION, conversation);
+                    store.dispatch(ActionTypes.LOAD_CALLHISTORY, conversation);
 
                 }
-            return {timeAgo,openConversation,callId}
+            return {timeAgo,openCall,callId}
         }
     })
 </script>

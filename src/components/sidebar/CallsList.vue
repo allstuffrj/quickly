@@ -99,7 +99,7 @@
                     {
 
                         ListAr = ListAr.filter(entry => {
-                            return entry.name.toLowerCase().includes(searchInput.value.toLowerCase())
+                            return entry.user_name.toLowerCase().includes(searchInput.value.toLowerCase())
                         })
                     }
                     filteredCallsList.value = ListAr;
@@ -129,7 +129,7 @@
                 if(searchInput.value != '' && searchInput.value != null)
                 {
                     tempList =  tempList.filter(entry => {
-                        return entry.name.toLowerCase().includes(searchInput.value.toLowerCase())
+                        return entry.user_name.toLowerCase().includes(searchInput.value.toLowerCase())
                     })
                 }
                 filteredCallsList.value = tempList;

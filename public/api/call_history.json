@@ -1,0 +1,51 @@
+{
+  "user_name" : "Catherine richardson",
+  "uuid" : "20240fba-19d1-49e0-8292-3f784b69289f0",
+  "status" : "online",
+  "avatar" : "uploads/avatar/1.png",
+  "phone" : "+01-202-265462",
+  "history" :[
+
+  {
+    "time" : "2021-06-16 22:00:03",
+    "type" : "incoming",
+    "end_time": "2021-06-16 22:20:15"
+  },
+  {
+
+    "time" : "2021-06-16 22:00:03",
+    "type" : "outgoing",
+    "end_time": "2021-06-16 22:20:03"
+  },
+  {
+
+    "time" : "2021-06-16 22:00:03",
+    "type" : "missed-calls",
+    "end_time": ""
+  },
+  {
+
+    "time" : "2021-06-16 22:00:03",
+    "type" : "outgoing",
+    "end_time": "2021-06-16 22:20:03"
+  },
+  {
+
+    "time" : "2021-06-16 22:00:03",
+    "type" : "incoming",
+    "end_time": "2021-06-16 22:20:03"
+  },
+  {
+
+    "time" : "2021-06-16 22:00:03",
+    "type" : "incoming",
+    "end_time": "2021-06-16 22:20:03"
+  },
+  {
+
+    "time" : "2021-06-16 22:00:03",
+    "type" : "outgoing",
+    "end_time": "2021-06-16 22:30:03"
+  }
+]
+}
