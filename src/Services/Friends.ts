@@ -19,6 +19,10 @@ class FriendsService {
       return http.get('/friend_detail.json');
     }
 
+    getUserDetail(): Promise<any>{
+        return http.get('/user_detail.json');
+    }
+
   }
 
   export default new FriendsService();
