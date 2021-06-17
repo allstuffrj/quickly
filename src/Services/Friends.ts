@@ -5,7 +5,7 @@ class FriendsService {
       return http.get("/friends.json");
     };
     getList(): Promise<any> {
-        return http.get("/friends.json");
+        return http.get("/friendslist.json");
     };
     getConversations(): Promise<any>{
         return http.get('/conversationlist.json');
@@ -13,6 +13,10 @@ class FriendsService {
 
     getConversationDetail(conversation : Object): Promise<any>{
       return http.get('/conversation_detail.json');
+    }
+
+    getFriendDetail(conversation : Object): Promise<any>{
+      return http.get('/friend_detail.json');
     }
 
   }

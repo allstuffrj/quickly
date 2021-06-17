@@ -16,7 +16,7 @@
                         </div>
 
 
-                        <CallListRender :friendsList=filteredFriendsList></CallListRender>
+                        <FriendListRender :friendsList=filteredFriendsList></FriendListRender>
 
                     </div>
                 </div>
@@ -31,8 +31,8 @@
     import Dropdown from "../Base/Dropdown.vue";
     import SerachForm from "../Base/SerachForm.vue";
     import {ref, defineComponent, computed, watch, onMounted} from 'vue'
-    import CallListRender from "../Partials/CallListRender.vue";
-    import Calls from "../../Services/Calls";
+    import FriendListRender from "../Partials/FriendListRender.vue";
+    import Friends from "../../Services/Friends";
 
     export default defineComponent({
         name: 'FriendsList',
@@ -41,7 +41,7 @@
             Dropdown,
             ChatAction,
             SerachForm,
-            CallListRender
+            FriendListRender
         },
         setup: () => {
             const searchInput = ref(null);
@@ -55,10 +55,11 @@
 
             function getFriendsList() {
 
-                Calls.getCalls().then((response: object) => {
+                Friends.getList().then((response: object) => {
 
                     friendsList.value = response.data;
                     filteredFriendsList.value = response.data;
+                    dpChangeHandler();
                 }).catch((e: Error) => {
                     console.log(e);
                 });
@@ -70,12 +71,29 @@
                 var tempList = friendsList.value;
 
                   if(searchInput.value != '' && searchInput.value != null)
-                {
-                    tempList =  tempList.filter(entry => {
-                        return entry.user_name.toLowerCase().includes(searchInput.value.toLowerCase())
-                    })
-                }
-                filteredFriendsList.value = tempList;
+                    {
+                        tempList =  tempList.filter(entry => {
+                            return entry.user_name.toLowerCase().includes(searchInput.value.toLowerCase())
+                        })
+                    }
+                tempList.sort((a, b) => a.user_name.localeCompare(b.user_name, 'es', { sensitivity: 'base' }))
+
+                tempList =  tempList.reduce((r, e) => {
+
+                    // get first letter of name of current element
+                    let alphabet = e.user_name[0];
+
+                    // if there is no property in accumulator with this letter create it
+                    if (!r[alphabet]) r[alphabet] = { alphabet, record: [e] }
+
+                    // if there is push current element to children array for that letter
+                    else r[alphabet].record.push(e);
+
+                    // return accumulator
+                    return r;
+                }, {});
+
+                filteredFriendsList.value = Object.values(tempList);
             }
 
 

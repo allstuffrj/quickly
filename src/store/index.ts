@@ -12,10 +12,10 @@ import {
 import Friends from "../Services/Friends";
 import Calls from "../Services/Calls";
 //declare state
-export type State = { currentConversation: Object, showChatSearch : Boolean,showChatInfo : Boolean,searchText : String, currentCall :Object };
+export type State = { currentConversation: Object, showChatSearch : Boolean,showChatInfo : Boolean,searchText : String, currentCall :Object,currentFriend : Object };
 
 //set state
-const state: State = { currentConversation: {}, showChatSearch : false , searchText: '',showChatInfo:false,currentCall:{} };
+const state: State = { currentConversation: {}, showChatSearch : false , searchText: '',showChatInfo:false,currentCall:{},currentFriend:{} };
 
 // mutations and action enums
 
@@ -25,11 +25,13 @@ export enum MutationTypes {
     SHOW_CHATINFO = "SET_SHOWCHATINFO",
     LOAD_SEARCHTEXT = "SET_SEARCHTEXT",
     LOAD_CALLHISTORY = "SET_CALLHISTORY",
+    LOAD_FRIEND = "SET_FRIEND",
 }
 
 export enum ActionTypes {
     LOAD_CONVERSATION = "SET_CONVERSATION",
     LOAD_CALLHISTORY = "SET_CALLHISTORY",
+    LOAD_FRIEND = "SET_FRIEND",
     LOAD_SEARCHTEXT = "SET_SEARCHTEXT",
 }
 
@@ -37,6 +39,7 @@ export enum ActionTypes {
 export type Mutations<S = State> = {
     [MutationTypes.LOAD_CONVERSATION](state: S, payload: Object): void;
     [MutationTypes.LOAD_CALLHISTORY](state: S, payload: Object): void;
+    [MutationTypes.LOAD_FRIEND](state: S, payload: Object): void;
     [MutationTypes.SHOW_CHATSEARCH](state: S, payload: Boolean): void;
     [MutationTypes.SHOW_CHATINFO](state: S, payload: Boolean): void;
     [MutationTypes.LOAD_SEARCHTEXT](state: S, payload: String): void;
@@ -54,13 +57,10 @@ const mutations: MutationTree<State> & Mutations = {
         });
     },
     [MutationTypes.LOAD_CALLHISTORY](state: State, payload: Object) {
-        Calls.getCallHistory(payload).then((response: object) => {
-
-            state.currentCall = response.data;
-        }).catch((e: Error) => {
-            console.log(e);
-            state.currentCall = {};
-        });
+        state.currentCall = payload;
+    },
+    [MutationTypes.LOAD_FRIEND](state: State, payload: Object) {
+        state.currentFriend = payload;
     },
     [MutationTypes.SHOW_CHATSEARCH](state: State, payload: Boolean) {
         state.showChatSearch = payload;
@@ -93,6 +93,10 @@ export interface Actions {
         { commit }: AugmentedActionContext,
         payload: Object
     ): void;
+    [ActionTypes.LOAD_FRIEND](
+        { commit }: AugmentedActionContext,
+        payload: Object
+    ): void;
     [ActionTypes.LOAD_SEARCHTEXT](
         { commit }: AugmentedActionContext,
         payload: Object
@@ -122,6 +126,18 @@ export const actions: ActionTree<State, State> & Actions = {
         });
 
     },
+    [ActionTypes.LOAD_FRIEND]({ commit }, payload: Object) {
+        // Ajax call will be here.
+
+        Friends.getFriendDetail(payload).then((response: object) => {
+
+            commit(MutationTypes.LOAD_FRIEND, response.data);
+        }).catch((e: Error) => {
+            console.log(e);
+            commit(MutationTypes.LOAD_CALLHISTORY, {});
+        });
+
+    },
     [ActionTypes.LOAD_SEARCHTEXT]({ commit }, payload: String) {
         // Ajax call will be here.
         commit(MutationTypes.LOAD_SEARCHTEXT, payload);
@@ -133,6 +149,7 @@ export const actions: ActionTree<State, State> & Actions = {
 export type Getters = {
     currentConversation(state: State): Object;
     currentCall(state: State): Object;
+    currentFriend(state: State): Object;
     currentShowChatSearch(state: State) : Boolean;
     currentShowChatInfo(state: State) : Boolean;
     currentSearchText(state: State) : String;
@@ -146,6 +163,9 @@ export const getters: GetterTree<State, State> & Getters = {
     },
     currentCall: state => {
         return state.currentCall;
+    },
+    currentFriend: state => {
+        return state.currentFriend;
     },
     currentShowChatSearch: state => {
         return state.showChatSearch;
