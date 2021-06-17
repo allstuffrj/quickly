@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Intro from '../components/intro/index.vue'
 import Chat from '../components/Pages/Chat.vue'
 import Calls from '../components/Pages/Calls.vue'
+import Friends from '../components/Pages/Friends.vue'
 
 export const routes: Array<RouteRecordRaw> = [
     {
@@ -19,6 +20,11 @@ export const routes: Array<RouteRecordRaw> = [
         path: '/calls',
         name: 'Calls',
         component: Calls,
+        meta: { layout: 'inner-layout' }
+    },{
+        path: '/friends',
+        name: 'Friends',
+        component: Friends,
         meta: { layout: 'inner-layout' }
     },
     {

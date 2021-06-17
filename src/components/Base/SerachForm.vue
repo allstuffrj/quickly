@@ -1,10 +1,10 @@
 <template>
-    <form class="form-inline" onsubmit="return false">
-        <div class="input-group">
+    <form class="form-inline" :class="[extraClass]" onsubmit="return false">
+        <div class="input-group" :class="[extraClass]">
             <input
                     type="text"
                     class="form-control search border-right-0 transparent-bg pr-0"
-                    placeholder="Search users..." :value="modelValue" 
+                    placeholder="Search users..." :value="modelValue"
     @input="$emit('update:modelValue', $event.target.value)">
             <div class="input-group-append">
                 <div
@@ -27,6 +27,10 @@
             modelValue : {
                 type: String,
                 default: null
+            },
+            extraClass : {
+                type:String,
+                default:null
             }
         },
 

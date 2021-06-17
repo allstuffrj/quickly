@@ -4,7 +4,9 @@ class FriendsService {
     getAll(): Promise<any> {
       return http.get("/friends.json");
     };
-
+    getList(): Promise<any> {
+        return http.get("/friends.json");
+    };
     getConversations(): Promise<any>{
         return http.get('/conversationlist.json');
     }
