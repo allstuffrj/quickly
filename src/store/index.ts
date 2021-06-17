@@ -48,13 +48,14 @@ export type Mutations<S = State> = {
 //define mutations
 const mutations: MutationTree<State> & Mutations = {
     [MutationTypes.LOAD_CONVERSATION](state: State, payload: Object) {
-        Friends.getConversationDetail(payload).then((response: object) => {
+        /*Friends.getConversationDetail(payload).then((response: object) => {
 
             state.currentConversation = response.data;
         }).catch((e: Error) => {
             console.log(e);
             state.currentConversation = {};
-        });
+        });*/
+        state.currentConversation = payload;
     },
     [MutationTypes.LOAD_CALLHISTORY](state: State, payload: Object) {
         state.currentCall = payload;
@@ -130,11 +131,10 @@ export const actions: ActionTree<State, State> & Actions = {
         // Ajax call will be here.
 
         Friends.getFriendDetail(payload).then((response: object) => {
-
             commit(MutationTypes.LOAD_FRIEND, response.data);
         }).catch((e: Error) => {
             console.log(e);
-            commit(MutationTypes.LOAD_CALLHISTORY, {});
+            commit(MutationTypes.LOAD_FRIEND, {});
         });
 
     },

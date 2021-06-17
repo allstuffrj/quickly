@@ -1,13 +1,13 @@
 <template>
     <FriendsList></FriendsList>
-    <CallHistory></CallHistory>
+    <FriendDetail></FriendDetail>
 </template>
 
 <script lang="ts">
-    import { ref, defineComponent } from 'vue'
+    import { ref, defineComponent,onUnmounted } from 'vue'
     import FriendsList from "../sidebar/FriendsList.vue";
-    import CallHistory from "../Partials/CallHistory.vue";
-
+    import FriendDetail from "../Partials/FriendDetail.vue";
+ import { useStore, MutationTypes,ActionTypes } from "../../store";
     export default defineComponent({
         name: 'Friends',
         props: {
@@ -15,10 +15,14 @@
         },
         components : {
             FriendsList,
-            CallHistory
+            FriendDetail
         },
         setup: () => {
-
+            const store = useStore();
+            onUnmounted(()=>{
+                    store.dispatch(ActionTypes.LOAD_SEARCHTEXT, '');
+                    store.commit(MutationTypes.LOAD_FRIEND, {});
+            })
 
         }
     })

@@ -8,54 +8,46 @@
                         <div class="card card-body card-bg-1 mb-3">
                             <div class="d-flex flex-column align-items-center">
                                 <div class="avatar avatar-lg mb-3">
-                                    <img class="avatar-img" :src=frienddetail.avatar alt="">
+                                    <img class="avatar-img" :src=friendDetail.avatar :alt=friendDetail.user_name>
                                 </div>
 
                                 <div class="d-flex flex-column align-items-center">
-                                    <h5 class="mb-1">Catherine Richardson</h5>
-                                    <!-- <p class="text-white rounded px-2 bg-primary">+01-202-265462</p> -->
+                                    <h5 class="mb-1">{{friendDetail.user_name}}</h5>
                                     <div class="d-flex mt-2">
                                         <div class="btn btn-primary btn-icon rounded-circle text-light mx-2">
-                                            <svg class="hw-24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
-                                            </svg>
-                                            <!-- <img class="injectable hw-24" src="./../assets/media/heroicons/outline/chat.svg" alt=""> -->
+                                            <ChatIcon class="injectable hw-24"></ChatIcon>
+                                            
                                         </div>
                                         <div class="btn btn-success btn-icon rounded-circle text-light mx-2">
-                                            <svg class="hw-24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-                                            </svg>
-
-                                            <!-- <img class="injectable hw-24" src="./../assets/media/heroicons/outline/phone.svg" alt=""> -->
+                                            <Phone class="injectable hw-24"></Phone>
+                                            
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="card-options">
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary btn-icon btn-minimal btn-sm text-muted" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <svg class="hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
-                                        </svg>
+                            <DropdownWithSlot title="Details" displayType="kebab" size=null xplacement="bottom-end"
+                                                  emptyLabel="Details"
 
-                                        <!-- <img class="injectable hw-20" src="./../assets/media/heroicons/outline/dots-vertical.svg" alt=""> -->
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#">Remove</a>
-                                        <a class="dropdown-item" href="#">Block</a>
-                                    </div>
-                                </div>
+                                                  defaultvalue=null :setActive=false dpclass="dropdown-menu-right" dpstyle="position: absolute; transform: translate3d(-134px, 48px, 0px); top: 0px; left: 0px; will-change: transform;">
+
+
+
+                                    <template v-slot:menus>
+
+                                        <a class="dropdown-item" href="javascript:void(0)" @click="removeUser()">Remove</a>
+                                        <a class="dropdown-item" href="javascript:void(0)" @click="blockUser()">Block</a>
+                                    </template>
+                                </DropdownWithSlot>
+                                
                             </div>
 
                             <div class="chat-closer d-xl-none">
                                 <!-- Chat Back Button (Visible only in Small Devices) -->
                                 <button class="btn btn-secondary btn-icon btn-minimal btn-sm text-muted" type="button" data-close="">
-                                    <svg class="hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-                                    </svg>
-
-                                    <!-- <img class="injectable hw-20" src="./../assets/media/heroicons/outline/arrow-left.svg" alt=""> -->
+                                    <ArrowLeft class="injectable hw-20"></ArrowLeft>
+                                    
                                 </button>
                             </div>
                         </div>
@@ -70,73 +62,60 @@
                                     <div class="media align-items-center">
                                         <div class="media-body">
                                             <p class="small text-muted mb-0">Local Time</p>
-                                            <p class="mb-0">10:25 PM</p>
+                                            <p class="mb-0">{{friendDetail.local_time}}</p>
                                         </div>
-                                        <svg class="text-muted hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                        </svg>
-                                        <!-- <img class="injectable text-muted hw-20" src="./../assets/media/heroicons/outline/clock.svg" alt=""> -->
+                                        <Clock  class="injectable text-muted hw-20"></Clock>
+                                        
                                     </div>
                                 </li>
                                 <li class="list-group-item">
                                     <div class="media align-items-center">
                                         <div class="media-body">
                                             <p class="small text-muted mb-0">Birthdate</p>
-                                            <p class="mb-0">20/11/1992</p>
+                                            <p class="mb-0">{{friendDetail.birth_date}}</p>
                                         </div>
-                                        <svg class="text-muted hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                        </svg>
-
-                                        <!-- <img class="injectable text-muted hw-20" src="./../assets/media/heroicons/outline/calendar.svg" alt=""> -->
+                                        <Calender class="injectable text-muted hw-20" ></Calender>
+                                        
                                     </div>
                                 </li>
                                 <li class="list-group-item">
                                     <div class="media align-items-center">
                                         <div class="media-body">
                                             <p class="small text-muted mb-0">Phone</p>
-                                            <p class="mb-0">+01-222-364522</p>
+                                            <p class="mb-0">{{friendDetail.phone}}</p>
                                         </div>
-                                        <svg class="text-muted hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-                                        </svg>
-                                        <!-- <img class="injectable text-muted hw-20" src="./../assets/media/heroicons/outline/phone.svg" alt=""> -->
+                                        <Phone class="injectable text-muted hw-20"></Phone>
+                                        
                                     </div>
                                 </li>
                                 <li class="list-group-item">
                                     <div class="media align-items-center">
                                         <div class="media-body">
                                             <p class="small text-muted mb-0">Email</p>
-                                            <p class="mb-0">catherine.richardson@gmail.com</p>
+                                            <p class="mb-0">{{friendDetail.email}}</p>
                                         </div>
-                                        <svg class="text-muted hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                                        </svg>
-                                        <!-- <img class="injectable text-muted hw-20" src="./../assets/media/heroicons/outline/mail.svg" alt=""> -->
+                                        <Email  class="injectable text-muted hw-20"></Email>
+                                        
                                     </div>
                                 </li>
                                 <li class="list-group-item">
                                     <div class="media align-items-center">
                                         <div class="media-body">
                                             <p class="small text-muted mb-0">Website</p>
-                                            <p class="mb-0">www.catherichardson.com</p>
+                                            <p class="mb-0">{{friendDetail.website}}</p>
                                         </div>
-                                        <svg class="text-muted hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                        </svg>
-                                        <!-- <img class="injectable text-muted hw-20" src="./../assets/media/heroicons/outline/globe.svg" alt=""> -->
+                                        <Globe  class="injectable text-muted hw-20"></Globe>
+                                        
                                     </div>
                                 </li>
                                 <li class="list-group-item">
                                     <div class="media align-items-center">
                                         <div class="media-body">
                                             <p class="small text-muted mb-0">Address</p>
-                                            <p class="mb-0">1134 Ridder Park Road, San Fransisco, CA 94851</p>
+                                            <p class="mb-0">{{friendDetail.address}}</p>
                                         </div>
-                                        <svg class="text-muted hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-                                        </svg>
-                                        <!-- <img class="injectable text-muted hw-20" src="./../assets/media/heroicons/outline/home.svg" alt=""> -->
+                                        <Home  class="injectable text-muted hw-20"></Home>
+                                        
                                     </div>
                                 </li>
                             </ul>
@@ -149,52 +128,40 @@
                                     <div class="media align-items-center">
                                         <div class="media-body">
                                             <p class="small text-muted mb-0">Facebook</p>
-                                            <a class="font-size-sm font-weight-medium" href="#">@cathe.richardson</a>
+                                            <a class="font-size-sm font-weight-medium" target="_blank" :href=friendDetail.facebook_url>{{friendDetail.facebook_url}}</a>
                                         </div>
-                                        <svg class="text-muted hw-20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-                                        </svg>
-                                        <!-- <img class="injectable text-muted hw-20" src="./../assets/media/icons/facebook.svg" alt=""> -->
+                                        <Facebook class="injectable text-muted hw-20"></Facebook>
+                                        
                                     </div>
                                 </li>
                                 <li class="list-group-item">
                                     <div class="media align-items-center">
                                         <div class="media-body">
                                             <p class="small text-muted mb-0">Twitter</p>
-                                            <a class="font-size-sm font-weight-medium" href="#">@cathe.richardson</a>
+                                            <a class="font-size-sm font-weight-medium" target="_blank"  :href=friendDetail.twitter_url>{{friendDetail.twitter_url}}</a>
                                         </div>
-                                        <svg class="text-muted hw-20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
-                                        </svg>
-                                        <!-- <img class="injectable text-muted hw-20" src="./../assets/media/icons/twitter.svg" alt=""> -->
+                                        <Twitter class="injectable text-muted hw-20"></Twitter>
+                                        
                                     </div>
                                 </li>
                                 <li class="list-group-item">
                                     <div class="media align-items-center">
                                         <div class="media-body">
                                             <p class="small text-muted mb-0">Instagram</p>
-                                            <a class="font-size-sm font-weight-medium" href="#">@cathe.richardson</a>
+                                            <a class="font-size-sm font-weight-medium" target="_blank"  :href=friendDetail.instagram_url>{{friendDetail.instagram_url}}</a>
                                         </div>
-                                        <svg class="text-muted hw-20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-                                        </svg>
-                                        <!-- <img class="injectable text-muted hw-20" src="./../assets/media/icons/instagram.svg" alt=""> -->
+                                        <Instagram class="injectable text-muted hw-20"></Instagram>
+                                        
                                     </div>
                                 </li>
                                 <li class="list-group-item">
                                     <div class="media align-items-center">
                                         <div class="media-body">
                                             <p class="small text-muted mb-0">Linkedin</p>
-                                            <a class="font-size-sm font-weight-medium" href="#">@cathe.richardson</a>
+                                            <a class="font-size-sm font-weight-medium" target="_blank" :href=friendDetail.linkedin_url>{{friendDetail.linkedin_url}}</a>
                                         </div>
-                                        <svg class="text-muted hw-20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                                            <rect x="2" y="9" width="4" height="12" />
-                                            <circle cx="4" cy="4" r="2" />
-                                        </svg>
-                                        <!-- <img class="injectable text-muted hw-20" src="./../assets/media/icons/linkedin.svg" alt=""> -->
+                                        <LinkedIn class="injectable text-muted hw-20"></LinkedIn>
+                                        
                                     </div>
                                 </li>
                             </ul>
@@ -217,9 +184,18 @@
     import  timeAgo from '../../Config/timeAgo'
     import timeDiff from "../../Config/timeDiff";
     import ArrowLeft from "../../assets/media/heroicons/outline/arrow-left.svg";
-
+    import ChatIcon from "../../assets/media/heroicons/outline/chat.svg";
+    import Phone from "../../assets/media/heroicons/outline/phone.svg";
+    import Clock from "../../assets/media/heroicons/outline/clock.svg";
+    import Calender from "../../assets/media/heroicons/outline/calendar.svg";
     import DropdownWithSlot from "../Base/DropdownWithSlot.vue";
-
+    import Email from "../../assets/media/heroicons/outline/mail.svg";
+    import Globe from "../../assets/media/heroicons/outline/globe.svg";
+    import Home from "../../assets/media/heroicons/outline/home.svg";
+    import Facebook from "../../assets/media/icons/facebook.svg";
+    import Twitter from "../../assets/media/icons/twitter.svg";
+    import Instagram from "../../assets/media/icons/instagram.svg";
+    import LinkedIn from "../../assets/media/icons/linkedin.svg";
     export default defineComponent({
         name: 'Friend',
         props: {
@@ -228,13 +204,23 @@
         components : {
             DropdownWithSlot,
             ArrowLeft,
-
+            ChatIcon,
+            Phone,
+            Clock,
+            Calender,
+            Email,
+            Globe,
+            Home,
+            Facebook,
+            Twitter,
+            Instagram,
+            LinkedIn
         },
         setup: () => {
             const store = useStore();
             const friendDetail = computed(() => store.getters.currentFriend);
 
-            function clearCallLogs()
+            function removeUser()
             {
                 console.log("Clear call logs functionality will goes here")
             }
@@ -243,7 +229,7 @@
             {
                 console.log("Block user functionality will goes here")
             }
-            return {friendDetail,clearCallLogs,blockUser,timeAgo,timeDiff}
+            return {friendDetail,removeUser,blockUser,timeAgo,timeDiff}
         },
         methods : {
 

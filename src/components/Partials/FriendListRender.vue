@@ -1,4 +1,5 @@
 <template>
+    
     <ul class="contacts-list" id="friendsTab">
 
         <li class="" v-for="friend in friendsList">
@@ -49,7 +50,7 @@
 
             const store = useStore();
             const friendId = ref(null);
-            const currentFriend = ref(store.state.currentFriend);
+            const currentFriend = ref(store.getters.currentFriend);
 
             function openCall(conversation : object) :void
                 {
@@ -59,7 +60,7 @@
                     store.dispatch(ActionTypes.LOAD_FRIEND, conversation);
 
                 }
-            return {timeAgo,openCall,friendId}
+            return {timeAgo,openCall,friendId,currentFriend}
         }
     })
 </script>

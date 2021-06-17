@@ -1,5 +1,4 @@
 <template>
-    {{currentFriend}}
     <EmptyChat v-if="isEmpty"></EmptyChat>
     <Friend v-if="!isEmpty"></Friend>
 </template>
@@ -25,11 +24,13 @@
             const count = ref(store.state);
 
             const currentFriend = computed(() => store.getters.currentFriend);
+            
             const isEmpty = computed(() => {
                 return Object.keys( currentFriend.value ).length == 0
             })
             return {
-                isEmpty
+                isEmpty,
+                currentFriend
                 }
         },
         methods : {
