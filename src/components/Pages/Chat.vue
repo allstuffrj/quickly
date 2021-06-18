@@ -4,7 +4,7 @@
 </template>
 
 <script lang="ts">
-    import { ref, defineComponent,onUnmounted } from 'vue'
+    import {ref, defineComponent, onUnmounted, onMounted} from 'vue'
     import ChatList from "../sidebar/ChatList.vue";
     import ChatHistory from "../Partials/ChatHistory.vue";
     import { useStore, MutationTypes,ActionTypes } from "../../store";
@@ -19,9 +19,14 @@
         },
         setup: () => {
             const store = useStore();
+            onMounted(()=>{
+
+                document.body.classList.add('chats-tab-open')
+            })
             onUnmounted(()=>{
                     store.dispatch(ActionTypes.LOAD_SEARCHTEXT, '');
                     store.commit(MutationTypes.LOAD_CONVERSATION, {});
+                document.body.classList.remove('chats-tab-open')
             })
         }
     })

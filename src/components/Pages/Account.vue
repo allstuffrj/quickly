@@ -21,10 +21,11 @@
             const store = useStore();
             onMounted(()=>{
                     store.dispatch(ActionTypes.LOAD_USERDETAIL);
+                document.body.classList.add('profile-tab-open')
             })
 
             onUnmounted(()=>{
-
+                document.body.classList.remove('profile-tab-open')
             })
 
         }

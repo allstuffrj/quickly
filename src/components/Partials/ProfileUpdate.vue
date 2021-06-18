@@ -5,10 +5,8 @@
 
             <!-- Chat Back Button (Visible only in Small Devices) -->
             <button class="btn btn-secondary btn-icon btn-minimal btn-sm text-muted d-xl-none" type="button" data-close="">
-                <svg class="hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-                </svg>
-                <!-- <img class="injectable hw-20" src="./../assets/media/heroicons/outline/arrow-left.svg" alt=""> -->
+                <ArrowLeft class="injectable hw-20"></ArrowLeft>
+
             </button>
 
             <div class="pl-2 pl-xl-0">
@@ -29,46 +27,96 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="firstName">First Name</label>
-                                        <input type="text" class="form-control form-control-md" id="firstName" placeholder="Type your first name" value="Catherine">
-                                    </div>
+
+
+                                        <my-input
+                                                name="first_name"
+                                                label="First Name"
+                                                :rules="{ required: true, min: 2 }"
+                                                :value="accountpersonal.first_name"
+                                                @update="update"
+                                                type="text"
+                                                inpclass="form-control form-control-md"
+                                                placeholder="Type your first name"
+                                        />
+
                                 </div>
                                 <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="lastName">Last Name</label>
-                                        <input type="text" class="form-control form-control-md" id="lastName" placeholder="Type your last name" value="Richardson">
-                                    </div>
+                                    <my-input
+                                            name="last_name"
+                                            label="Last Name"
+                                            :rules="{ required: true, min: 2 }"
+                                            :value="accountpersonal.last_name"
+                                            @update="update"
+                                            type="text"
+                                            inpclass="form-control form-control-md"
+                                            placeholder="Type your last name"
+                                    />
                                 </div>
                                 <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="mobileNumber">Mobile number</label>
-                                        <input type="text" class="form-control form-control-md" id="mobileNumber" placeholder="Type your mobile number" value="+01-222-364522">
-                                    </div>
+
+                                    <my-input
+                                            name="phone"
+                                            label="Mobile number"
+                                            :rules="{ required: true, min: 2 }"
+                                            :value="accountpersonal.phone"
+                                            @update="update"
+                                            type="text"
+                                            inpclass="form-control form-control-md"
+                                            placeholder="Type your mobile number"
+                                    />
                                 </div>
                                 <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="birthDate">Birth date</label>
-                                        <input type="text" class="form-control form-control-md" id="birthDate" placeholder="dd/mm/yyyy" value="20/11/1992">
-                                    </div>
+
+                                    <my-input
+                                            name="birth_date"
+                                            label="Birth date"
+                                            :rules="{ required: true }"
+                                            :value="accountpersonal.birth_date"
+                                            @update="update"
+                                            type="date"
+                                            inpclass="form-control form-control-md"
+                                            placeholder="dd/mm/yyyy"
+                                    />
                                 </div>
                                 <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="emailAddress">Email address</label>
-                                        <input type="email" class="form-control form-control-md" id="emailAddress" placeholder="Type your email address" value="catherine.richardson@gmail.com">
-                                    </div>
+
+                                    <my-input
+                                            name="email"
+                                            label="Email"
+                                            :rules="{ required: true }"
+                                            :value="accountpersonal.email"
+                                            @update="update"
+                                            type="email"
+                                            inpclass="form-control form-control-md"
+                                            placeholder="Type your email address"
+                                    />
                                 </div>
                                 <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="webSite">Website</label>
-                                        <input type="text" class="form-control form-control-md" id="webSite" placeholder="Type your website" value="www.catherichardson.com">
-                                    </div>
+
+                                    <my-input
+                                            name="website"
+                                            label="Website"
+                                            :rules="{ required: true }"
+                                            :value="accountpersonal.website"
+                                            @update="update"
+                                            type="text"
+                                            inpclass="form-control form-control-md"
+                                            placeholder="Type your website"
+                                    />
                                 </div>
                                 <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="Address">Address</label>
-                                        <input type="text" class="form-control form-control-md" id="Address" placeholder="Type your address" value="1134 Ridder Park Road, San Fransisco, CA 94851">
-                                    </div>
+
+                                    <my-input
+                                            name="address"
+                                            label="Address"
+                                            :rules="{ required: true }"
+                                            :value="accountpersonal.address"
+                                            @update="update"
+                                            type="text"
+                                            inpclass="form-control form-control-md"
+                                            placeholder="Type your address"
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -316,27 +364,40 @@
 
 <script lang="ts">
 
-    import { ref, defineComponent,computed } from 'vue'
-
+    import { ref, defineComponent,computed,reactive } from 'vue'
+    import ArrowLeft from '../../assets/media/heroicons/outline/arrow-left.svg';
     import { useStore, MutationTypes, ActionTypes } from "../../store";
-
+    import MyInput from "../Base/MyInput.vue";
     export default defineComponent({
         name: 'ProfileUpdate',
         props: {
 
         },
         components : {
-
+            MyInput
         },
         setup: () => {
             const store = useStore();
             const count = ref(store.state);
+            const accountpersonal = reactive({
+                first_name : '',
+                last_name : '',
+                phone : '',
+                birth_date : '',
+                email : '',
+                website : '',
+                address : '',
+            });
 
             const currentUser = computed(() => store.getters.currentUser);
-
+            function update(payload: Object) :void {
+                accountpersonal[payload.name] = payload.value
+            }
 
             return {
-                currentUser
+                currentUser,
+                accountpersonal,
+                update
                 }
         },
         methods : {
