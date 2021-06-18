@@ -236,23 +236,3 @@ export const store = createStore({
 export function useStore() {
     return store as Store;
 }
-// export const store = createStore({
-//   state,
-//   mutations: {
-//     increment(state, payload) {
-//       state.counter++;
-//     }
-//   },
-//   actions: {
-//     increment({ commit }) {
-//       commit("increment");
-//     }
-//   },
-
-//   getters: {
-//     counter(state) {
-//       return state.counter;
-//     }
-//   },
-//   modules: {}
-// });

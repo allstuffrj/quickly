@@ -1,6 +1,7 @@
 {
   "uuid": "ea519128-972d-4081-8378-5b72dff6b8c8",
   "name": "Catherine Richardson",
+  "type" : "friend", 
   "avatar": "uploads/avatar/3.png",
   "status": "online",
   "location" : "San Fransisco, CA",

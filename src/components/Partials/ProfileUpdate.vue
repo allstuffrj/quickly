@@ -137,26 +137,58 @@
                             <div class="row">
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        <label for="facebookId">Facebook</label>
-                                        <input type="text" class="form-control form-control-md" id="facebookId" placeholder="Username">
+                                        
+                                        <my-input
+                                            name="facebook"
+                                            label="Facebook"
+                                            :value="socialDetail.facebook"
+                                            @update="updateSocial"
+                                            type="text"
+                                            inpclass="form-control form-control-md"
+                                            placeholder="Facebook username"
+                                    />
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        <label for="twitterId">Twitter</label>
-                                        <input type="text" class="form-control form-control-md" id="twitterId" placeholder="Username">
+                                        
+                                        <my-input
+                                            name="twitter"
+                                            label="Twitter"
+                                            :value="socialDetail.twitter"
+                                            @update="updateSocial"
+                                            type="text"
+                                            inpclass="form-control form-control-md"
+                                            placeholder="Twitter username"
+                                    />
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        <label for="instagramId">Instagram</label>
-                                        <input type="text" class="form-control form-control-md" id="instagramId" placeholder="Username">
+                                        
+                                        <my-input
+                                            name="instagram"
+                                            label="Instagram"
+                                            :value="socialDetail.instagram"
+                                            @update="updateSocial"
+                                            type="text"
+                                            inpclass="form-control form-control-md"
+                                            placeholder="Instagram username"
+                                    />
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        <label for="linkedinId">Linkedin</label>
-                                        <input type="text" class="form-control form-control-md" id="linkedinId" placeholder="Username">
+                                        
+                                        <my-input
+                                            name="linkedin"
+                                            label="LinkedIn"
+                                            :value="socialDetail.linkedin"
+                                            @update="updateSocial"
+                                            type="text"
+                                            inpclass="form-control form-control-md"
+                                            placeholder="LinkedIn username"
+                                    />
                                     </div>
                                 </div>
                             </div>
@@ -389,15 +421,33 @@
                 address : '',
             });
 
+            const socialDetail = reactive({
+                 facebook: '',
+                twitter : '',
+                linkedin : '',
+                instagram : ''
+            });
+
+            const changePassword = reactive({
+                 old_password: '',
+                new_password : '',
+                confirm_password : ''
+            });
+
             const currentUser = computed(() => store.getters.currentUser);
             function update(payload: Object) :void {
                 accountpersonal[payload.name] = payload.value
+            }
+            function updateSocial(payload: Object) :void {
+                socialDetail[payload.name] = payload.value
             }
 
             return {
                 currentUser,
                 accountpersonal,
-                update
+                update,
+                socialDetail,
+                changePassword
                 }
         },
         methods : {
