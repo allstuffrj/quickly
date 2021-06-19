@@ -1,5 +1,5 @@
 <template>
-    <main class="main main-visible">
+    <main class="main " :class="[{'main-visible':currentMainVisible}]">
 
         <!-- Chats Page Start -->
         <div class="chats">
@@ -22,12 +22,13 @@
 
 <script lang="ts">
 
-    import { ref, defineComponent,onMounted,watch,reactive } from 'vue'
+    import {ref, defineComponent, onMounted, watch, reactive, computed} from 'vue'
     import ChatHeader from "./ChatScreen/ChatHeader.vue";
     import ChatContent from "./ChatScreen/ChatContent.vue";
     import ChatSearch from "./ChatScreen/ChatSearch.vue";
     import ChatFooter from "./ChatScreen/ChatFooter.vue";
     import ChatInfo from "./ChatScreen/ChatInfo.vue";
+    import {useStore} from "../../store";
     export default defineComponent({
         name: 'Conversation',
         props: {
@@ -44,7 +45,9 @@
             ChatInfo
         },
         setup: () => {
-
+            const store = useStore();
+            const currentMainVisible = computed(() => store.getters.currentMainVisible);
+            return {currentMainVisible}
         },
         methods : {
 

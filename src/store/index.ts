@@ -12,10 +12,10 @@ import {
 import Friends from "../Services/Friends";
 import Calls from "../Services/Calls";
 //declare state
-export type State = { currentConversation: Object, showChatSearch : Boolean,showChatInfo : Boolean,searchText : String, currentCall :Object,currentFriend : Object,currentUser : Object };
+export type State = { currentConversation: Object, showChatSearch : Boolean,showChatInfo : Boolean,searchText : String, currentCall :Object,currentFriend : Object,currentUser : Object,mainVisible : Boolean };
 
 //set state
-const state: State = { currentConversation: {}, showChatSearch : false , searchText: '',showChatInfo:false,currentCall:{},currentFriend:{},currentUser:{} };
+const state: State = { currentConversation: {}, showChatSearch : false , searchText: '',showChatInfo:false,currentCall:{},currentFriend:{},currentUser:{},mainVisible:true };
 
 // mutations and action enums
 
@@ -23,6 +23,7 @@ export enum MutationTypes {
     LOAD_CONVERSATION = "SET_CONVERSATION",
     SHOW_CHATSEARCH = "SET_SHOWCHATSEARCH",
     SHOW_CHATINFO = "SET_SHOWCHATINFO",
+    SHOW_MAINWINDOW = "SET_MAINWINDOW",
     LOAD_SEARCHTEXT = "SET_SEARCHTEXT",
     LOAD_CALLHISTORY = "SET_CALLHISTORY",
     LOAD_FRIEND = "SET_FRIEND",
@@ -43,6 +44,7 @@ export type Mutations<S = State> = {
     [MutationTypes.LOAD_CALLHISTORY](state: S, payload: Object): void;
     [MutationTypes.LOAD_FRIEND](state: S, payload: Object): void;
     [MutationTypes.LOAD_USER](state: S, payload: Object): void;
+    [MutationTypes.SHOW_MAINWINDOW](state: S, payload: Boolean): void;
     [MutationTypes.SHOW_CHATSEARCH](state: S, payload: Boolean): void;
     [MutationTypes.SHOW_CHATINFO](state: S, payload: Boolean): void;
     [MutationTypes.LOAD_SEARCHTEXT](state: S, payload: String): void;
@@ -71,6 +73,9 @@ const mutations: MutationTree<State> & Mutations = {
     },
     [MutationTypes.SHOW_CHATSEARCH](state: State, payload: Boolean) {
         state.showChatSearch = payload;
+    },
+    [MutationTypes.SHOW_MAINWINDOW](state: State, payload: Boolean) {
+        state.mainVisible = payload;
     },
     [MutationTypes.SHOW_CHATINFO](state: State, payload: Boolean) {
         state.showChatInfo = payload;
@@ -173,6 +178,7 @@ export type Getters = {
     currentFriend(state: State): Object;
     currentUser(state: State): Object;
     currentShowChatSearch(state: State) : Boolean;
+    currentMainVisible(state: State) : Boolean;
     currentShowChatInfo(state: State) : Boolean;
     currentSearchText(state: State) : String;
 };
@@ -194,6 +200,9 @@ export const getters: GetterTree<State, State> & Getters = {
     },
     currentShowChatSearch: state => {
         return state.showChatSearch;
+    },
+    currentMainVisible: state => {
+        return state.mainVisible;
     },
     currentShowChatInfo: state => {
         return state.showChatInfo;

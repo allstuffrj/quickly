@@ -1,11 +1,7 @@
 <template>
     <!-- Chat Header Start-->
     <div class="chat-header">
-        <!-- Chat Back Button (Visible only in Small Devices) -->
-        <button class="btn btn-secondary btn-icon btn-minimal btn-sm text-muted d-xl-none" type="button" data-close="">
-            <ArrowLeft class="injectable hw-20"></ArrowLeft>
-        </button>
-
+        <MobileNavigationArrow></MobileNavigationArrow>
         <!-- Chat participant's Name -->
         <div class="media chat-name align-items-center text-truncate">
             <div class="avatar  d-none d-sm-inline-block mr-3" :class="'avatar-'+currentConversation.status">
@@ -163,7 +159,7 @@
     import Ban from '../../../assets/media/heroicons/outline/ban.svg';
     import DropdownWithSlot from "../../Base/DropdownWithSlot.vue";
     import { useStore,MutationTypes } from "../../../store";
-
+    import MobileNavigationArrow from "../MobileNavigationArrow.vue";
     export default defineComponent({
         name: 'ChatHeader',
         props: {
@@ -180,7 +176,8 @@
             Archive,
             Trash,
             Ban,
-            DropdownWithSlot
+            DropdownWithSlot,
+            MobileNavigationArrow
         },
         setup: () => {
 

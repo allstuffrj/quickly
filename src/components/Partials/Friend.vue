@@ -1,5 +1,5 @@
 <template>
-    <main class="main main-visible">
+    <main class="main " :class="[{'main-visible':currentMainVisible}]">
 
         <div class="friends px-0 py-2 p-xl-3">
             <div class="container-xl">
@@ -16,11 +16,11 @@
                                     <div class="d-flex mt-2">
                                         <div class="btn btn-primary btn-icon rounded-circle text-light mx-2">
                                             <ChatIcon class="injectable hw-24"></ChatIcon>
-                                            
+
                                         </div>
                                         <div class="btn btn-success btn-icon rounded-circle text-light mx-2">
                                             <Phone class="injectable hw-24"></Phone>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -40,15 +40,11 @@
                                         <a class="dropdown-item" href="javascript:void(0)" @click="blockUser()">Block</a>
                                     </template>
                                 </DropdownWithSlot>
-                                
+
                             </div>
 
                             <div class="chat-closer d-xl-none">
-                                <!-- Chat Back Button (Visible only in Small Devices) -->
-                                <button class="btn btn-secondary btn-icon btn-minimal btn-sm text-muted" type="button" data-close="">
-                                    <ArrowLeft class="injectable hw-20"></ArrowLeft>
-                                    
-                                </button>
+                                <MobileNavigationArrow></MobileNavigationArrow>
                             </div>
                         </div>
                     </div>
@@ -65,7 +61,7 @@
                                             <p class="mb-0">{{friendDetail.local_time}}</p>
                                         </div>
                                         <Clock  class="injectable text-muted hw-20"></Clock>
-                                        
+
                                     </div>
                                 </li>
                                 <li class="list-group-item">
@@ -75,7 +71,7 @@
                                             <p class="mb-0">{{friendDetail.birth_date}}</p>
                                         </div>
                                         <Calender class="injectable text-muted hw-20" ></Calender>
-                                        
+
                                     </div>
                                 </li>
                                 <li class="list-group-item">
@@ -85,7 +81,7 @@
                                             <p class="mb-0">{{friendDetail.phone}}</p>
                                         </div>
                                         <Phone class="injectable text-muted hw-20"></Phone>
-                                        
+
                                     </div>
                                 </li>
                                 <li class="list-group-item">
@@ -95,7 +91,7 @@
                                             <p class="mb-0">{{friendDetail.email}}</p>
                                         </div>
                                         <Email  class="injectable text-muted hw-20"></Email>
-                                        
+
                                     </div>
                                 </li>
                                 <li class="list-group-item">
@@ -105,7 +101,7 @@
                                             <p class="mb-0">{{friendDetail.website}}</p>
                                         </div>
                                         <Globe  class="injectable text-muted hw-20"></Globe>
-                                        
+
                                     </div>
                                 </li>
                                 <li class="list-group-item">
@@ -115,7 +111,7 @@
                                             <p class="mb-0">{{friendDetail.address}}</p>
                                         </div>
                                         <Home  class="injectable text-muted hw-20"></Home>
-                                        
+
                                     </div>
                                 </li>
                             </ul>
@@ -131,7 +127,7 @@
                                             <a class="font-size-sm font-weight-medium" target="_blank" :href=friendDetail.facebook_url>{{friendDetail.facebook_url}}</a>
                                         </div>
                                         <Facebook class="injectable text-muted hw-20"></Facebook>
-                                        
+
                                     </div>
                                 </li>
                                 <li class="list-group-item">
@@ -141,7 +137,7 @@
                                             <a class="font-size-sm font-weight-medium" target="_blank"  :href=friendDetail.twitter_url>{{friendDetail.twitter_url}}</a>
                                         </div>
                                         <Twitter class="injectable text-muted hw-20"></Twitter>
-                                        
+
                                     </div>
                                 </li>
                                 <li class="list-group-item">
@@ -151,7 +147,7 @@
                                             <a class="font-size-sm font-weight-medium" target="_blank"  :href=friendDetail.instagram_url>{{friendDetail.instagram_url}}</a>
                                         </div>
                                         <Instagram class="injectable text-muted hw-20"></Instagram>
-                                        
+
                                     </div>
                                 </li>
                                 <li class="list-group-item">
@@ -161,7 +157,7 @@
                                             <a class="font-size-sm font-weight-medium" target="_blank" :href=friendDetail.linkedin_url>{{friendDetail.linkedin_url}}</a>
                                         </div>
                                         <LinkedIn class="injectable text-muted hw-20"></LinkedIn>
-                                        
+
                                     </div>
                                 </li>
                             </ul>
@@ -196,6 +192,7 @@
     import Twitter from "../../assets/media/icons/twitter.svg";
     import Instagram from "../../assets/media/icons/instagram.svg";
     import LinkedIn from "../../assets/media/icons/linkedin.svg";
+    import MobileNavigationArrow from "./MobileNavigationArrow.vue";
     export default defineComponent({
         name: 'Friend',
         props: {
@@ -214,10 +211,13 @@
             Facebook,
             Twitter,
             Instagram,
-            LinkedIn
+            LinkedIn,
+            MobileNavigationArrow
         },
         setup: () => {
             const store = useStore();
+            const currentMainVisible = computed(() => store.getters.currentMainVisible);
+
             const friendDetail = computed(() => store.getters.currentFriend);
 
             function removeUser()
@@ -229,7 +229,7 @@
             {
                 console.log("Block user functionality will goes here")
             }
-            return {friendDetail,removeUser,blockUser,timeAgo,timeDiff}
+            return {friendDetail,removeUser,blockUser,timeAgo,timeDiff,currentMainVisible}
         },
         methods : {
 

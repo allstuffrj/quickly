@@ -1,5 +1,5 @@
 <template>
-    <main class="main main-visible">
+    <main class="main " :class="[{'main-visible':currentMainVisible}]">
 
         <div class="calls px-0 py-2 p-xl-3">
             <div class="container-xl">
@@ -42,11 +42,7 @@
                             </div>
 
                             <div class="chat-closer d-xl-none">
-                                <!-- Chat Back Button (Visible only in Small Devices) -->
-                                <button class="btn btn-secondary btn-icon btn-minimal btn-sm text-muted" type="button" data-close="">
-                                    <ArrowLeft class="injectable hw-20"></ArrowLeft>
-
-                                </button>
+                                <MobileNavigationArrow></MobileNavigationArrow>
                             </div>
 
                         </div>
@@ -110,7 +106,7 @@
     import PhoneOutgoing from '../../assets/media/heroicons/solid/phone-outgoing.svg'
     import Phone from '../../assets/media/heroicons/outline/phone.svg'
     import DropdownWithSlot from "../Base/DropdownWithSlot.vue";
-
+    import MobileNavigationArrow from "./MobileNavigationArrow.vue";
     export default defineComponent({
         name: 'CallDetails',
         props: {
@@ -121,10 +117,12 @@
             ArrowLeft,
             PhoneIncoming,
             PhoneOutgoing,
-            Phone
+            Phone,
+            MobileNavigationArrow
         },
         setup: () => {
             const store = useStore();
+            const currentMainVisible = computed(() => store.getters.currentMainVisible);
             const calllogs = computed(() => store.getters.currentCall);
 
             function clearCallLogs()
@@ -136,7 +134,7 @@
             {
                 console.log("Block user functionality will goes here")
             }
-            return {calllogs,clearCallLogs,blockUser,timeAgo,timeDiff}
+            return {calllogs,clearCallLogs,blockUser,timeAgo,timeDiff,currentMainVisible}
         },
         methods : {
 

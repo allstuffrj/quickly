@@ -66,8 +66,10 @@
             function openConversation(conversation : object) :void
                 {
                     convId.value = conversation.uuid;
+                    console.log("openConversation");
                     store.dispatch(ActionTypes.LOAD_SEARCHTEXT, '');
                     store.commit(MutationTypes.SHOW_CHATSEARCH, false);
+                    //store.commit(MutationTypes.SHOW_MAINWINDOW, true);
                     store.dispatch(ActionTypes.LOAD_CONVERSATION, conversation);
 
                 }

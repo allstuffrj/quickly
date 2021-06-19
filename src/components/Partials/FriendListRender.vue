@@ -1,5 +1,5 @@
 <template>
-    
+
     <ul class="contacts-list" id="friendsTab">
 
         <li class="" v-for="friend in friendsList">
@@ -57,6 +57,7 @@
                     friendId.value = conversation.uuid;
                     store.dispatch(ActionTypes.LOAD_SEARCHTEXT, '');
                     store.commit(MutationTypes.SHOW_CHATSEARCH, false);
+                    //store.commit(MutationTypes.SHOW_MAINWINDOW, true);
                     store.dispatch(ActionTypes.LOAD_FRIEND, conversation);
 
                 }

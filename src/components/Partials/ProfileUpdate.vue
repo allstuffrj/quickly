@@ -1,13 +1,9 @@
 <template>
-    <main class="main main-visible">
+    <main class="main " :class="[{'main-visible':currentMainVisible}]">
         <div class="profile">
         <div class="page-main-heading sticky-top py-2 px-3 mb-3">
 
-            <!-- Chat Back Button (Visible only in Small Devices) -->
-            <button class="btn btn-secondary btn-icon btn-minimal btn-sm text-muted d-xl-none" type="button" data-close="">
-                <ArrowLeft class="injectable hw-20"></ArrowLeft>
-
-            </button>
+            <MobileNavigationArrow></MobileNavigationArrow>
 
             <div class="pl-2 pl-xl-0">
                 <h5 class="font-weight-semibold">Settings</h5>
@@ -123,7 +119,8 @@
 
                         <div class="card-footer d-flex justify-content-end">
                             <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
-                            <button type="button" class="btn btn-primary">Save Changes</button>
+                            <button type="button" @click="updateProfileInfo" class="btn btn-primary">Save
+                                Changes</button>
                         </div>
                     </div>
 
@@ -137,7 +134,7 @@
                             <div class="row">
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        
+
                                         <my-input
                                             name="facebook"
                                             label="Facebook"
@@ -151,7 +148,7 @@
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        
+
                                         <my-input
                                             name="twitter"
                                             label="Twitter"
@@ -165,7 +162,7 @@
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        
+
                                         <my-input
                                             name="instagram"
                                             label="Instagram"
@@ -179,7 +176,7 @@
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        
+
                                         <my-input
                                             name="linkedin"
                                             label="LinkedIn"
@@ -196,7 +193,8 @@
 
                         <div class="card-footer d-flex justify-content-end">
                             <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
-                            <button type="button" class="btn btn-primary">Save Changes</button>
+                            <button type="button" @click="updateSocialInfo" class="btn btn-primary">Save
+                                Changes</button>
                         </div>
                     </div>
 
@@ -211,22 +209,45 @@
                                 <div class="row">
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="current-password">Current Password</label>
-                                            <input type="password" class="form-control form-control-md" id="current-password" placeholder="Current password" autocomplete="on">
+                                            <my-input
+                                                    name="current_password"
+                                                    label="Current Password"
+                                                    :value="changePassword.current_password"
+                                                    @update="updatePassword"
+                                                    type="password"
+                                                    inpclass="form-control form-control-md"
+                                                    placeholder="Current Password"
+                                            />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="new-password">New Password</label>
-                                            <input type="password" class="form-control form-control-md" id="new-password" placeholder="New password" autocomplete="off">
+
+                                            <my-input
+                                                    name="new_password"
+                                                    label="New Password"
+                                                    :value="changePassword.new_password"
+                                                    @update="updatePassword"
+                                                    type="password"
+                                                    inpclass="form-control form-control-md"
+                                                    placeholder="New Password"
+                                            />
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="repeat-password">Repeat Password</label>
-                                            <input type="password" class="form-control form-control-md" id="repeat-password" placeholder="Repeat password" autocomplete="off">
+
+                                            <my-input
+                                                    name="confirm_password"
+                                                    label="Repeat Password"
+                                                    :value="changePassword.confirm_password"
+                                                    @update="updatePassword"
+                                                    type="password"
+                                                    inpclass="form-control form-control-md"
+                                                    placeholder="Repeat Password"
+                                            />
                                         </div>
                                     </div>
                                 </div>
@@ -235,7 +256,8 @@
 
                         <div class="card-footer d-flex justify-content-end">
                             <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
-                            <button type="button" class="btn btn-primary">Save Changes</button>
+                            <button type="button" @click="updatePasswordInfo" class="btn btn-primary">Save
+                                Changes</button>
                         </div>
                     </div>
 
@@ -254,16 +276,16 @@
                                             <p class="mb-0">Profile Picture</p>
                                             <p class="small text-muted mb-0">Select who can see my profile picture</p>
                                         </div>
-                                        <div class="dropdown mr-2">
-                                            <button class="btn btn-outline-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Public
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">Public</a>
-                                                <a class="dropdown-item" href="#">Friends</a>
-                                                <a class="dropdown-item" href="#">Selected Friends</a>
-                                            </div>
-                                        </div>
+                                        <Dropdown title="Details" displayType="button" size="mr-2"
+                                                  xplacement="bottom-start"
+                                                  emptyLabel="Public"
+                                                  :options=chatOptions
+                                                  @change="whoCanSeeProfileUpdate" defaultvalue="public"
+                                                  :setActive=true
+                                                  dpclass="dropdown-menu-right"
+                                                  dpstyle="position: absolute; will-change: transform; top: 0px; left: -40px; transform: translate3d(-12px, 37px, 0px);"></Dropdown>
+
+
                                     </div>
                                 </li>
 
@@ -273,16 +295,14 @@
                                             <p class="mb-0">Last Seen</p>
                                             <p class="small text-muted mb-0">Select who can see my last seen</p>
                                         </div>
-                                        <div class="dropdown mr-2">
-                                            <button class="btn btn-outline-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Public
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">Public</a>
-                                                <a class="dropdown-item" href="#">Friends</a>
-                                                <a class="dropdown-item" href="#">Selected Friends</a>
-                                            </div>
-                                        </div>
+                                        <Dropdown title="Details" displayType="button" size="mr-2"
+                                                  xplacement="bottom-start"
+                                                  emptyLabel="Public"
+                                                  :options=chatOptions
+                                                  @change="lastSeenUpdate" defaultvalue="public"
+                                                  :setActive=true
+                                                  dpclass="dropdown-menu-right"
+                                                  dpstyle="position: absolute; will-change: transform; top: 0px; left: -40px; transform: translate3d(-12px, 37px, 0px);"></Dropdown>
                                     </div>
                                 </li>
 
@@ -292,16 +312,15 @@
                                             <p class="mb-0">Groups</p>
                                             <p class="small text-muted mb-0">Select who can add you in groups</p>
                                         </div>
-                                        <div class="dropdown mr-2">
-                                            <button class="btn btn-outline-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Public
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">Public</a>
-                                                <a class="dropdown-item" href="#">Friends</a>
-                                                <a class="dropdown-item" href="#">Selected Friends</a>
-                                            </div>
-                                        </div>
+
+                                        <Dropdown title="Details" displayType="button" size="mr-2"
+                                                  xplacement="bottom-start"
+                                                  emptyLabel="Public"
+                                                  :options=chatOptions
+                                                  @change="whoCanAddInGroupUpdate" defaultvalue="public"
+                                                  :setActive=true
+                                                  dpclass="dropdown-menu-right"
+                                                  dpstyle="position: absolute; will-change: transform; top: 0px; left: -40px; transform: translate3d(-12px, 37px, 0px);"></Dropdown>
                                     </div>
                                 </li>
 
@@ -311,16 +330,15 @@
                                             <p class="mb-0">Status</p>
                                             <p class="small text-muted mb-0">Select who can see my status updates</p>
                                         </div>
-                                        <div class="dropdown mr-2">
-                                            <button class="btn btn-outline-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Public
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">Public</a>
-                                                <a class="dropdown-item" href="#">Friends</a>
-                                                <a class="dropdown-item" href="#">Selected Friends</a>
-                                            </div>
-                                        </div>
+                                        <Dropdown title="Details" displayType="button" size="mr-2"
+                                                  xplacement="bottom-start"
+                                                  emptyLabel="Public"
+                                                  :options=chatOptions
+                                                  @change="whoCanSeeStatusUpdate" defaultvalue="public"
+                                                  :setActive=true
+                                                  dpclass="dropdown-menu-right"
+                                                  dpstyle="position: absolute; will-change: transform; top: 0px; left: -40px; transform: translate3d(-12px, 37px, 0px);"></Dropdown>
+
                                     </div>
                                 </li>
 
@@ -331,8 +349,9 @@
                                             <p class="small text-muted mb-0">If turn off this option you won't be able to see read recipts</p>
                                         </div>
                                         <div class="custom-control custom-switch mr-2">
-                                            <input type="checkbox" class="custom-control-input" id="readReceiptsSwitch" checked="">
-                                            <label class="custom-control-label" for="readReceiptsSwitch">&nbsp;</label>
+                                            <input type="checkbox" class="custom-control-input" id="readReceipts"
+                                                   :checked="readReceipt"  v-model="readReceipt" >
+                                            <label class="custom-control-label" for="readReceipts">&nbsp;</label>
                                         </div>
                                     </div>
                                 </li>
@@ -342,7 +361,8 @@
 
                         <div class="card-footer d-flex justify-content-end">
                             <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
-                            <button type="button" class="btn btn-primary">Save Changes</button>
+                            <button type="button" @click="updatePrivacySettings" class="btn btn-primary">Save
+                                Changes</button>
                         </div>
                     </div>
 
@@ -361,7 +381,8 @@
                                             <p class="small text-muted mb-0">Ask for a code if attempted login from an unrecognised device or browser.</p>
                                         </div>
                                         <div class="custom-control custom-switch mr-2">
-                                            <input type="checkbox" class="custom-control-input" id="twoFactorSwitch" checked="">
+                                            <input type="checkbox" class="custom-control-input" id="twoFactorSwitch"
+                                                   :checked="twofactor"  v-model="twofactor">
                                             <label class="custom-control-label" for="twoFactorSwitch">&nbsp;</label>
                                         </div>
                                     </div>
@@ -373,7 +394,8 @@
                                             <p class="small text-muted mb-0">You will be notified if anyone logs in from a device or browser you don't usually use</p>
                                         </div>
                                         <div class="custom-control custom-switch mr-2">
-                                            <input type="checkbox" class="custom-control-input" id="unrecognisedSwitch" checked="">
+                                            <input type="checkbox" class="custom-control-input"
+                                                   id="unrecognisedSwitch" :checked="unrecognised"  v-model="unrecognised">
                                             <label class="custom-control-label" for="unrecognisedSwitch">&nbsp;</label>
                                         </div>
                                     </div>
@@ -384,7 +406,8 @@
 
                         <div class="card-footer d-flex justify-content-end">
                             <button class="btn btn-link text-muted mx-1">Reset</button>
-                            <button class="btn btn-primary" type="button">Save Changes</button>
+                            <button class="btn btn-primary" @click="updateSecurityInfo" type="button">Save
+                                Changes</button>
                         </div>
                     </div>
                 </div>
@@ -400,17 +423,25 @@
     import ArrowLeft from '../../assets/media/heroicons/outline/arrow-left.svg';
     import { useStore, MutationTypes, ActionTypes } from "../../store";
     import MyInput from "../Base/MyInput.vue";
+    import Dropdown from '../Base/Dropdown.vue';
+    import MobileNavigationArrow from "./MobileNavigationArrow.vue";
     export default defineComponent({
         name: 'ProfileUpdate',
         props: {
 
         },
         components : {
-            MyInput
+            MyInput,
+            ArrowLeft,
+            Dropdown,
+            MobileNavigationArrow
         },
         setup: () => {
             const store = useStore();
             const count = ref(store.state);
+            const readReceipt = ref(true);
+            const unrecognised = ref(true);
+            const twofactor = ref(true);
             const accountpersonal = reactive({
                 first_name : '',
                 last_name : '',
@@ -429,25 +460,116 @@
             });
 
             const changePassword = reactive({
-                 old_password: '',
+                 current_password: '',
                 new_password : '',
                 confirm_password : ''
             });
 
+            const privacyInfo = reactive({
+                whocanseeprofilepic: '',
+                whocanseelastseen : '',
+                whocanaddingroup : '',
+                whocanseestatus : ''
+
+            });
             const currentUser = computed(() => store.getters.currentUser);
+            const currentMainVisible = computed(() => store.getters.currentMainVisible);
             function update(payload: Object) :void {
                 accountpersonal[payload.name] = payload.value
             }
             function updateSocial(payload: Object) :void {
                 socialDetail[payload.name] = payload.value
             }
+            function updatePassword(payload: Object) :void {
+                changePassword[payload.name] = payload.value
+            }
+            const chatOptions= [
+                {
+                    value : 'public',
+                    label : 'Public'
+                },
+                {
+                    value : 'friend',
+                    label : 'Friend'
+                },
+                {
+                    value : 'selected-friends',
+                    label : 'Selected Friends'
+                }
+            ];
 
+            function whoCanSeeProfileUpdate(option : Object) :void
+            {
+                privacyInfo.whocanseeprofilepic = option.value
+            }
+
+            function whoCanSeeStatusUpdate(option : Object) :void
+            {
+                privacyInfo.whocanseelastseen = option.value
+            }
+
+            function whoCanAddInGroupUpdate(option : Object) :void
+            {
+                privacyInfo.whocanaddingroup = option.value
+            }
+
+            function lastSeenUpdate(option : Object) :void
+            {
+                privacyInfo.whocanseestatus = option.value
+            }
+
+            function updateProfileInfo()
+            {
+                console.log("In updateProfileInfo call")
+            }
+            function updatePrivacySettings()
+            {
+                console.log(privacyInfo)
+                console.log(readReceipt.value)
+
+            }
+
+            function updateSecurityInfo()
+            {
+                console.log("Update security Info");
+                console.log(twofactor.value)
+                console.log(unrecognised.value)
+            }
+
+            function updateSocialInfo()
+            {
+                console.log("updateSocialInfo");
+
+            }
+
+            function updatePasswordInfo()
+            {
+                console.log("updatePasswordInfo");
+                console.log(changePassword);
+
+            }
             return {
                 currentUser,
                 accountpersonal,
                 update,
                 socialDetail,
-                changePassword
+                changePassword,
+                updateSocial,
+                updatePassword,
+                chatOptions,
+                whoCanSeeProfileUpdate,
+                whoCanSeeStatusUpdate,
+                whoCanAddInGroupUpdate,
+                lastSeenUpdate,
+                readReceipt,
+                twofactor,
+                unrecognised,
+                updatePrivacySettings,
+                updateSecurityInfo,
+                updateProfileInfo,
+                updateSocialInfo,
+                updatePasswordInfo,
+                currentMainVisible
                 }
         },
         methods : {
