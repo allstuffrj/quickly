@@ -57,7 +57,7 @@
                     friendId.value = conversation.uuid;
                     store.dispatch(ActionTypes.LOAD_SEARCHTEXT, '');
                     store.commit(MutationTypes.SHOW_CHATSEARCH, false);
-                    //store.commit(MutationTypes.SHOW_MAINWINDOW, true);
+                    store.commit(MutationTypes.SHOW_MAINWINDOW, true);
                     store.dispatch(ActionTypes.LOAD_FRIEND, conversation);
 
                 }

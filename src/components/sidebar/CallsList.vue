@@ -14,7 +14,7 @@
                                 <Dropdown title="Details" :displayType=dpDisplayType :size=dpsize :xplacement=xplacement
                                           :emptyLabel=emptyLabel
                                           :options=options
-                                          @change="dpChangeHandler" :defaultvalue=defaultvalue></Dropdown>
+                                          @change="dpChangeHandler" :defaultvalue=defaultvalue dpstyle="position: absolute; transform: translate3d(0px, 37px, 0px); top: 0px; left: 0px; will-change: transform;"></Dropdown>
 
                                 <SerachForm v-model="searchInput"></SerachForm>
                             </div>

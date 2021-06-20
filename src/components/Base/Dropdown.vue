@@ -9,7 +9,8 @@
             {{emptyLabel}}
         </button>
 
-        <a v-if="displayType == 'kebab'" v-click-outside="onClickOutside" @click="handleToggle"  class="nav-link text-muted px-1" href="#"
+        <a v-if="displayType == 'kebab'" v-click-outside="onClickOutside" @click="handleToggle"
+           class="nav-link text-muted px-1" href="javascript:void(0)"
            role="button" :title=title
            data-toggle="dropdown" aria-haspopup="true" aria-expanded=checkIsOpen>
             <!-- Default :: Inline SVG -->
@@ -30,7 +31,7 @@
             options" data-chat-filter=""
                @click="handleSelection(i)"
                :data-select=option.value
-               href="#"> {{option.label}}</a>
+               href="javascript:void(0)"> {{option.label}}</a>
 
         </div>
         <!-- Dropdown Menu End -->
@@ -128,6 +129,7 @@
 
                   function handleSelection(selectedVal : number) :void
                   {
+
                       let selectOp = this.options[selectedVal];
                         if(props.setActive)
                         {

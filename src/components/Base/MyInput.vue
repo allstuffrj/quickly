@@ -1,7 +1,7 @@
 <template>
     <div class="form-group">
         <div class="label">
-            <label :for="name">{{ label }}</label>
+            <label :for="name" :class=labelcalss>{{ label }}</label>
 
         </div>
         <input
@@ -44,6 +44,9 @@
             },
             placeholder: {
                 type: String
+            },
+            labelcalss : {
+                type:String
             }
         },
         components : {

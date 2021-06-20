@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Intro from '../components/intro/index.vue'
+import SignIn from '../components/Pages/SignIn.vue'
+import SignUp from '../components/Pages/SignUp.vue'
+import resetPassword from '../components/Pages/ResetPassword.vue'
 import Chat from '../components/Pages/Chat.vue'
 import Calls from '../components/Pages/Calls.vue'
 import Friends from '../components/Pages/Friends.vue'
@@ -36,19 +39,19 @@ export const routes: Array<RouteRecordRaw> = [
     {
         path: '/sign-in',
         name: 'SignIn',
-        component: Intro,
-        meta: { layout: 'intro-layout' }
+        component: SignIn,
+        meta: { layout: 'auth-layout' }
     },{
         path: '/sign-up',
         name: 'SignUp',
-        component: Intro,
-        meta: { layout: 'intro-layout' }
+        component: SignUp,
+        meta: { layout: 'auth-layout' }
     },
     {
         path: '/reset-password',
-        name: 'reset-password',
-        component: Intro,
-        meta: { layout: 'intro-layout' }
+        name: 'resetPassword',
+        component: resetPassword,
+        meta: { layout: 'auth-layout' }
     }
 ]
 

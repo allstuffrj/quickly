@@ -13,6 +13,7 @@
                 converse.list">
                     <div class="message-wrapper">
                         <div class="message-content">
+                            <h6 class="text-dark" v-if="conversation.type == 'group'">{{conversemsg.name}}</h6>
                             <span v-if="conversemsg.message_type.includes('text')">{{conversemsg.message}}</span>
 
                             <div class="document" v-if="conversemsg.message_type == 'document' ">
@@ -159,11 +160,11 @@
 
 
 
-
+            const conversation = store.getters.currentConversation;
 
             const filteredConversationList = computed(() => {
                 var srchTxt = store.getters.currentSearchText;
-                console.log(srchTxt)
+
                 let converList = store.getters.currentConversation;
                  let tempList = [];
                 tempList = converList.conversations;
@@ -180,7 +181,7 @@
                 return  tempList;
             });
             return {
-                timeAgo,showImg,handleImgHide,imgIndex,imgPopupVisible,setMsgRef,filteredConversationList
+                timeAgo,showImg,handleImgHide,imgIndex,imgPopupVisible,setMsgRef,filteredConversationList,conversation
             }
         },
         methods : {
