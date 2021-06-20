@@ -120,7 +120,7 @@
                 </div>
                 <div class="col-sm-6 col-md-4 my-3">
                     <router-link
-                            to="/SignIn"
+                            to="/sign-in"
                             @click.native="setThemeColor(ThemeColor.Light)"
                             class="border rounded d-block theme-shadow-sm overflow-hidden text-reset" target="_blank">
                         <img
@@ -134,7 +134,7 @@
                 </div>
                 <div class="col-sm-6 col-md-4 my-3">
                     <router-link
-                            to="/SignUp"
+                            to="/sign-up"
                             @click.native="setThemeColor(ThemeColor.Light)"
                             class="border rounded d-block theme-shadow-sm overflow-hidden text-reset" target="_blank">
                         <img
@@ -165,7 +165,7 @@
                 </div>
                 <div class="col-sm-6 col-md-4 my-3">
                     <router-link
-                            to="/SignIn"
+                            to="/sign-in"
                             @click.native="setThemeColor(ThemeColor.Dark)"
                             class="border rounded d-block theme-shadow-sm overflow-hidden text-reset" target="_blank">
                         <img
@@ -179,7 +179,7 @@
                 </div>
                 <div class="col-sm-6 col-md-4 my-3">
                     <router-link
-                            to="/SignUp"
+                            to="/sign-up"
                             @click.native="setThemeColor(ThemeColor.Dark)"
                             class="border rounded d-block theme-shadow-sm overflow-hidden text-reset" target="_blank">
                         <img

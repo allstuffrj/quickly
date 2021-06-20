@@ -4,7 +4,7 @@
 @import "./../framework/functions";
 @import "./../abstracts/bootstrap-variables";
 @import "./../abstracts/theme-variables";
-
+body.dark-skin{
 h1,
 h2,
 h3,
@@ -541,7 +541,7 @@ textarea.form-control {
     .nav-link{
         color: $text-muted;
     }
-  
+
     .appbar-wrapper {
         border-color: $skin-border;
 
@@ -678,10 +678,11 @@ textarea.form-control {
 
 .emojionearea-form-control{
     background-color: $skin-main-bg;
-    border-color: $skin-border !important; 
+    border-color: $skin-border !important;
     color: $gray-500;
 
     &.focused{
         color: $white;
     }
+}
 }

@@ -10,13 +10,7 @@
                     <p class="text-muted">
                         Please select a chat to start messaging.
                     </p>
-                    <button
-                            class="btn btn-primary no-box-shadow"
-                            type="button"
-                            data-toggle="modal"
-                            data-target="#startConversation" >
-                        Start a conversation
-                    </button>
+
                 </div>
             </div>
         </div>

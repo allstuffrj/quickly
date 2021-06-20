@@ -27,10 +27,12 @@ const ProfileType = {
     Svg: 2,
     Text: 3,
 };
+const isRTL = 0;
 export {
     ThemeColor,
     UserStatus,
     ChatFilterOptions,
     CallFilterOptions,
     ProfileType,
+    isRTL
 };

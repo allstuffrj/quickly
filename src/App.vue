@@ -26,6 +26,7 @@ export default defineComponent({
             return route.meta.layout || "auth-layout";
         });
         const themeColor = ref(localStorage.getItem("theme") ?  localStorage.getItem("theme") : ThemeColor.Light)
+
         return {themeColor,layout}
     },
     methods : {
