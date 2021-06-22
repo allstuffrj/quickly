@@ -7,7 +7,8 @@
 <script lang="ts">
     export default {
         methods : {
-            updateThemeMode(mode)
+            emits : ['update-theme-mode-parent'],
+            updateThemeMode(mode : Object) : void
             {
                 this.$emit('update-theme-mode-parent',mode);
             }

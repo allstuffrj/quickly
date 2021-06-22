@@ -1,6 +1,6 @@
 <template>
     <transition name="modal-fade">
-        <div class="fade modal-backdrop "  :class="showModalToggle ? 'show' : 'hide'"></div>
+        <div class="fade modal-backdrop "  :class="[modalClassTogal]"></div>
     </transition>
 
     <transition name="modal-fade">
@@ -57,9 +57,11 @@
                 showModalToggle.value = props.showModal;
 
             });
+                    const modalClassTogal  = computed(() => {
+                         return (showModalToggle.value == true) ? 'show' : 'hide';
+            });
 
-
-                return {showModalToggle}
+                return {showModalToggle,modalClassTogal}
         },
         methods: {
 
