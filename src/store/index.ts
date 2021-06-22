@@ -17,6 +17,11 @@ export type State = { currentConversation: Object, showChatSearch : Boolean,show
 //set state
 const state: State = { currentConversation: {}, showChatSearch : false , searchText: '',showChatInfo:false,currentCall:{},currentFriend:{},currentUser:{},mainVisible:true };
 
+declare interface ResponseType {
+    data: Object,
+    status : number,
+    statusText : String
+}
 // mutations and action enums
 
 export enum MutationTypes {
@@ -121,7 +126,7 @@ export interface Actions {
 export const actions: ActionTree<State, State> & Actions = {
     [ActionTypes.LOAD_CONVERSATION]({ commit }, payload: Object) {
         // Ajax call will be here.
-        Friends.getConversationDetail(payload).then((response: object) => {
+        Friends.getConversationDetail(payload).then((response: ResponseType) => {
 
             commit(MutationTypes.LOAD_CONVERSATION, response.data);
         }).catch((e: Error) => {
@@ -132,7 +137,7 @@ export const actions: ActionTree<State, State> & Actions = {
     },
     [ActionTypes.LOAD_CALLHISTORY]({ commit }, payload: Object) {
         // Ajax call will be here.
-        Calls.getCallHistory(payload).then((response: object) => {
+        Calls.getCallHistory(payload).then((response: ResponseType) => {
 
             commit(MutationTypes.LOAD_CALLHISTORY, response.data);
         }).catch((e: Error) => {
@@ -144,7 +149,7 @@ export const actions: ActionTree<State, State> & Actions = {
     [ActionTypes.LOAD_FRIEND]({ commit }, payload: Object) {
         // Ajax call will be here.
 
-        Friends.getFriendDetail(payload).then((response: object) => {
+        Friends.getFriendDetail(payload).then((response: ResponseType) => {
             commit(MutationTypes.LOAD_FRIEND, response.data);
         }).catch((e: Error) => {
             console.log(e);
@@ -156,7 +161,7 @@ export const actions: ActionTree<State, State> & Actions = {
     [ActionTypes.LOAD_USERDETAIL]({ commit }) {
         // Ajax call will be here.
 
-        Friends.getUserDetail().then((response: object) => {
+        Friends.getUserDetail().then((response: ResponseType) => {
             commit(MutationTypes.LOAD_USER, response.data);
         }).catch((e: Error) => {
             console.log(e);
