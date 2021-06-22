@@ -125,13 +125,9 @@
         <div class="col-12">
             <div class="d-flex justify-content-center align-items-center flex-column h-100">
                 <div class="btn btn-success btn-icon rounded-circle text-light mb-3">
-                    <!-- Default :: Inline SVG -->
-                    <svg class="hw-24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                    </svg>
 
-                    <!-- Alternate :: External File link -->
-                    <!-- <img class="injectable hw-24" src="./../assets/media/heroicons/outline/check.svg" alt=""> -->
+                        <CheckIcon class="injectable hw-24"></CheckIcon>
+
                 </div>
                 <h6>Group Created Successfully</h6>
                 <p class="text-muted text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores cumque laborum fugiat vero pariatur provident!</p>
@@ -144,6 +140,7 @@
 <script lang="ts">
     import {ref, defineComponent, onMounted, reactive, watch} from 'vue'
     import SearchSvg from  '../../assets/media/icons/search.svg';
+    import CheckIcon from  '../../assets/media/heroicons/outline/check.svg';
     import Friends from "../../Services/Friends";
     import FriendRow from "../Base/FriendRow.vue";
 
@@ -163,6 +160,7 @@
         components : {
                 SearchSvg,
                 FriendRow,
+                CheckIcon
         },
         emits : ['onFilePicked'],
         setup: (props,context) => {
