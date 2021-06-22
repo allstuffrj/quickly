@@ -1,6 +1,6 @@
 import DateTimeFormat = Intl.DateTimeFormat;
 
-const timeDiff =  function( startTime : String,endTime :String) :String
+const timeDiff =  function( startTime : Date,endTime :Date) :String
 {
 
     var datetime = new Date( startTime ).getTime();

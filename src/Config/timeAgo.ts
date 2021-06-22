@@ -4,19 +4,20 @@ const MONTH_NAMES = [
 ];
 
 
-function getFormattedDate(date, prefomattedDate = false, hideYear = false,displayTime = true) {
+function getFormattedDate(date : Date, prefomattedDate:String = '', hideYear:boolean = false,displayTime:boolean = true) {
     const day = date.getDate();
     const month = MONTH_NAMES[date.getMonth()];
     const year = date.getFullYear();
     const hours = date.getHours();
-    let minutes = date.getMinutes();
+    let minutes : any = date.getMinutes().valueOf();
 
     if (minutes < 10) {
         // Adding leading zero to minutes
-        minutes = `0${ minutes }`;
+        minutes  = `0${ minutes }`;
+
     }
 
-    if (prefomattedDate) {
+    if (prefomattedDate != '') {
         // Today at 10:20
         // Yesterday at 10:20
         if(displayTime)
@@ -42,16 +43,18 @@ function getFormattedDate(date, prefomattedDate = false, hideYear = false,displa
 
 
 // --- Main function
-const timeAgo = function (dateParam,displayTime = true) {
+const timeAgo = function (dateParam : Date,displayTime = true) {
     if (!dateParam) {
         return null;
     }
 
-    const date = typeof dateParam === 'object' ? dateParam : new Date(dateParam);
-    const DAY_IN_MS = 86400000; // 24 * 60 * 60 * 1000
-    const today = new Date();
-    const yesterday = new Date(today - DAY_IN_MS);
-    const seconds = Math.round((today - date) / 1000);
+    const date :Date = typeof dateParam === 'object' ? dateParam : new Date(dateParam);
+    const DAY_IN_MS : number = 86400000; // 24 * 60 * 60 * 1000
+    let today :Date = new Date();
+    let  diffTime : number = today.valueOf() - DAY_IN_MS;
+    const yesterday = new Date(diffTime);
+    let secDiff : number = today.valueOf() - date.valueOf();
+    const seconds = Math.round(( secDiff)/ 1000);
     const minutes = Math.round(seconds / 60);
     const isToday = today.toDateString() === date.toDateString();
     const isYesterday = yesterday.toDateString() === date.toDateString();
@@ -71,10 +74,10 @@ const timeAgo = function (dateParam,displayTime = true) {
     } else if (isYesterday) {
         return getFormattedDate(date, 'Yesterday',false,displayTime); // Yesterday at 10:20
     } else if (isThisYear) {
-        return getFormattedDate(date, false, true,displayTime); // 10. January at 10:20
+        return getFormattedDate(date, '', true,displayTime); // 10. January at 10:20
     }
 
-    return getFormattedDate(date,false,false,displayTime); // 10. January 2017. at 10:20
+    return getFormattedDate(date,'',false,displayTime); // 10. January 2017. at 10:20
 }
 
 export default timeAgo;
