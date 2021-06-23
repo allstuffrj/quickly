@@ -264,6 +264,7 @@
     import Twitter from "../../assets/media/icons/twitter.svg";
     import Instagram from "../../assets/media/icons/instagram.svg";
     import LinkedIn from "../../assets/media/icons/linkedin.svg";
+    import {userdata} from "../../Config/Config"
     export default defineComponent({
         name: 'AccountDetail',
         props: {},
@@ -285,7 +286,7 @@
         },
         setup: () => {
             const store = useStore();
-            const user = computed(() => store.getters.currentUser);
+            const user = computed(<userdata>() => store.getters.currentUser);
 
             return {user }
         }

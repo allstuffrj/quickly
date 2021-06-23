@@ -274,16 +274,16 @@
             {
                 store.commit(MutationTypes.SHOW_CHATINFO, !store.getters.currentShowChatInfo);
             }
-            function downloadDoc(doc)
+            function downloadDoc(doc :object)
             {
                 console.log("Download doc code goes here")
             }
 
-            function shareDoc(doc)
+            function shareDoc(doc :object)
             {
                 console.log("Share doc code goes here")
             }
-            function deleteDoc(doc)
+            function deleteDoc(doc :object)
             {
                 console.log("Delete doc code goes here")
             }

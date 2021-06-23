@@ -11,17 +11,14 @@ import {
 } from "vuex";
 import Friends from "../Services/Friends";
 import Calls from "../Services/Calls";
+import {ResponseType, userdata} from '../Config/Config';
 //declare state
 export type State = { currentConversation: Object, showChatSearch : Boolean,showChatInfo : Boolean,searchText : String, currentCall :Object,currentFriend : Object,currentUser : Object,mainVisible : Boolean };
 
 //set state
 const state: State = { currentConversation: {}, showChatSearch : false , searchText: '',showChatInfo:false,currentCall:{},currentFriend:{},currentUser:{},mainVisible:true };
 
-declare interface ResponseType {
-    data: Object,
-    status : number,
-    statusText : String
-}
+
 // mutations and action enums
 
 export enum MutationTypes {

@@ -196,6 +196,17 @@
         private =  'private',
         public = 'public'
     };
+
+    interface groupObj {
+        grpname :string,
+        friends : array,
+        type:string,
+        image:any
+    }
+    interface inviteotherType {
+        email:string,
+        message:string
+    }
     import { ref, defineComponent,onMounted,watch,reactive } from 'vue'
     import NotificationsSvg from '../../assets/media/icons/notifications.svg';
     import Dropdown from '../Base/Dropdown.vue'
@@ -206,6 +217,7 @@
     import Friends from "../../Services/Friends";
     import FriendRow from "../Base/FriendRow.vue";
     import CreateGroup from './CreateGroup.vue'
+    import{ ResponseType,dpOptionType } from '../../Config/Config';
     export default defineComponent({
         name: 'ChatAction',
         props: {
@@ -226,18 +238,18 @@
                 const showNewChat = ref(false);
                 const showCreateGroup = ref(false);
                 const showInvite = ref(false);
-                const notificationList = ref([])
+                const notificationList = ref({})
                 const friendSearch = ref(null)
                 const friendsList = ref({});
                 const createGrpMdlTitle = ref('Create a New Group');
-                const creategroupobj = reactive({
+                const creategroupobj = reactive<groupObj>({
                     grpname :'',
                     friends : [],
                     type:'',
                     image:''
                 });
 
-                const inviteother = reactive({
+                const inviteother = reactive<inviteotherType>({
                     email:'',
                     message:''
                 })
@@ -290,14 +302,14 @@
                     }
                 ];
 
-                function charOpHandler(option : Object) :void
+                function charOpHandler(option : dpOptionType) :void
                 {
                     toggleModal(option.value);
                 }
 
            function getNotificationsList(){
 
-                Notifications.getAll().then((response: object) => {
+                Notifications.getAll().then((response: ResponseType) => {
 
                     notificationList.value = response.data;
                 }).catch((e: Error) => {
@@ -307,7 +319,7 @@
 
            function getFriendList(){
 
-                Friends.getAll().then((response: object) => {
+                Friends.getAll().then((response: ResponseType) => {
 
                     friendsList.value = response.data;
 
@@ -348,7 +360,7 @@
                 toggleModal('invite-others')
             }
 
-            function groupPictureUpload (event) {
+            function groupPictureUpload (event :any) {
 
                 const files = event.target.files
                 let filename = files[0].name

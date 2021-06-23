@@ -425,6 +425,42 @@
     import MyInput from "../Base/MyInput.vue";
     import Dropdown from '../Base/Dropdown.vue';
     import MobileNavigationArrow from "./MobileNavigationArrow.vue";
+    declare interface keyValueObject {
+        name: string,
+        value : string
+    }
+    const enum accountKeyTypes  {
+        first_name = 'first_name',
+        last_name = 'last_name',
+        phone = 'phone',
+        birth_date = 'birth_date',
+        email = 'email',
+        website = 'website',
+        address = 'address'
+    };
+    const enum socialKeyTypes  {
+        facebook = 'facebook',
+        twitter = 'twitter',
+        linkedin = 'linkedin',
+        instagram = 'instagram'
+    };
+    const enum changePwdKeyTypes  {
+        current_password = 'current_password',
+        new_password = 'new_password',
+        confirm_password = 'confirm_password'
+    };
+    declare interface accountPayload {
+        name: accountKeyTypes,
+        value : string
+    }
+    declare interface socialPayload {
+        name: socialKeyTypes,
+        value : string
+    }
+    declare interface changePwdPayload {
+        name: changePwdKeyTypes,
+        value : string
+    }
     export default defineComponent({
         name: 'ProfileUpdate',
         props: {
@@ -474,13 +510,13 @@
             });
             const currentUser = computed(() => store.getters.currentUser);
             const currentMainVisible = computed(() => store.getters.currentMainVisible);
-            function update(payload: Object) :void {
+            function update(payload: accountPayload) :void {
                 accountpersonal[payload.name] = payload.value
             }
-            function updateSocial(payload: Object) :void {
+            function updateSocial(payload: socialPayload) :void {
                 socialDetail[payload.name] = payload.value
             }
-            function updatePassword(payload: Object) :void {
+            function updatePassword(payload: changePwdPayload) :void {
                 changePassword[payload.name] = payload.value
             }
             const chatOptions= [
@@ -498,22 +534,22 @@
                 }
             ];
 
-            function whoCanSeeProfileUpdate(option : Object) :void
+            function whoCanSeeProfileUpdate(option : keyValueObject) :void
             {
                 privacyInfo.whocanseeprofilepic = option.value
             }
 
-            function whoCanSeeStatusUpdate(option : Object) :void
+            function whoCanSeeStatusUpdate(option : keyValueObject) :void
             {
                 privacyInfo.whocanseelastseen = option.value
             }
 
-            function whoCanAddInGroupUpdate(option : Object) :void
+            function whoCanAddInGroupUpdate(option : keyValueObject) :void
             {
                 privacyInfo.whocanaddingroup = option.value
             }
 
-            function lastSeenUpdate(option : Object) :void
+            function lastSeenUpdate(option : keyValueObject) :void
             {
                 privacyInfo.whocanseestatus = option.value
             }

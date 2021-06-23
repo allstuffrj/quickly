@@ -1,5 +1,5 @@
 // Global configuration
-const enum ThemeColor  {
+ enum ThemeColor  {
     Light = 1,
     Dark = 2,
 };
@@ -28,11 +28,44 @@ const ProfileType = {
     Text: 3,
 };
 const isRTL = 0;
+declare interface ResponseType {
+    data: Object,
+    status : number,
+    statusText : String
+}
+
+declare interface dpOptionType {
+    value : string,
+    label : string
+}
+
+declare interface userdata {
+    "user_name" : string,
+    "uuid" : string,
+    "status" : string,
+    "avatar" : string,
+    "phone" : string,
+    "local_time" : string,
+    "birth_date" : string,
+    "email" : string,
+    "website" : string,
+    "address" : string,
+    "faecbook_url" : string,
+    "twitter_url" : string,
+    "instagram_url" : string,
+    "linkedin_url" : string
+
+}
 export {
     ThemeColor,
     UserStatus,
     ChatFilterOptions,
     CallFilterOptions,
     ProfileType,
-    isRTL
+    isRTL,
+    ResponseType,
+    dpOptionType,
+    userdata
 };
+
+
