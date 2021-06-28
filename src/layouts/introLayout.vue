@@ -5,13 +5,19 @@
     </div>
 </template>
 <script lang="ts">
-    export default {
-        methods : {
-            emits : ['update-theme-mode-parent'],
-            updateThemeMode(mode : Object) : void
+    import { ref, defineComponent } from 'vue'
+    export default defineComponent({
+        name:"introLayout",
+        emits : ['update-theme-mode-parent'],
+        components : {
+
+        },
+        setup : (props,context) => {
+            function updateThemeMode(mode : object) : void
             {
-                this.$emit('update-theme-mode-parent',mode);
+                context.emit('update-theme-mode-parent',mode);
             }
+            return {updateThemeMode}
         }
-    }
+    })
 </script>

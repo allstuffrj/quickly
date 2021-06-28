@@ -286,7 +286,7 @@
         },
         setup: () => {
             const store = useStore();
-            const user = computed(<userdata>() => store.getters.currentUser);
+            const user = computed(() =>  <userdata>store.getters.currentUser);
 
             return {user }
         }

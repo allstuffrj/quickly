@@ -168,7 +168,7 @@
                                     class="form-control form-control-md no-resize hide-scrollbar"
                                     id="inviteMessage"
                                     placeholder="Write your message here"
-                                    rows="3"
+                                    rows=3
                                     v-model="inviteother.message"
                             ></textarea>
                         </div>
@@ -199,7 +199,7 @@
 
     interface groupObj {
         grpname :string,
-        friends : array,
+        friends : string[],
         type:string,
         image:any
     }
@@ -217,7 +217,7 @@
     import Friends from "../../Services/Friends";
     import FriendRow from "../Base/FriendRow.vue";
     import CreateGroup from './CreateGroup.vue'
-    import{ ResponseType,dpOptionType } from '../../Config/Config';
+    import{ ResponseType,dpOptionType,Sgfriend } from '../../Config/Config';
     export default defineComponent({
         name: 'ChatAction',
         props: {
@@ -238,9 +238,9 @@
                 const showNewChat = ref(false);
                 const showCreateGroup = ref(false);
                 const showInvite = ref(false);
-                const notificationList = ref({})
-                const friendSearch = ref(null)
-                const friendsList = ref({});
+                const notificationList = ref({});
+                const friendSearch = ref('');
+                const friendsList = ref();
                 const createGrpMdlTitle = ref('Create a New Group');
                 const creategroupobj = reactive<groupObj>({
                     grpname :'',
@@ -275,7 +275,7 @@
                     }else if(modal == 'new-chat')
                     {
                         showNewChat.value = !showNewChat.value;
-                        friendSearch.value =null;
+                        friendSearch.value ='';
                     }else if(modal == 'create-group')
                     {
                         showCreateGroup.value = !showCreateGroup.value;
@@ -337,7 +337,9 @@
 
             function filteredFriendList() {
 
-                let friendListAr = friendsList.value;
+                let friendListAr : Sgfriend[] = friendsList.value;
+                if(friendListAr == undefined)
+                    return [];
                 if(friendSearch.value === '' || friendSearch.value == null)
                                         return friendListAr;
 

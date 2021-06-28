@@ -230,6 +230,7 @@
     import PhotographIcon from '../../../assets/media/heroicons/outline/photograph.svg';
     import DocumentIcon from '../../../assets/media/heroicons/outline/document.svg';
     import DropdownWithSlot from "../../Base/DropdownWithSlot.vue";
+    import {converDetail} from "../../../Config/Config";
     export default defineComponent({
         name: 'ChatInfo',
         props: {
@@ -251,7 +252,7 @@
             const store = useStore();
             const count = ref(store.state);
             const showChatInfo = computed(() => store.getters.currentShowChatInfo);
-            const currentConversation = computed(() => store.getters.currentConversation);
+            const currentConversation = computed(() => <converDetail>store.getters.currentConversation);
             const showUserInfo = ref(true);
             const showMediaInfo = ref(true);
             const showDocumentInfo = ref(true);

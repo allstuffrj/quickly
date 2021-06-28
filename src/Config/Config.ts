@@ -50,11 +50,58 @@ declare interface userdata {
     "email" : string,
     "website" : string,
     "address" : string,
-    "faecbook_url" : string,
+    "facebook_url" : string,
     "twitter_url" : string,
     "instagram_url" : string,
     "linkedin_url" : string
 
+}
+
+declare  interface Sgfriend {
+    "user_name" : string,
+    "uuid" : string,
+    "status" : string,
+    "avatar" : string
+}
+
+declare  interface sgconvdetail {
+    "message_uuid" : string,
+    "message_type" : string,
+    "name": string,
+    "avatar": string,
+    "message" : string,
+    "datetime" : string,
+    "user_uuid" : string,
+    "is_received": number,
+    "is_sent" : number
+}
+
+declare interface dayConv {
+
+    "date" : Date,
+    "list" : sgconvdetail[]
+
+}
+declare interface convdoc {
+    "name": string,
+    "size" : string,
+    "type" : string,
+    "url" :string
+
+}
+declare interface converDetail {
+    "uuid": string,
+    "name": string,
+    "type" : string,
+    "avatar": string,
+    "status": string,
+    "location" : string,
+    "phone" : string,
+    "email" : string,
+    "address" : string,
+    "conversations" : dayConv[],
+    "last_media" : string[],
+    "last_documents" : convdoc[]
 }
 export {
     ThemeColor,
@@ -65,7 +112,11 @@ export {
     isRTL,
     ResponseType,
     dpOptionType,
-    userdata
+    userdata,
+    Sgfriend,
+    converDetail,
+    sgconvdetail,
+    convdoc
 };
 
 

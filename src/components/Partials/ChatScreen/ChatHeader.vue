@@ -160,6 +160,7 @@
     import DropdownWithSlot from "../../Base/DropdownWithSlot.vue";
     import { useStore,MutationTypes } from "../../../store";
     import MobileNavigationArrow from "../MobileNavigationArrow.vue";
+    import {converDetail} from "../../../Config/Config";
     export default defineComponent({
         name: 'ChatHeader',
         props: {
@@ -191,7 +192,7 @@
 
                 store.commit(MutationTypes.SHOW_CHATINFO, !store.getters.currentShowChatInfo);
             };
-            const currentConversation = computed(() => store.getters.currentConversation);
+            const currentConversation = computed(() => <converDetail>store.getters.currentConversation);
 
             function callFriend()
             {

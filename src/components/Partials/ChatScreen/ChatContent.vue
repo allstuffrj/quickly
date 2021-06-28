@@ -116,6 +116,7 @@
     import DocumentIcon from '../../../assets/media/heroicons/outline/document.svg';
     import DropdownWithSlot from "../../Base/DropdownWithSlot.vue";
     import VueEasyLightbox from 'vue-easy-lightbox'
+    import {converDetail,sgconvdetail} from '../../../Config/Config';
     export default defineComponent({
         name: 'ChatContent',
         props: {
@@ -140,7 +141,7 @@
                 function handleImgHide() {
                     imgPopupVisible.value = false
                 }
-                let msgRefs = []
+                let msgRefs :any[] = [];
                 const setMsgRef = el => {
                     if (el) {
                         msgRefs.push(el)
@@ -165,13 +166,13 @@
             const filteredConversationList = computed(() => {
                 var srchTxt = store.getters.currentSearchText;
 
-                let converList = store.getters.currentConversation;
+                let converList = <converDetail>store.getters.currentConversation;
                  let tempList = [];
                 tempList = converList.conversations;
                 if(srchTxt != '' && srchTxt != null)
                 {
                     tempList =  tempList.filter(entry => {
-                        var newList =   entry.list.filter(msgli => {
+                        var newList =   entry.list.filter(msgli  => {
                             return msgli.message.toLowerCase().includes(srchTxt.toLowerCase())
                         })
                         return entry.list = newList;

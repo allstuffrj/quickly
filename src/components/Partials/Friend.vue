@@ -193,6 +193,7 @@
     import Instagram from "../../assets/media/icons/instagram.svg";
     import LinkedIn from "../../assets/media/icons/linkedin.svg";
     import MobileNavigationArrow from "./MobileNavigationArrow.vue";
+    import {userdata} from "../../Config/Config";
     export default defineComponent({
         name: 'Friend',
         props: {
@@ -218,7 +219,7 @@
             const store = useStore();
             const currentMainVisible = computed(() => store.getters.currentMainVisible);
 
-            const friendDetail = computed(() => store.getters.currentFriend);
+            const friendDetail = computed(() => <userdata>store.getters.currentFriend);
 
             function removeUser()
             {

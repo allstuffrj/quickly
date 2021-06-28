@@ -9,6 +9,7 @@
     import EmptyChat from "./EmptyChat.vue";
     import Friend from "./Friend.vue";
     import { useStore, MutationTypes, ActionTypes } from "../../store";
+    import {userdata} from "../../Config/Config";
 
     export default defineComponent({
         name: 'FriendDetail',
@@ -23,8 +24,8 @@
             const store = useStore();
             const count = ref(store.state);
 
-            const currentFriend = computed(() => store.getters.currentFriend);
-            
+            const currentFriend = computed(() => <userdata>store.getters.currentFriend);
+
             const isEmpty = computed(() => {
                 return Object.keys( currentFriend.value ).length == 0
             })
