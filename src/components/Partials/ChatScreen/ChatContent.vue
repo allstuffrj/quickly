@@ -161,7 +161,7 @@
 
 
 
-            const conversation = store.getters.currentConversation;
+            const conversation = <converDetail>store.getters.currentConversation;
 
             const filteredConversationList = computed(() => {
                 var srchTxt = store.getters.currentSearchText;

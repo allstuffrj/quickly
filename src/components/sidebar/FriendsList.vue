@@ -44,7 +44,7 @@
             FriendListRender
         },
         setup: () => {
-            const searchInput = ref(null);
+            const searchInput = ref('');
             watch(searchInput, (neval, oldVal) => {
                 dpChangeHandler()
             });

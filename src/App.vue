@@ -13,7 +13,7 @@ import introLayout from "./layouts/introLayout.vue";
 import { useRoute } from 'vue-router'
 
 
-import { ThemeColor } from './Config/Config'
+import {ThemeColor, themeMode} from './Config/Config'
 
 export default defineComponent({
   name: 'App',
@@ -30,7 +30,7 @@ export default defineComponent({
         return {themeColor,layout}
     },
     methods : {
-        updateThemeMode(newColor: Object) :void{
+        updateThemeMode(newColor: themeMode) :void{
             this.themeColor = newColor.mode
             if (newColor.isRTL) localStorage.setItem("rtl", newColor.isRTL);
             else localStorage.removeItem("rtl");

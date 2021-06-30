@@ -396,7 +396,7 @@
                 count,ThemeColor,emit,LightSkin,DarkSkin,LigntSignIn,DarkSignIn,LightSignUp,DarkSignUp,LightResetPassword,DarkResetPassword,RTLLIghtSkin,RTLDarkSkin}
         },
         methods : {
-            setThemeColor(mode: ThemeColor, isRTL : Boolean = false) : void {
+            setThemeColor(mode: ThemeColor, isRTL : boolean = false) : void {
                 console.log("Selected mode",mode)
                 this.$emit("update-theme-mode", {mode:mode,isRTL:isRTL});
             }

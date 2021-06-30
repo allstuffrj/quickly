@@ -20,7 +20,7 @@
         setup: () => {
             const store = useStore();
             onMounted(()=>{
-                    store.dispatch(ActionTypes.LOAD_USERDETAIL);
+                    store.dispatch(ActionTypes.LOAD_USERDETAIL,'');
                 document.body.classList.add('profile-tab-open')
             })
 

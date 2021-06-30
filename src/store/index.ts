@@ -112,7 +112,8 @@ export interface Actions {
         payload: Object
     ): void;
     [ActionTypes.LOAD_USERDETAIL](
-        { commit }: AugmentedActionContext
+        { commit }: AugmentedActionContext,
+        payload:string
     ): void;
     [ActionTypes.LOAD_SEARCHTEXT](
         { commit }: AugmentedActionContext,
@@ -155,7 +156,7 @@ export const actions: ActionTree<State, State> & Actions = {
 
     },
 
-    [ActionTypes.LOAD_USERDETAIL]({ commit }) {
+    [ActionTypes.LOAD_USERDETAIL]({ commit },payload:string) {
         // Ajax call will be here.
 
         Friends.getUserDetail().then((response: ResponseType) => {
@@ -166,7 +167,7 @@ export const actions: ActionTree<State, State> & Actions = {
         });
 
     },
-    [ActionTypes.LOAD_SEARCHTEXT]({ commit }, payload: String) {
+    [ActionTypes.LOAD_SEARCHTEXT]({ commit }, payload: string) {
         // Ajax call will be here.
         commit(MutationTypes.LOAD_SEARCHTEXT, payload);
 

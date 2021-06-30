@@ -21,7 +21,7 @@
 
 
         <a v-if="displayType == 'kebabhorz'" v-click-outside="onClickOutside" @click="handleToggle" class="text-muted" href="#" data-toggle="dropdown" aria-haspopup="true"
-           :title=title  aria-expanded=checkIsOpen>
+           :title=title  :aria-expanded=checkIsOpen>
 
             <DotsHorizontalIcon class="injectable hw-18" alt="message options"></DotsHorizontalIcon>
 
@@ -126,7 +126,7 @@
                 }
 
                 const checkIsOpen = computed(() => {
-                    return isOpen.value;
+                    return <boolean>isOpen.value;
                 });
 
                   function handleSelection(selectedVal : number) :void

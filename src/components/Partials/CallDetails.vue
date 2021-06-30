@@ -107,6 +107,7 @@
     import Phone from '../../assets/media/heroicons/outline/phone.svg'
     import DropdownWithSlot from "../Base/DropdownWithSlot.vue";
     import MobileNavigationArrow from "./MobileNavigationArrow.vue";
+    import {calllog} from "../../Config/Config";
     export default defineComponent({
         name: 'CallDetails',
         props: {
@@ -123,7 +124,7 @@
         setup: () => {
             const store = useStore();
             const currentMainVisible = computed(() => store.getters.currentMainVisible);
-            const calllogs = computed(() => store.getters.currentCall);
+            const calllogs = computed(() => <calllog>store.getters.currentCall);
 
             function clearCallLogs()
             {

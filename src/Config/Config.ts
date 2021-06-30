@@ -103,6 +103,25 @@ declare interface converDetail {
     "last_media" : string[],
     "last_documents" : convdoc[]
 }
+
+declare interface callloggduration {
+    "time" : string,
+    "type" : string,
+    "end_time": string
+}
+declare interface calllog {
+    "user_name" : string,
+    "uuid" : string,
+    "status" : string,
+    "avatar" : string,
+    "phone" : string,
+    "history" :callloggduration[]
+}
+
+declare interface themeMode {
+    mode:number,
+    isRTL:boolean
+}
 export {
     ThemeColor,
     UserStatus,
@@ -116,7 +135,10 @@ export {
     Sgfriend,
     converDetail,
     sgconvdetail,
-    convdoc
+    convdoc,
+    calllog,
+    callloggduration,
+    themeMode
 };
 
 

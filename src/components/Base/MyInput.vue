@@ -55,7 +55,7 @@
         setup: (props,context) => {
             const error = computed(() => validate(props.value));
 
-            function validate(value: String) :String {
+            function validate(value: string) :string {
                 if(typeof props.rules != "undefined" && Object.keys(props.rules).length > 0)
                 {
                     if (typeof props.rules.required != "undefined" && props.rules.required && !value) {
@@ -66,7 +66,7 @@
                         return `Minimum length is ${props.rules.min}`
                     }
                 }
-
+                return '';
             }
 
             function input($evt) : void {

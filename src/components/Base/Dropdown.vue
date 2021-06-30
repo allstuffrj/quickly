@@ -5,14 +5,14 @@
         <button v-if="displayType == 'button'" v-click-outside="onClickOutside"  class="btn btn-outline-default dropdown-toggle" @click="handleToggle"
                 type="button"
                 data-chat-filter-list=""
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded=checkIsOpen>
+                data-toggle="dropdown" aria-haspopup="true" :aria-expanded=checkIsOpen>
             {{emptyLabel}}
         </button>
 
         <a v-if="displayType == 'kebab'" v-click-outside="onClickOutside" @click="handleToggle"
            class="nav-link text-muted px-1" href="javascript:void(0)"
            role="button" :title=title
-           data-toggle="dropdown" aria-haspopup="true" aria-expanded=checkIsOpen>
+           data-toggle="dropdown" aria-haspopup="true" :aria-expanded=checkIsOpen>
             <!-- Default :: Inline SVG -->
             <svg class="hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
@@ -124,7 +124,7 @@
                 }
 
                 const checkIsOpen = computed(() => {
-                    return isOpen.value;
+                    return <boolean>isOpen.value;
                 });
 
                   function handleSelection(selectedVal : number) :void
