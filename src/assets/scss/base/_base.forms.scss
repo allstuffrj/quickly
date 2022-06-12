@@ -9,54 +9,54 @@ Chanelog:
 // Form Controls
 
 .form-control-md {
-    height: calc(2.6rem + 2px);
+  height: calc(2.6rem + 2px);
 }
 
 textarea.no-resize {
-    resize: none;
+  resize: none;
 }
 
 .form-row .input-group {
-    align-items: center;
+  align-items: center;
 }
 
 .form-group {
-    label {
-        font-size: $font-size-sm;
-    }
+  label {
+    font-size: $font-size-sm;
+  }
 }
 
 // Custom Controls
 
 .custom-control {
-    label {
-        cursor: pointer;
-    }
+  label {
+    cursor: pointer;
+  }
 }
 
 .form-control {
-    font-size: $font-size-sm;
+  font-size: $font-size-sm;
 }
-
 
 // Custom Radio
 
 .custom-radio {
-    line-height: 1.3125rem;
-    min-height: 1.3125rem;
+  line-height: 1.3125rem;
+  min-height: 1.3125rem;
 }
-
 
 .media-label {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    left: 0;
-    top: 0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
 }
 
-.form-error{
-  color:red
+.form-error {
+  color: red;
 }
 
-.custom-select { background: none; }
+.custom-select {
+  background: none;
+}

@@ -1,9 +1,8 @@
-import axios, { AxiosInstance } from "axios";
-
+import axios, { AxiosInstance } from 'axios';
 const apiClient: AxiosInstance = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: `${process.env.VITE_API_BASE_URL}/api`,
   headers: {
-    "Content-type": "application/json",
+    'Content-type': 'application/json'
   }
 });
 

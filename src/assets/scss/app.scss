@@ -6,18 +6,14 @@ Version:    1.0
 Last change:    [Initial Release]
 -------------------------------------------------------------------*/
 
-
 // CONFIGURATION
 @import './config';
-
 
 // FRAMEWORK
 @import './framework/bootstrap';
 
-
 // ABSTRACTS
 @import './abstracts/mixins';
-
 
 // BASE
 @import './base/base.root';
@@ -26,7 +22,6 @@ Last change:    [Initial Release]
 @import './base/base.backgrounds';
 @import './base/base.utilities';
 @import './base/base.forms';
-
 
 // COMOPNENTS
 @import './components/components.avatar';
@@ -39,7 +34,6 @@ Last change:    [Initial Release]
 @import './components/components.modal';
 @import './components/components.events';
 
-
 // LAYOUTS
 @import './layouts/layouts.navbar';
 @import './layouts/layouts.layout';
@@ -48,12 +42,9 @@ Last change:    [Initial Release]
 @import './layouts/layouts.appbar';
 @import './layouts/layouts.rtl';
 
-
 // VENDORS
 @import './vendors/vendors.magnificpopup';
 @import './vendors/vendors.emojionearea';
-
-
 
 // CUSTOM
 @import './custom';

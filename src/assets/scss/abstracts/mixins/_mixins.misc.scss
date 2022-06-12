@@ -1,17 +1,14 @@
-
 // Hide scrollbar mixin
 @mixin hide-scrollbar() {
+  & {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 
-    & {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
 
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
-
-    &::-webkit-scrollbar {
-        display: none;
-    }
-
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }

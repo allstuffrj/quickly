@@ -6,25 +6,24 @@ Last change: [Initial Release]
 Chanelog:
 -------------------------------------------------------------------*/
 
+.navbar-light {
+  .nav-minimal {
+    .nav-link {
+      color: lighten($color: $primary, $amount: 15);
+      transition: all 0.2s ease;
 
-.navbar-light{
-    .nav-minimal{
-        .nav-link{
-            color: lighten($color: $primary, $amount: 15);
-            transition: all 0.2s ease;
+      &:hover {
+        color: lighten($color: $primary, $amount: 25);
+      }
 
-            &:hover{
-                color: lighten($color: $primary, $amount: 25);
-            }
-
-            &.active{
-                color: $white;
-            }
-        }
+      &.active {
+        color: $white;
+      }
     }
+  }
 }
 
 .tab-content,
-.tab-pane{
-    height: 100% !important;
+.tab-pane {
+  height: 100% !important;
 }

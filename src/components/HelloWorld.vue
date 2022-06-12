@@ -5,10 +5,7 @@
     Recommended IDE setup:
     <a href="https://code.visualstudio.com/" target="_blank">VSCode</a>
     +
-    <a
-      href="https://marketplace.visualstudio.com/items?itemName=octref.vetur"
-      target="_blank"
-    >
+    <a href="https://marketplace.visualstudio.com/items?itemName=octref.vetur" target="_blank">
       Vetur
     </a>
     or
@@ -35,18 +32,16 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from 'vue'
+import { ref, defineComponent } from 'vue';
 export default defineComponent({
   name: 'HelloWorld',
-  props: {
-
-  },
+  props: {},
   setup: () => {
-      console.log("in hello world")
-    const count = ref(0)
-    return { count }
+    console.log('in hello world');
+    const count = ref(0);
+    return { count };
   }
-})
+});
 </script>
 
 <style scoped>

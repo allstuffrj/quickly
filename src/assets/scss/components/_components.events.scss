@@ -1,17 +1,17 @@
-$grey: #545A5C;
-$lightgrey: #CBD1D2;
-$blue: #6691CC;
-$red: #D61643;
-$green: #8BBF43;
+$grey: #545a5c;
+$lightgrey: #cbd1d2;
+$blue: #6691cc;
+$red: #d61643;
+$green: #8bbf43;
 
-#event-calender{
-    // height: 100%;
-    
-    @include media-breakpoint-up(xl) {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
+#event-calender {
+  // height: 100%;
+
+  @include media-breakpoint-up(xl) {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
 }
 .calendar {
   position: relative;
@@ -99,7 +99,7 @@ $green: #8BBF43;
   }
 
   td {
-    padding: .8rem .1rem;
+    padding: 0.8rem 0.1rem;
   }
 
   .day {
@@ -114,7 +114,7 @@ $green: #8BBF43;
     cursor: pointer;
 
     &:hover {
-    //   border: 1px solid $primary;
+      //   border: 1px solid $primary;
       background-color: $lightgrey;
     }
 
@@ -139,7 +139,7 @@ $green: #8BBF43;
       &:after {
         content: '';
         position: absolute;
-        top: calc(50% + .6em);
+        top: calc(50% + 0.6em);
         left: calc(50% - 2px);
         width: 4px;
         height: 4px;
@@ -148,7 +148,7 @@ $green: #8BBF43;
       }
     }
 
-    &.disabled{
+    &.disabled {
       cursor: default;
 
       &:hover {
@@ -168,23 +168,24 @@ $green: #8BBF43;
     background: $grey;
     box-sizing: border-box;
 
-    .event-wrapper{
+    .event-wrapper {
       overflow-y: auto;
       max-height: 100%;
     }
 
-    .close{
+    .close {
       position: absolute;
-      width:30px;
+      width: 30px;
       height: 30px;
       top: 20px;
-      right:20px;
+      right: 20px;
       cursor: pointer;
 
-      &:before, &:after {
+      &:before,
+      &:after {
         content: '';
         position: absolute;
-        top:0;
+        top: 0;
         left: 50%;
         width: 2px;
         height: 100%;
@@ -198,27 +199,27 @@ $green: #8BBF43;
       }
     }
 
-    .event{
+    .event {
       position: relative;
-      width:100%;
+      width: 100%;
       padding: 1em;
       margin-bottom: 1em;
       background: $primary;
       border-radius: 4px;
       box-sizing: border-box;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.12);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12);
       text-align: left;
-      color:white;
+      color: white;
 
-      &-date{
+      &-date {
         margin-bottom: 1em;
       }
 
-      &-hour{
-        float:right;
+      &-hour {
+        float: right;
       }
 
-      &-summary{
+      &-summary {
         font-weight: 600;
       }
     }
