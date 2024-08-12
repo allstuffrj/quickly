@@ -4,9 +4,7 @@ Quicky, a modern and clean premium quality messaging template based on Vue and B
 
          Quicky - Most Complete Chat Template     
 
- [![](https://quicky.jeviwebstudio.com/assets/media/logo.svg) Quicky](#)
-
-[View demo](https://quicky.jeviwebstudio.com/Chats) [Purchase now](#)
+[View demo](https://quicky.jeviwebstudio.com/Chats)
 
 v1.0
 
