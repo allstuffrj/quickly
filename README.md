@@ -1,27 +1,125 @@
-# Vue 3 + Typescript + Vite
+# Quicky - Complete Chat Vue JS Template
 
-This template should help get you started developing with Vue 3 and Typescript in Vite.
+Quicky, a modern and clean premium quality messaging template based on Vue and Bootstrap 4 using concept driven and minimal design. It's well optimized with mobile first responsive approach.
 
-## Recommended IDE Setup
+         Quicky - Most Complete Chat Template     
 
-[VSCode](https://code.visualstudio.com/) + [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur). Make sure to enable `vetur.experimental.templateInterpolationService` in settings!
+ [![](https://quicky.jeviwebstudio.com/assets/media/logo.svg) Quicky](#)
 
-### If Using `<script setup>`
+[View demo](https://quicky.jeviwebstudio.com/Chats) [Purchase now](#)
 
-[`<script setup>`](https://github.com/vuejs/rfcs/pull/227) is a feature that is currently in RFC stage. To get proper IDE support for the syntax, use [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) instead of Vetur (and disable Vetur).
+v1.0
 
-## Type Support For `.vue` Imports in TS
+Quicky Vue Documentation
+========================
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can use the following:
+Thank you so much to see our template. This is guide to understand how to compile, build and customize and run project.
 
-### If Using Volar
+![](https://quicky.jeviwebstudio.com/assets/media/tools.png)
 
-Run `Volar: Switch TS Plugin on/off` from VSCode command palette.
+#### Introduction
 
-### If Using Vetur
+Quicky, a modern and clean premium quality messaging template based on Vue and Bootstrap 4 using concept driven and minimal design. It's well optimized with mobile first responsive approach.
 
-1. Install and add `@vuedx/typescript-plugin-vue` to the [plugins section](https://www.typescriptlang.org/tsconfig#plugins) in `tsconfig.json`
-2. Delete `src/shims-vue.d.ts` as it is no longer needed to provide module info to Typescript
-3. Open `src/main.ts` in VSCode
-4. Open the VSCode command palette
-5. Search and run "Select TypeScript version" -> "Use workspace version"
+#### File Structure
+
+Learn more about file structure of Quicky.
+
+*   **📁 public**
+    *   **📁 api** - Sample API response format for Friends, Conversations and Single Conversation
+    *   **📁 uploads** - Uploaded attachements goes here
+        *   **📁 avatar**
+        *   **📁 shared-photos**
+*   **📁 src**
+    *   **📁 assets**
+        *   **📁 media** - Image, icons and third party plugins assets
+        *   **📁 scss** - SCSS source files
+    *   **📁 components** - Vue components
+    *   **📁 config** - Global configuration
+    *   **📁 layouts** - Auth Layout, Introduction page layout and Internal Pages Layout
+    *   **📁 services** - Call API endpoints and get results
+    *   **📁 store** - Vuex
+    *   **📁 routers** - Vue routing
+*   **📄 .env** - Customize your individual working environment variables
+*   **📄 .env.production** - Configure production api endpoint
+*   **📄 .env.development** - Configure development api endpoint
+*   **📄 package.json** - List of dependencies and npm information
+
+#### Quick start -Install
+
+This template requires Node CLI. Please follow these steps to install the required technologies:
+
+##### 1\. Installing Node.js
+
+If you do not have Node installed already, you can get it by downloading the package installer from Node's website. You need to have Node.js installed onto your computer. [Download and install Node.js →](https://nodejs.org/en/download/)
+
+##### 2\. Installing Dependency
+
+*   Go to Project directory with cmd or terminal.
+*   Run `npm i`
+    *   This command will install necessary dependencies.
+*   Run `npm start`
+    
+    *   This command will start local server in web browser.
+    
+    *   Hit `CTRL+C` to terminate the local server from running.
+
+##### 3\. Create a production build
+
+You can change content according your requirements. When ypu are done, you can run below command to generate build for production upload.
+
+npm run build
+
+Above command will generate `dist` folder in your project directory. You can upload content of `dist` folder to production server.
+
+#### Features
+
+*   Built with Bootstrap 4
+*   User friendly & Fully Responsive design
+*   Simple coded
+*   Cross-browser Compatibility
+*   Dark skin & Light skin
+*   FREE Lifetime Updates
+
+#### Components & Modules:
+
+*   User Profile & Contact Profile
+*   Advanced Settings
+*   Invite Friends
+*   Create Group
+*   Chat List
+*   Friend List
+*   Call List
+*   Call Log
+
+#### Sources and Credits
+
+We are using this JS and CSS plugins for creating quicky.
+
+###### jQuery
+
+[https://jquery.com](https://jquery.com)
+
+###### Bootstrap
+
+[https://getbootstrap.com](https://getbootstrap.com)
+
+###### Icons
+
+[https://github.com/refactoringui/heroicons](https://github.com/refactoringui/heroicons)
+
+###### Icons
+
+[https://github.com/feathericons/feather](https://github.com/feathericons/feather)
+
+###### Magnific Popup
+
+[https://github.com/dimsemenov/Magnific-Popup](https://github.com/dimsemenov/Magnific-Popup)
+
+###### Modal Stepwise
+
+[https://github.com/BhavanPatel/jquery-bootstrap-modal-stepwise](https://github.com/BhavanPatel/jquery-bootstrap-modal-stepwise)
+
+###### Emojionearea
+
+[https://github.com/mervick/emojionearea](https://github.com/mervick/emojionearea)
